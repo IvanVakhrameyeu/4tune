@@ -1,0 +1,37 @@
+.referals {
+    h5 {
+        font-size: 14px;
+        color: #000000;
+        font-weight: 500;
+        margin: 50px auto!important;
+
+        a {
+            text-decoration: none;
+            color: #71b0fa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+
+    table {
+        thead {
+            tr {
+                th {
+                    color: #353535;
+                    font-size: 14px;
+                    font-weight: bold;
+                    border-top: 0px;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    color: #084876;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

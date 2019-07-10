@@ -1,0 +1,30 @@
+.modal {
+    .modal-dialog {
+        .modal-content {
+            border-radius: 10px;
+
+            .modal-header {
+                background: #ededed;
+                border: none;
+                padding: 10px 30px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                
+                h5.modal-title {
+                    font-size: 16px;
+                    color: $brand-color;
+                    font-weight: bold;
+                }
+            }
+
+            .modal-body {
+                padding: 10px 30px;
+            }
+
+            @import "modals/pay";
+            @import "modals/out";
+            @import "modals/transfer";
+            @import "modals/referals";
+        }
+    }
+}

@@ -1,0 +1,949 @@
+.game-page {
+    margin-top: 40px;
+    
+    .game,
+    .chat {
+        background-color: rgba(#fff, .08);
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .game {
+        padding: 25px;
+
+        .select-mode-bar {
+            background-color: #cce8fd;
+            width: 100%;
+            border-radius: 10px;
+            padding: 18px 0px;
+
+            @media(max-width: 991px) {
+                padding: 18px;
+            }
+
+            h5 {
+                color: $brand-color;
+                font-weight: bold;
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+
+            a.btn {
+                background-color: $brand-color;
+                color: #fff;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 4px 43px;
+                border-radius: 5px;
+                transition: $transition-duration;
+
+                @media(max-width: 991px) {
+                    width: 100%;
+                    display: block;
+                    margin-bottom: 10px;
+                }
+            }
+
+            a.btn.active,
+            a.btn:hover {
+                -webkit-box-shadow: 0px 0px 79px -24px rgba(0,0,0,1);
+                -moz-box-shadow: 0px 0px 79px -24px rgba(0,0,0,1);
+                box-shadow: 0px 0px 79px -24px rgba(0,0,0,1);
+            }
+        }
+
+        .game-zone {
+            background-color: #cce8fd;
+            width: 100%;
+            border-radius: 10px;
+            padding: 18px 0px;
+            margin-top: 5px;
+
+            h3 {
+                font-weight: bold;
+                font-size: 18px;
+                color: rgba($brand-color, .5);
+                margin: 15px auto!important;
+                margin-top: 30px!important;
+            }
+
+            .game-stats {
+                .stats-block {
+                    background: url("../images/game-stats-bg.png") no-repeat center;
+                    width: 172px;
+                    height: 70px;
+                    margin-bottom: 10px;
+
+                    b {
+                        color: $brand-color;
+                        font-size: 22px;
+                        font-weight: bold;
+                        display: block;
+                    }
+
+                    span {
+                        font-size: 10px;
+                        font-weight: normal;
+                        color: #000;
+                        display: block;
+                        padding: 0px 25px;
+                        margin-top: -5px;
+                    }
+                }
+            }
+
+            .select-rooms {
+                .select-room-block {
+                    background: url("../images/select-room-bg.png") no-repeat center;
+                    width: 172px;
+                    height: 91px;
+                    margin-bottom: 10px;
+                    display: block;
+                    text-decoration: none;
+
+                    p {
+                        margin: 0;
+                        display: block;
+                        color: rgba(#fff, .5);
+                        font-size: 14px;
+                        padding-top: 4px;
+                        font-weight: normal;
+                    }
+
+                    b {
+                        margin: 0;
+                        display: block;
+                        color: #fff;
+                        font-size: 22px;
+                        font-weight: bold;
+                    }
+
+                    span {
+                        margin: 0;
+                        display: block;
+                        color: #fff;
+                        font-size: 12px;
+                        font-weight: normal;
+
+                        b {
+                            font-weight: bold;
+                            font-size: 12px;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+
+            p.msg {
+                text-align: center;
+                font-size: 16px;
+                font-weight: bold;
+                color: $brand-color;
+                margin: 15px auto;
+            }
+
+            .room {
+                .jackpot-info {
+                    h4 {
+                        font-size: 18px;
+                        color: #223444;
+                        font-weight: 900;
+                        font-style: normal;
+                        text-transform: uppercase;
+                        margin-top: 50px;
+                        
+                        b {
+                            color: $brand-color;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .win-info {
+                        width: 100%;
+                        padding: 10px 18px;
+                        text-align: center;
+
+                        .winner {
+                            font-size: 16px;
+                            color: #223444;
+                            display: inline-block;
+
+                            b {
+                                color: $brand-color;
+                                font-weight: normal;
+                                text-transform: uppercase;
+                            }
+                        }
+
+                        .ticket {
+                            font-size: 16px;
+                            color: #223444;
+                            display: inline-block;
+
+                            b {
+                                color: $brand-color;
+                                font-weight: normal;
+                                text-transform: uppercase;
+                            }
+                        }
+
+                        .ticket:before,
+                        .ticket:after {
+                            content: "|";
+                            font-size: 16px;
+                            color: $brand-color;
+                            font-weight: 200;
+                        }
+
+                        .win-sum {
+                            font-size: 16px;
+                            color: $brand-color;
+                            display: inline-block;
+                            font-weight: normal;
+                            text-transform: uppercase;
+
+                            b {
+                                color: $brand-color;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+                
+                .jackpot-process {
+                    width: 100%;
+                    padding: 18px;
+                    margin-bottom: 30px;
+
+                    .jackpot-progress {
+                        position: relative;
+                        position: relative;
+                        padding: 35px 10px 0px;
+                        background: #c5e0f7;
+
+                        .progress {
+                            border-radius: 10px;
+                            height: 57px;
+                            position: relative;
+                        }
+
+                        .arrow {
+                            content: "";
+                            position: absolute;
+                            background: url("../images/progress-arrow.png") no-repeat;
+                            width: 74px;
+                            height: 44px;
+                            display: block;
+                            margin: 0 auto!important;
+                            left: 45%;
+                            top: 67px;
+
+                            @media(max-width: 911px) {
+                                left: 38%;
+                            }
+                        }
+
+                        .start-new-game {
+                            background: url("../images/timer-figure.png") no-repeat center bottom;
+                            position: relative;
+                            top: 30px;
+                            padding-bottom: 5px;
+
+                            span {
+                                font-weight: 500;
+                                font-style: italic;
+                                color: #1392ff;
+                                font-size: 14px;
+                                display: block;
+                                text-transform: uppercase;
+                            }
+
+                            b {
+                                color: $brand-color;
+                                font-size: 14px;
+                                font-weight: bold;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+
+                .jackpot-bet-form {
+                    width: 100%;
+                    padding: 0px 18px;
+
+                    input.form-control {
+                        max-width: 266px;
+                        display: inline-block;
+                        font-size: 14px;
+                        color: rgba(#445f6f, 0.57);
+                        border-radius: 10px;
+                        padding: 14px 20px;
+
+                        @media(max-width: 991px)
+                        {
+                            max-width: 100%;
+                            display: block;
+                            margin-bottom: 10px;
+                        }
+                    }
+
+                    .balance {
+                        display: inline-block;
+                        color: #1a3043;
+                        font-weight: 500;
+                        font-size: 14px;
+
+                        @media(max-width: 991px)
+                        {
+                            width: 100%;
+                            margin-bottom: 10px;
+                            display: block;
+                            text-align: center;
+                        }
+                    }
+
+                    a.btn {
+                        background-color: $brand-color;
+                        color: #fff;
+                        font-size: 16px;
+                        font-weight: bold;
+                        border-radius: 10px;
+
+                        @media(max-width: 991px)
+                        {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .jackpot-players {
+                    width: 100%;
+                    padding: 0px 18px 0 25px;
+                    margin-top: 20px;
+
+                    .player {
+                        background-color: #c5e0f7;
+                        border-radius: 10px;
+                        position: relative;
+                        margin: 25px auto!important;
+
+                        .player-avatar {
+                            display: inline-block;
+                            max-width: 60px;
+                            max-height: 48px;
+                            min-width: 60px;
+                            min-height: 48px;
+                            position: relative;
+                            left: -5px;
+                            top: -5px;
+
+                            @media (max-width: 991px) {
+                                margin: 0 auto!important;
+                                position: absolute;
+                                right: auto;
+                                left: -5px;
+                                top: -5px;
+                                max-width: 40px;
+                                max-height: 40px;
+                                min-width: 40px;
+                                min-height: 40px;
+                            }
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+                            }
+                        }
+
+                        .player-info {
+                            display: inline-block;
+
+                            .name {
+                                display: inline-block;
+                                color: #1a3043;
+                                font-size: 14px;
+                                font-weight: 500;
+                                position: relative;
+                                top: -5px;
+                                min-width: 200px;
+
+                                @media (max-width: 991px) {
+                                    width: 100%;
+                                    text-align: center;
+                                    margin-top: 15px;
+                                }
+                            }
+
+                            .bet {
+                                display: inline-block;
+                                color: #1a3043;
+                                font-weight: 500;
+                                font-size: 14px;
+                                position: relative;
+                                top: -5px;
+                                min-width: 170px;
+
+                                b {
+                                    color: $brand-color;
+                                    font-weight: bold;
+                                }
+
+                                @media (max-width: 991px) {
+                                    width: 100%;
+                                    text-align: center;
+                                }
+                            }
+
+                            .ticket {
+                                display: inline-block;
+                                color: $brand-color;
+                                font-size: 12px;
+                                font-weight: 500;
+                                position: relative;
+                                min-width: 120px;
+
+                                span {
+                                    color: #b7b6b6;
+                                    font-size: 12px;
+                                    display: block;
+                                    font-weight: 500;
+                                    margin: 0;
+
+                                    @media (max-width: 991px) {
+                                        display: inline;
+                                    }
+                                }
+
+                                @media (max-width: 991px) {
+                                    width: 100%;
+                                    text-align: center;
+                                    margin-bottom: 10px;
+                                }
+                            }
+
+                            .percent {
+                                display: inline-block;
+                                text-align: center;
+                                width: 38px;
+                                border: 3px solid #ff9600;
+                                color: #ff9600;
+                                font-size: 12px;
+                                font-weight: 500;
+                                background-color: #fff;
+                                border-radius: 50%;
+                                max-height: 38px;
+                                padding: 7px 0;
+                                position: relative;
+                                top: -5px;
+                                left: 15px;
+
+                                @media (max-width: 991px) {
+                                    margin: 0 auto!important;
+                                    position: absolute;
+                                    right: -5px;
+                                    left: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            }
+
+            .double-history {
+                width: 100%;
+                padding: 0 18px;
+
+                span {
+                    margin: 0;
+                    display: inline-block;
+                    width: 18%;
+
+                    @media (max-width: 991px) {
+                        display: block;
+                        margin: 0 auto!important;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+
+                div.history {
+                    margin: 0;
+                    display: inline-flex;
+                    width: 80%;
+                    overflow: hidden;
+
+                    @media (max-width: 991px) {
+                        width: 100%;
+                        margin-top: 10px;
+                    }
+
+                    p {
+                        text-align: center;
+                        max-width: 38px;
+                        min-width: 38px;
+                        min-height: 20px;
+                        max-height: 20px;
+                        border-radius: 5px;
+                        background-color: #242424;
+                        color: #fff;
+                        font-weight: 500px;
+                        font-size: 12px;
+                        padding: 1px 0px;
+                        margin: 0px 3px;
+                    }
+
+                    p.black {
+                        background-color: #242424;
+                    }
+
+                    p.green {
+                        background-color: #00c435;
+                    }
+
+                    p.red {
+                        background-color: #ff0b4b;
+                    }
+                }
+            }
+
+            .double-wheel {
+                width: 100%;
+                padding: 0 18px;
+                position: relative;
+                margin-bottom: 20px;
+
+                .wheel-block {
+                    position: relative;
+                    width: 253px;
+
+                    b.wheel-number {
+                        position: relative;
+                        top: 155px;
+                        left: 47%;
+                        z-index: 5;
+                        font-weight: 900;
+                        font-size: 36px;
+                    }
+
+                    b.wheel-number.black {
+                        color: #242424;
+                    }
+
+                    b.wheel-number.green {
+                        color: #00c435;
+                    }
+
+                    b.wheel-number.red {
+                        color: #ff0b4b;
+                    }
+
+                    .wheel {
+                        background: url("../images/wheel.png") no-repeat center;
+                        width: 253px;
+                        height: 253px;
+                        position: relative;
+                    }
+                }
+            }
+
+            .double-bet-form {
+                width: 100%;
+                padding: 0px 18px;
+                margin-top: 15px;
+
+                input.form-control {
+                    max-width: 266px;
+                    display: inline-block;
+                    font-size: 14px;
+                    color: rgba(#445f6f, 0.57);
+                    border-radius: 10px;
+                    padding: 14px 20px;
+
+                    @media(max-width: 991px)
+                    {
+                        max-width: 100%;
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .bet-buttons {
+                    max-width: 30%;
+
+                    @media(max-width: 991px)
+                    {
+                        float: auto;
+                        max-width: 100%;
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+
+                    a.btn {
+                        color: #fff;
+                        background-color: $brand-color;
+                        font-weight: bold;
+                        font-size: 12px;
+                        padding: 0px 5px;
+                    }
+                }
+            }
+
+            .double-bets {
+                width: 100%;
+                padding: 0 18px;
+                margin-top: 35px!important;
+
+                .bet-block {
+
+                    .bet-head {
+                        position: relative;
+                        background-color: #ff0a4b;
+                        font-weight: 500;
+                        color: #fff;
+                        font-size: 14px;
+                        border-radius: 10px;
+                        padding: 10px 15px;
+                        margin-bottom: 10px;
+
+                        b {
+                            font-size: 17px;
+                        }
+
+                        span {
+                            position: absolute;
+                            top: 5px;
+                            right: 10px;
+                            font-size: 24px;
+                            color: rgba(#fff, .2);
+                        }
+                    }
+
+                    .bet-head.black {
+                        background-color: #242424;
+                    }
+
+                    .bet-head.green {
+                        background-color: #00c435;
+                    }
+
+                    .bet-head.red {
+                        background-color: #ff0b4b;
+                    }
+
+                    p {
+                        width: 100%;
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: normal;
+
+                        b {
+                            color: $brand-color;
+                            font-weight: bold;
+                        }
+                    }
+
+                    .bet-players {
+                        padding-left: 10px;
+
+                        .player {
+                            position: relative;
+                            margin-bottom: 10px;
+                            background-color: #a1d9fc;
+                            max-height: 20px;
+                            border-top-right-radius: 10px;
+                            border-bottom-right-radius: 10px;
+
+                            .player-avatar {
+                                display: inline-block;
+                                max-width: 20px;
+                                max-height: 20px;
+                                min-width: 20px;
+                                min-height: 20px;
+                                position: absolute;
+                                top: -4px;
+                                left: -10px;
+                                
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+
+                            .player-info {
+                                display: inline-block;
+                                max-height: 20px;
+                                height: 20px;
+                                position: relative;
+                                top: -4px;
+                                width: 100%;
+                                padding-left: 20px;
+
+                                .name {
+                                    display: inline-block;
+                                    font-weight: normal;
+                                    color: #445f6f;
+                                    font-size: 12px;
+                                }
+
+                                .bet-sum {
+                                    display: inline-block;
+                                    font-size: 10px;
+                                    background-color: #7fcefb;
+                                    border-top-right-radius: 10px;
+                                    border-bottom-right-radius: 10px;
+                                    padding: 2.5px 15px;
+                                    position: absolute;
+                                    color: #445f6f;
+                                    right: 0px;
+                                    top: 4px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+                
+            .nvuti {
+                width: 100%;
+
+                padding: 0 18px;
+            }
+
+            .game-size-block,
+            .game-chance-block {
+                @media (max-width: 991px) {
+                    margin-top: 15px;
+                }
+
+                span {
+                    font-size: 12px;
+                    color: #5e5757;
+                }
+
+                input.form-control {
+                    max-width: 100%;
+                    display: block;
+                    font-size: 14px;
+                    color: rgba(#445f6f, 0.57);
+                    border-radius: 10px;
+                    padding: 14px 20px;
+                    text-align: center;
+                }
+
+                .size-buttons,
+                .chance-buttons {
+                    max-width: 100%;
+                    margin-top: 10px;
+
+                    a.btn {
+                        color: #fff;
+                        background-color: $brand-color;
+                        font-weight: bold;
+                        font-size: 12px;
+                        padding: 0px 5px;
+                    }
+
+                    a.btn:nth-child(2n+1) {
+                        width: 60%;
+                    }
+
+                    a.btn:nth-child(2n) {
+                        width: 35%;
+                    }
+                }
+            }
+
+            .game-side {
+                background-color: rgba(#fff, .33);
+                text-align: center;
+                border-radius: 10px;
+                padding: 10px;
+
+                @media (max-width: 991px) {
+                    margin-top: 15px;
+                }
+
+                b {
+                    font-weight: bold;
+                    color: $brand-color;
+                    font-size: 28px;
+                    display: block;
+                }
+
+                span {
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: $brand-color;
+                    display: block;
+                }
+
+                .buttons {
+                    margin-top: 15px;
+
+                    p {
+                        color: #000;
+                        font-size: 12px;
+                        text-align: center;
+                        width: 100%;
+                        margin: 0;
+                    }
+
+                    a.btn {
+                        color: #fff;
+                        background-color: $brand-color;
+                        font-weight: bold;
+                        font-size: 14px;
+                        padding: 5px 0px;
+                        width: 100%;
+                    }
+                }
+            }
+
+            .hash {
+                padding: 10px;
+                border-radius: 10px;
+                background-color: rgba(#fff, 0.33);
+                margin-top: 20px;
+
+                h4 {
+                    font-weight: normal;
+                    font-size: 14px;
+                    color: $brand-color;
+                }
+
+                h4:before {
+                    content: "•";
+                    margin-right: 5px;
+                }
+
+                p.hash-value {
+                    color: #040506;
+                    font-size: 10px;
+                    font-weight: 300;
+                    font-style: normal;
+                    display: block;
+                    word-wrap: break-word;
+                    text-align: left!important;
+                }
+
+                a.whatis {
+                    font-size: 12px;
+                    color: rgba($brand-color, .5);
+                }
+            }
+        }
+    }
+
+    .chat {
+        padding: 15px;
+
+        .chat-content {
+            background-color: rgba(#fff, .7);
+            border-radius: 10px;
+            padding: 10px;
+            max-height: 506px;
+            overflow-y: auto;
+
+            .message {
+                background-color: rgba(#14a9f7, .14);
+                padding: 10px;
+                padding-left: 20px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+
+                .message-head {
+                    position: relative;
+                    margin-bottom: 10px;
+                    background-color: #8dd5fb;
+                    max-height: 20px;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+
+                    .message-avatar {
+                        display: inline-block;
+                        max-width: 20px;
+                        max-height: 20px;
+                        min-width: 20px;
+                        min-height: 20px;
+                        position: absolute;
+                        top: -4px;
+                        left: -10px;
+                        
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .message-user-info {
+                        display: inline-block;
+                        max-height: 20px;
+                        height: 20px;
+                        position: relative;
+                        top: -4px;
+                        width: 100%;
+                        padding-left: 20px;
+
+                        .name {
+                            display: inline-block;
+                            font-weight: normal;
+                            color: #445f6f;
+                            font-size: 12px;
+                        }
+
+                        .id {
+                            display: inline-block;
+                            font-size: 10px;
+                            background-color: #7fcefb;
+                            border-top-right-radius: 10px;
+                            border-bottom-right-radius: 10px;
+                            padding: 2.5px 15px;
+                            position: absolute;
+                            color: #445f6f;
+                            right: 0px;
+                            top: 4px;
+                        }
+                    }
+                }
+
+                .message-text {
+                    width: 100%;
+                    word-wrap: break-word;
+                    font-size: 14px;
+                    color: #445f6f;
+                }
+            }
+        }
+
+        .chat-form {
+            margin-top: 15px;
+
+            input.form-control {
+                background-color: #cbebfd;
+                border-color: #cbebfd;
+                border-radius: 10px;
+                color: rgba(#445f6f, .5);
+                padding: 14px 30px;
+                font-weight: normal;
+            }
+
+            button.btn {
+                background-color: #cbebfd;
+                font-weight: bold;
+                font-size: 14px;
+                color: $brand-color;
+                border-radius: 10px;
+                padding: 13px 15px;
+
+                @media (max-width: 991px) {
+                    width: 100%;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}

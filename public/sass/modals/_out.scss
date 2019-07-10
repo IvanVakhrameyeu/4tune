@@ -1,0 +1,184 @@
+.out {
+    .paysystem {
+        background: #e0f0f8;
+        transition: $transition-duration;
+
+        border-radius: 10px;
+        display: block;
+        height: 55px;
+        padding: 0px 10px;
+        margin-bottom: 10px;
+
+        -webkit-box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+        box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+
+        .qiwi,
+        .webmoney,
+        .yandexmoney,
+        .card {
+            background: url("../images/ps/qiwi.png") no-repeat center;
+            width: 100%;
+            height: 32px;
+            background-size: contain!important;
+            position: relative;
+            top: 14px;
+        }
+
+        .webmoney {
+            background: url("../images/ps/webmoney.png") no-repeat center;
+        }
+
+        .yandexmoney {
+            background: url("../images/ps/yandexmoney.png") no-repeat center;
+        }
+
+        .card {
+            background: url("../images/ps/card.png") no-repeat center;
+            border: none;
+        }
+    }
+
+    .paysystem:hover,
+    .paysystem.active {
+        background: #00bdff; /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #00bdff 0%, #009aff 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #00bdff 0%,#009aff 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #00bdff 0%,#009aff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bdff', endColorstr='#009aff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+    
+    label {
+        display: block!important;
+        font-size: 14px;
+        color: rgba(#353535, .5);
+        width: 100%;
+    }
+
+    form {
+        margin: 50px auto!important;
+        padding: 0px 150px;
+        
+        @media (max-width: 991px) {
+            padding: 0;
+        }
+    }
+
+    select {
+        width: 100%;
+    }
+
+    input {
+        background-color: #dfeef6;
+        border-color: #dfeef6;
+        font-size: 14px;
+        color: #353535;
+        padding: 14px 20px;
+        border-radius: 10px;
+    }
+
+    button.btn {
+        background: #00bdff; /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #00bdff 0%, #009aff 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #00bdff 0%,#009aff 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #00bdff 0%,#009aff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bdff', endColorstr='#009aff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        border-radius: 40px;
+        color: #fff;
+        padding: 12px 30px;
+
+        @media (max-width: 991px) {
+            margin: 0 auto!important;
+            display: block;
+            margin-top: 15px!important;
+        }
+    }
+
+    .nice-select {
+        width: 100%;
+        background: #00bdff; /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #00bdff 0%, #009aff 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #00bdff 0%,#009aff 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #00bdff 0%,#009aff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bdff', endColorstr='#009aff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        color: #fff;
+        border: 1px solid #e2e2e2;
+        font-size: 14px;
+        margin-bottom: 25px;
+        display: block;
+        text-align: center!important;
+        border-radius: 10px;
+
+        -webkit-box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+        box-shadow: 0px 31px 112px -28px rgba(0,0,0,0.75);
+
+        .option {
+            font-size: 14px;
+            color: $brand-color;
+        }
+
+        .option:hover {
+            background: #dfe2e8;
+            color: $brand-color;
+        }
+
+        .option.selected {
+            background: $brand-color!important;
+            color: #fff;
+        }
+    }
+
+    .nice-select.open {
+        .list {
+            width: 100%;
+            background: #fff;
+        }
+    }
+
+    h5 {
+        font-size: 14px;
+        color: rgba(#353535, .5);
+        font-weight: normal;
+        margin: 20px auto!important;
+        margin-top: 50px!important;
+    }
+
+    table {
+        thead {
+            tr {
+                th {
+                    color: #353535;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+
+                th:nth-last-child(2) {
+                    text-align: center;
+                }
+
+                th:last-child {
+                    text-align: left;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    color: #353535;
+                    font-size: 14px;
+                }
+
+                td:nth-last-child(2) {
+                    text-align: center;
+                    color: $brand-color;
+                }
+
+                td:last-child {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,96 @@
+header {
+    nav.navbar {
+        .logo {
+            background: url("../images/logo.png") no-repeat center;
+            width: 125px;
+            height: 41px;
+        }
+
+        .navbar-toggler {
+            color: #fff;
+        }
+
+        .collapse {
+            ul.navbar-nav {
+                li.nav-item {
+                    position: relative;
+                    margin-top: 10px;
+                    
+                    a.nav-link {
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: normal;
+	                    font-style: normal;
+                    }
+                }
+
+                li.nav-item:after {
+                    content: "";
+                    position: relative;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    display: block;
+                    margin: 0 auto;
+                    top: -5px;
+                    background-color: transparent;
+                    transition: $transition-duration;
+
+                    @media (max-width: 991px) {
+                        display: none;
+                    }
+                }
+
+                li.nav-item:hover:after,
+                li.nav-item.active:after {
+                    background-color: #fff;
+                }
+
+                li.nav-item.profile {
+                    margin-bottom: -25px;
+                    margin-top: 0px;
+
+                    @media (max-width: 991px) {
+                        margin-left: 20px;
+                        margin-bottom: 10px;
+                    }
+
+                    img {
+                        border-radius: 50%;
+                        max-width: 48px;
+                        max-height: 48px;
+                        min-width: 48px;
+                        min-height: 48px;
+
+                        @media (max-width: 991px) {
+                            display: none;
+                        }
+                    }
+                    
+                    span {
+                        position: absolute;
+                        top: 30px;
+                    }
+
+                    b {
+                        display: block;
+                    }
+                }
+
+                li.nav-item.profile:after {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+body.full {
+    header {
+        background: #1789ff; /* Old browsers */
+        background: -moz-linear-gradient(45deg, #1789ff 0%, #03b2ff 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg, #1789ff 0%,#03b2ff 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg, #1789ff 0%,#03b2ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1789ff', endColorstr='#03b2ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+}
