@@ -35,27 +35,71 @@
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#"><i class="fa fa-comment"></i></a>
                     </li>
-                    <li class="nav-item ml-4 profile">
-                        <a class="nav-link" href="#">
-                            <img src="images/test-avatar.png">
-                        </a>
-                    </li>
+
                     <li class="nav-item profile">
-                        <a class="nav-link" href="/profile">
-                            <b>Name</b>
-                            <span>100р +</span>
-                        </a>
+
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                            <!-- отображение пользователя -->
+                                <a class="nav-link" href="/profile">
+
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <li class="nav-item ml-4 profile">
+                                        <a class="nav-link" href="#">
+                                            <img src="images/test-avatar.png">
+                                        </a>
+                                    </li>
+                                    <b>{{ Auth::user()->name }}</b>
+                                    <span class="caret">100р +</span>
+                                </a>
+                                <!-- Выход из авторизации -->
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item ml-3">
+                                        <a class="nav-link" href="#">
+
+
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                        </a>
+                                    </li>
+
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                                </li>
+                                </a>
+                            @endguest
+                        </ul>
+
+
                     </li>
-                    <li class="nav-item ml-3">
-                        <a class="nav-link" href="#">Выход</i></a>
-                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 
-@yield('content');
+@yield('content')
 
 <footer class="py-3">
     <div class="container text-center">
@@ -76,4 +120,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
         integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
+<!--
+<script src="https://vk.com/js/api/openapi.js?161" type="text/javascript"></script>
+<script type="text/javascript">
+    VK.init({
+        apiId: ВАШ_API_ID
+    });
+</script>
+-->
 

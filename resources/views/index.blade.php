@@ -1,6 +1,24 @@
-@extends('header');
+@extends('header')
 @section('content')
 <body>
+<!--
+<div id="vk_api_transport"></div>
+<script type="text/javascript">
+    window.vkAsyncInit = function() {
+        VK.init({
+            apiId: ВАШ_APP_ID
+        });
+    };
+
+    setTimeout(function() {
+        var el = document.createElement("script");
+        el.type = "text/javascript";
+        el.src = "https://vk.com/js/api/openapi.js?161";
+        el.async = true;
+        document.getElementById("vk_api_transport").appendChild(el);
+    }, 0);
+</script>
+-->
 <main>
     <div class="home">
         <div class="container">
@@ -65,6 +83,9 @@
             </div>
         </div>
     </div>
+
+
+
 </main>
 </body>
 @endsection
