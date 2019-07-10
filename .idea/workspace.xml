@@ -2,105 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5535a9f-1778-4d81-9cf5-b97ef289d0c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/nice-select.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/style.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Black.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Black.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Black.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BlackItalic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BlackItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BlackItalic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Bold.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Bold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BoldItalic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-BoldItalic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Italic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Italic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Light.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Light.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-LightItalic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-LightItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-LightItalic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Medium.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-MediumItalic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-MediumItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro-MediumItalic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamPro.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Bold.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Bold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Medium.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/GothamProNarrow-Medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/full-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/game-stats-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/middle-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/mode-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/mode-header.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/progress-arrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ps/card.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ps/qiwi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ps/webmoney.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ps/yandexmoney.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/select-room-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/test-avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/test-big-avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/timer-figure.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/wheel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_base.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_fonts.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_footer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_game.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_home.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_modal.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_modes.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/_profile.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_animated.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_bordered-pulled.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_core.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_fixed-width.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_icons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_larger.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_list.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_path.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_rotated-flipped.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_screen-reader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_stacked.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/fontawesome/font-awesome.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/modals/_out.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/modals/_pay.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/modals/_referals.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/modals/_transfer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sass/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/header.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,16 +27,16 @@
         <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/header.blade.php">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+            <state relative-caret-position="119">
+              <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -175,6 +82,16 @@
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/header.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114703_create_cron_jobs_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114751_create_cron_reports_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114809_create_double_games_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114825_create_double_game_bets_table.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114849_create_messages_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114918_create_nvuti_games_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114931_create_nvuti_game_bets_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_115014_create_wallets_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_121402_create_social_networks_table.php" />
       </list>
     </option>
   </component>
@@ -278,8 +195,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="897" />
-    <option name="y" value="95" />
+    <option name="x" value="1081" />
+    <option name="y" value="90" />
     <option name="width" value="1422" />
     <option name="height" value="913" />
   </component>
@@ -315,6 +232,17 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="4tune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="4tune" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="4tune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="4tune" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="4tune" type="b2602c69:ProjectViewProjectNode" />
@@ -392,17 +320,19 @@
       <workItem from="1562750660027" duration="1783000" />
       <workItem from="1562752462964" duration="990000" />
       <workItem from="1562753470347" duration="983000" />
+      <workItem from="1562759002704" duration="1790000" />
+      <workItem from="1562760813498" duration="160000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3756000" />
+    <option name="totallyTimeSpent" value="5706000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="897" y="95" width="1422" height="913" extended-state="0" />
+    <frame x="1081" y="90" width="1422" height="913" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24375919" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25110132" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -443,13 +373,110 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/foot.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/footer.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/foot.blade.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProfileController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        <state relative-caret-position="102">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/cron_job.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114703_create_cron_jobs_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114751_create_cron_reports_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114809_create_double_games_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="27" lean-forward="true" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114825_create_double_game_bets_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114849_create_messages_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114918_create_nvuti_games_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114931_create_nvuti_game_bets_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="26" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114948_create_referals_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_115014_create_wallets_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/cron_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -460,20 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProfileController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -481,10 +494,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/header.blade.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_121402_create_social_networks_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        <state relative-caret-position="255">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_120347_create_vkontaktes_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
         </state>
       </provider>
     </entry>
