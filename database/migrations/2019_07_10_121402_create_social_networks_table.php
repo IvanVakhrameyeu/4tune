@@ -14,11 +14,14 @@ class CreateSocialNetworksTable extends Migration
     public function up()
     {
         Schema::create('social_networks', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('vkontakte_id');
-            $table->binary('status')->default('0');
+            $table->increments('id');
+          //  $table->binary('status');
             $table->timestamps();
         });
+     //   Schema::table('social_networks', function (Blueprint $table) {
+     //       $table->foreign('user_id')->references('id')->on('users');
+     //       $table->integer('vk_id')->references('id')->on('vk');
+     //    });
     }
 
     /**

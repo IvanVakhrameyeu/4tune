@@ -21,76 +21,50 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item mx-4 active">
-                        <a class="nav-link" href="game.html">Помощь</a>
+                        <a class="nav-link" href="/game">Помощь</a>
                     </li>
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#">Контакты</a>
                     </li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link" href="#"><i class="fa fa-vk"></i></a>
-                    </li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link" href="#"><i class="fa fa-telegram"></i></a>
-                    </li>
+
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#"><i class="fa fa-comment"></i></a>
                     </li>
-
                     <li class="nav-item profile">
-
                         <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
+                        @if(isset($_COOKIE['user_identity']))
                             <!-- отображение пользователя -->
                                 <a class="nav-link" href="/profile">
-
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <li class="nav-item ml-4 profile">
                                         <a class="nav-link" href="#">
-                                            <img src="images/test-avatar.png">
+                                            <img src="photo">
                                         </a>
                                     </li>
-                                    <b>{{ Auth::user()->name }}</b>
-                                    <span class="caret">100р +</span>
-                                </a>
-                                <!-- Выход из авторизации -->
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <b>'user_name'</b>
+                                        <span class="caret">100р +</span>
+                                    </li>
+                                    <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">
                                         <a class="nav-link" href="#">
-
-
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                            <a class="dropdown-item" href="/logout">asdasdsa
                                             </a>
-
                                         </a>
                                     </li>
-
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                                </li>
                                 </a>
-                            @endguest
+                            @else
+                                <li class="nav-item mx-4">
+                                    <a class="nav-link" href="/login">Вход </a>
+                                </li>
+                                <li class="nav-item mx-4">
+                                    @include('auth.social')
+                                    @yield('js')
+                                </li>
+                            @endif
                         </ul>
-
-
                     </li>
 
                 </ul>
@@ -98,7 +72,6 @@
         </div>
     </nav>
 </header>
-
 @yield('content')
 
 <footer class="py-3">

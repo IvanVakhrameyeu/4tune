@@ -16,14 +16,18 @@ class CreateNvutiGameBetsTable extends Migration
         Schema::create('nvuti_game_bets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('numbers_range');
-            $table->integer('user_id');
             $table->string('game_type');
-            $table->integer('game_id');
+            //        $table->integer('game_id');
             $table->double('amount');
             $table->string('currency');
             $table->dateTime('bet_time');
             $table->string('status');
             $table->timestamps();
+        });
+        Schema::table('nvuti_game_bets', function (Blueprint $table) {
+            $table->integer('user_id')->references('id')->on('users');
+            // $table->integer('game_id');
+
         });
     }
 

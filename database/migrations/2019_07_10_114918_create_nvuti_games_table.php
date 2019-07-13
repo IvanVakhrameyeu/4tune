@@ -21,8 +21,11 @@ class CreateNvutiGamesTable extends Migration
             $table->string('game_hash');
             $table->string('game_salt');
             $table->double('game_number');
-            $table->integer('user_id');
             $table->timestamps();
+        });
+        Schema::table('nvuti_games', function (Blueprint $table) {
+
+            $table->integer('user_id')->references('id')->on('users');
         });
     }
 
