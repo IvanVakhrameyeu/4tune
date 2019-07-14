@@ -12,7 +12,13 @@ class user extends Model
     static public function getUser($user_identity){
         return static::select('id','user_name','photo')->where('uid','=',$user_identity)->get();
     }
-    static public function getMoney($wallet_id){
-        return static::hasOne(wallet::select('balance')->where('id',$wallet_id)->get());
+    static public function getPhoto($user_name){
+        return static::where('user_name', $user_name)->first()->photo;
+    }
+    static public function getName($user_name){
+        return static::where('user_name', $user_name)->first()->user_name;
+    }
+    static public function getId($user_name){
+        return static::where('user_name', $user_name)->first()->id;
     }
 }

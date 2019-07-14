@@ -21,44 +21,41 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item mx-4 active">
-                        <a class="nav-link" href="/game">Помощь</a>
+                        <a class="nav-link" href="/game">Играть</a>
                     </li>
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#">Контакты</a>
                     </li>
-
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#"><i class="fa fa-comment"></i></a>
                     </li>
                     <li class="nav-item profile">
                         <ul class="navbar-nav ml-auto">
-                        @if(isset($_COOKIE['user_identity']))
+                        @if(isset($_COOKIE['user_name']))
                             <!-- отображение пользователя -->
                                 <a class="nav-link" href="/profile">
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <li class="nav-item ml-4 profile">
                                         <a class="nav-link" href="#">
-                                            <img src="photo">
+                                            <img src="{{\App\user::getPhoto($_COOKIE['user_name'])}}">
                                         </a>
                                     </li>
                                     <li>
-                                        <b>'user_name'</b>
-                                        <span class="caret">100р +</span>
+                                        <b>{{\App\user::getName($_COOKIE['user_name'])}}</b>
+                                        <span class="caret">{{\App\wallet::getMoney(1)}}</span>
                                     </li>
                                     <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">
                                         <a class="nav-link" href="#">
-                                            <a class="dropdown-item" href="/logout">asdasdsa
+                                            <a class="dropdown-item" href="/logout">Выход
                                             </a>
                                         </a>
                                     </li>
                                 </a>
                             @else
+                            <!--
                                 <li class="nav-item mx-4">
                                     <a class="nav-link" href="/login">Вход </a>
-                                </li>
+                                </li>-->
                                 <li class="nav-item mx-4">
                                     @include('auth.social')
                                     @yield('js')

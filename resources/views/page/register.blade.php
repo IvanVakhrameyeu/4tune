@@ -1,7 +1,7 @@
 @extends('header')
 @section('content')
-    <main class="login container-l2">
-        <h2>Вход</h2>
+    <main class="registration container-l2">
+        <h2>Регистрация</h2>
 
         <section class="grid-6">
             <form action="{{route('login.action')}}" method="POST">
@@ -14,17 +14,19 @@
                     <input type="password" name="password" placeholder="Пароль"/>
                 </div>
                 <div class="form-item">
-                    <label>
-                        <input type="checkbox" name="remember" class="button"/>
+                    <input type="password" name="password_repeat" placeholder="Повторите пароль"/>
+                </div>
 
-                        Запомнить меня
+
+                <div class="form-item">
+                    <label>
+
+                        <a href="{{route('login')}}">У меня уже есть аккаунт</a>
                     </label>
                 </div>
-                <input type="submit" value="Вход" class="button"/>
+                <input type="submit" value="Создать пользователя" class="button"/>
             </form>
 
-            <a href="{{route('registration')}}">Нет аккаунта?</a>
-            <a href="#">Восстановление пароля</a>
         </section>
 
     </main>

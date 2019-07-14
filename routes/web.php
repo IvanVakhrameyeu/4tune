@@ -17,16 +17,21 @@ Route::get('/game','MainController@game');
 Route::get('/profile','ProfileController@indexAction');
 
 Route::middleware('guest')->group(function (){
-    Route::get('/login', 'AuthController@index')->name('login');
-    Route::post('/login', 'AuthController@login')->name('login.action');
 
-    Route::get('/register', 'RegistrationController@index')->name('registration');
-    Route::post('/register', 'RegistrationController@register')->name('registration.action');
+    Route::post('/ulogin', 'AuthController@loginBeta');
+
+    //Route::get('/login', 'AuthController@index')->name('login');
+    //Route::post('/login', 'AuthController@login')->name('login.action');
+
+    //Route::get('/register', 'RegistrationController@index')->name('registration');
+    //Route::post('/register', 'RegistrationController@register')->name('registration.action');
 
 });
+
+Route::get('/logout', 'AuthController@logout');
+
 Route::middleware('auth')->group(function (){
-    Route::get('/logout', 'AuthController@logout');
+
 });
 
 
-Route::post('/ulogin', 'AuthController@loginBeta');

@@ -7,27 +7,21 @@ use App\wallet;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
+use Hash;
+use Redirect;
 class AuthController extends Controller
 {
-    public function index():View
-    {
-        return view('page.login');
-    }
-    public function loginAction(Request $request):RedirectResponse
-    {
 
-
-        if ($request->has('from')){
-            return redirect($request->get('from'));
-        }
-        return redirect()->route('home');
-    }
     public function logout()
     {
-
+        setcookie('user_name', '', time() + 1, '/');
+        return redirect()->back();
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function loginBeta(Request $request)
     {
         // Get information about user.
@@ -41,9 +35,9 @@ class AuthController extends Controller
 
         // Check exist user.
         if (isset($userData->id)) {
-            setcookie('user_identity', $user['identity'], time() + 3600 * 24 * 7, '/');
+            setcookie('user_name', $user['nickname'], time() + 3600 * 24 * 7, '/');
             // Check user status.
-            if ($userData->status) {
+            if ($userData->is_active) {
 
                 // Make login user.
                 //   Auth::loginUsingId($userData->id, TRUE);
@@ -53,7 +47,8 @@ class AuthController extends Controller
                 \Session::flash('flash_message_error', trans('interface.AccountNotActive'));
             }
 
-            return Redirect::back();
+           // return redirect()->route('home');
+            return redirect()->back();
         } // Make registration new user.
         else {
             // Create new user in DB.
@@ -77,13 +72,35 @@ class AuthController extends Controller
                 'balance' => 0,
                 'type' => 'dollar',
             ]);
-            setcookie('user_identity', $user['identity'], time() + 3600 * 24 * 7, '/');
+            setcookie('user_name', $user['nickname'], time() + 3600 * 24 * 7, '/');
 
             // Make login user.  хз для чего ниже, но потом посмотреть
             // Auth::loginUsingId($newUser->id, TRUE);
             // \Session::flash('flash_message', trans('interface.ActivatedSuccess'));
 
-            return Redirect::back();
+            return redirect()->back();
         }
+    }
+
+
+
+    /**
+     * @return View
+     */
+    public function index():View
+    {
+        return view('page.login');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function loginAction(Request $request):RedirectResponse
+    {
+        if ($request->has('from')){
+            return redirect($request->get('from'));
+        }
+        return redirect()->route('home');
     }
 }
