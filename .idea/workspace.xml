@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5535a9f-1778-4d81-9cf5-b97ef289d0c6" name="Default Changelist" comment="add authorization and log out">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_01_01_091205_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_01_01_091205_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/ul/form.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/games.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/page/game/double.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/page/game/double.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/page/game/jackpot.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/page/game/jackpot.blade.php" afterDir="false" />
+    <list default="true" id="f5535a9f-1778-4d81-9cf5-b97ef289d0c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+              <caret column="5" selection-start-column="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -44,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NvutiController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="21" />
+            <state relative-caret-position="323">
+              <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -53,11 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/games.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+            <state relative-caret-position="34">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -131,13 +129,13 @@
         <option value="$PROJECT_DIR$/resources/views/game.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
         <option value="$PROJECT_DIR$/resources/views/page/game/jackpot.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/game/double.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/JackpotController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/NvutiController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/games.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/NvutiController.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php" />
       </list>
     </option>
   </component>
@@ -241,10 +239,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1253" />
-    <option name="y" value="69" />
+    <option name="x" value="861" />
+    <option name="y" value="127" />
     <option name="width" value="1307" />
-    <option name="height" value="910" />
+    <option name="height" value="903" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -424,7 +422,7 @@
       <workItem from="1563022683140" duration="17000" />
       <workItem from="1563022719107" duration="2683000" />
       <workItem from="1563035582446" duration="624000" />
-      <workItem from="1563086636113" duration="10979000" />
+      <workItem from="1563086636113" duration="19465000" />
     </task>
     <task id="LOCAL-00001" summary="add login page and change authorization">
       <created>1563017474739</created>
@@ -447,11 +445,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563091787252</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="split all games and fix path to css style">
+      <created>1563101930878</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1563101930878</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53438000" />
+    <option name="totallyTimeSpent" value="61924000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,7 +468,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1253" y="69" width="1307" height="910" extended-state="0" />
+    <frame x="861" y="127" width="1307" height="903" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993565" visible="true" weight="0.23416199" />
@@ -478,7 +483,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.25096524" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.32947233" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.25353926" />
+      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.25584415" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32947233" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -533,7 +538,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add login page and change authorization" />
     <MESSAGE value="add authorization and log out" />
-    <option name="LAST_COMMIT_MESSAGE" value="add authorization and log out" />
+    <MESSAGE value="split all games and fix path to css style" />
+    <option name="LAST_COMMIT_MESSAGE" value="split all games and fix path to css style" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_07_10_114751_create_cron_reports_table.php" />
@@ -778,13 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/nice-select.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1916">
@@ -852,14 +851,14 @@
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NvutiController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="21" />
+        <state relative-caret-position="323">
+          <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
@@ -868,8 +867,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/games.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        <state relative-caret-position="34">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
         </state>
       </provider>
     </entry>
