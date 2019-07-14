@@ -12,7 +12,10 @@
 */
 
 Route::get('/','MainController@index')->name('home');
-Route::get('/game','MainController@game');
+Route::get('/games','MainController@games');
+Route::get('/games/double','DoubleController@index');
+Route::get('/games/jackpot','JackpotController@index');
+Route::get('/games/nvuti','NvutiController@index');
 
 Route::get('/profile','ProfileController@indexAction');
 

@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
           integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="{{\Illuminate\Support\Facades\URL::asset('css/style.css')}}">
 </head>
 <header>
     <nav class="navbar navbar-expand-lg">
@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item mx-4 active">
-                        <a class="nav-link" href="/game">Играть</a>
+                        <a class="nav-link" href="/games">Играть</a>
                     </li>
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#">Контакты</a>

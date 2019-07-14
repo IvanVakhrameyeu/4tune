@@ -36,6 +36,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('role_id')->references('id')->on('roles');
+        });
     }
 
     /**

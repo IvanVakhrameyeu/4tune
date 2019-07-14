@@ -19,8 +19,8 @@ class MainController extends Controller
         return view('page.index');
     }
 
-    public function game()
+    public function games()
     {
-        return view('game');
+        return view('games');
     }
 }
