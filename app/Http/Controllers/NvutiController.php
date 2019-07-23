@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\nvuti_game;
-use App\user;
+use App\Nvuti_game;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,7 +16,7 @@ class NvutiController extends Controller
     {
         if (!empty($_COOKIE['user_name'])) {// заменить проверку на авторизованность
 
-            $userData = user::where('user_name', $_COOKIE['user_name'])->first();
+            $userData = User::where('user_name', $_COOKIE['user_name'])->first();
             if (isset($userData->id)) {  // если пользователь существует, то проверка на существование игры и добавление\изменение данных игры
                 $hash = $this->game($userData);
             } else {
@@ -33,14 +33,14 @@ class NvutiController extends Controller
      */
     public function setBet(Request $request)
     {
-        $userData = user::where('user_name', $_COOKIE['user_name'])->first();
-        $nvuti_game = nvuti_game::where([
+        $userData = User::where('user_name', $_COOKIE['user_name'])->first();
+        $nvuti_game = Nvuti_game::where([
             ['user_id', '=', $userData->id],
             ['status', '=', 'в процессе'], // статус изменить
         ])->first();
 
         $result = $this->isNumberMore($nvuti_game->game_number,5,10);
-        $newGame = nvuti_game::find($nvuti_game->id);
+        $newGame = Nvuti_game::find($nvuti_game->id);
         $newGame->status = 'сыграно';
         $newGame->name = ($result == 0 ? 'проиграл' : 'выиграл');
         $newGame->save();
@@ -50,7 +50,7 @@ class NvutiController extends Controller
 
     public function game($userData) // проверка на существование игры
     {
-        $nvuti_game = nvuti_game::where([
+        $nvuti_game = Nvuti_game::where([
             ['user_id', '=', $userData->id],
             ['status', '=', 'в процессе'], // статус изменить
         ])->first();
@@ -58,7 +58,7 @@ class NvutiController extends Controller
         // если пользователь существует и игра в процессе, то генерятся новые 2 соли и число
         if (isset($nvuti_game->id)) {
             $data = $this->newData(); // получение сгенерированных солей и числа
-            $newGame = nvuti_game::find($nvuti_game->id);
+            $newGame = Nvuti_game::find($nvuti_game->id);
             $newGame->game_salt = $data['game_salt'];
             $newGame->game_salt2 = $data['game_salt2'];
             $newGame->game_hash = Hash::make($data['game_salt'] . $data['rand_number'] . $data['game_salt2']);
@@ -67,9 +67,9 @@ class NvutiController extends Controller
             return $newGame->game_hash;
         } else {
             $data = $this->newData(); // получение сгенерированных солей и числа
-            $userData = user::where('user_name', $_COOKIE['user_name'])->first(); // юсера получаем
+            $userData = User::where('user_name', $_COOKIE['user_name'])->first(); // юсера получаем
             $hash = Hash::make($data['game_salt'] . $data['rand_number'] . $data['game_salt2']);
-            nvuti_game::create([
+            Nvuti_game::create([
                 'name' => '',
                 'status' => 'в процессе',
                 'game_hash' => $hash,

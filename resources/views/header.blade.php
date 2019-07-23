@@ -36,12 +36,12 @@
                                 <a class="nav-link" href="/profile">
                                     <li class="nav-item ml-4 profile">
                                         <a class="nav-link" href="#">
-                                            <img src="{{\App\user::getPhoto($_COOKIE['user_name'])}}">
+                                            <img src="{{\App\User::getPhoto($_COOKIE['user_name'])}}">
                                         </a>
                                     </li>
                                     <li>
-                                        <b>{{\App\user::getName($_COOKIE['user_name'])}}</b>
-                                        <span class="caret">{{\App\wallet::getMoney(1)}}</span>
+                                        <b>{{\App\User::getName($_COOKIE['user_name'])}}</b>
+                                        <span class="caret">{{\App\Wallet::getMoney(1)}}</span>
                                     </li>
                                     <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">

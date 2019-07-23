@@ -22,8 +22,12 @@ $(document).ready(function() {
             'amount': amount,
             'stake': stake
         };
+
+        alert($(this).attr('about')); // вызывается ток less
+
+
         $.ajax({
-            url: '/setBet',
+            url: './setBet',
             data: data,
             dataType: 'json',
             async: true,

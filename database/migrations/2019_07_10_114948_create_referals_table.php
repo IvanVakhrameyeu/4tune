@@ -13,7 +13,7 @@ class CreateReferalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('referals', function (Blueprint $table) {
+        Schema::create('referal', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateReferalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referals');
+        Schema::dropIfExists('referal');
     }
 }

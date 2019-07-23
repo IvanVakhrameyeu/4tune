@@ -1638,7 +1638,7 @@
         });
         var B = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
         C.Deferred.exceptionHook = function (e, t) {
-            n.console && n.console.warn && e && B.test(e.name) && n.console.warn("jQuery.Deferred exception: " + e.message, e.stack, t)
+            n.console && n.console.warn && e && B.test(e.name) && n.console.warn("jQuery.Deferred exception: " + e.Message, e.stack, t)
         }, C.readyException = function (e) {
             n.setTimeout(function () {
                 throw e
@@ -4341,7 +4341,7 @@
                                 case G:
                                     return ds(+e, +t);
                                 case K:
-                                    return e.name == t.name && e.message == t.message;
+                                    return e.name == t.name && e.Message == t.Message;
                                 case te:
                                 case re:
                                     return e == t + "";
@@ -5646,7 +5646,7 @@
                 function Cs(e) {
                     if (!ks(e)) return !1;
                     var t = Zr(e);
-                    return t == K || t == V || "string" == typeof e.message && "string" == typeof e.name && !Is(e)
+                    return t == K || t == V || "string" == typeof e.Message && "string" == typeof e.name && !Is(e)
                 }
 
                 function Es(e) {

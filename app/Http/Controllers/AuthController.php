@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\user;
-use App\wallet;
+use App\User;
+use App\Wallet;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,7 +31,7 @@ class AuthController extends Controller
         $network = $user['network'];
 
         // Find user in DB.
-        $userData = user::where('email', $user['email'])->first();
+        $userData = User::where('email', $user['email'])->first();
 
         // Check exist user.
         if (isset($userData->id)) {
@@ -53,8 +53,8 @@ class AuthController extends Controller
         else {
             // Create new user in DB.
 
-            $newUser = user::create([
-                'uid' => $user['identity'],
+            $newUser = User::create([
+              //  'uid' => $user['identity'],
                 'user_name' => $user['nickname'],
                 'first_name' => $user['first_name'],
                 'last_name' => $user['last_name'],
@@ -67,7 +67,7 @@ class AuthController extends Controller
                 'is_active' => '1',
                 'last_ip' => $request->ip()
             ]);
-            wallet::create([
+            Wallet::create([
                 'user_id' => $newUser->id,
                 'balance' => 0,
                 'type' => 'dollar',

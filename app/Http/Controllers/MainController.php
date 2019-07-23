@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\user;
+use App\User;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -10,7 +10,7 @@ class MainController extends Controller
     public function index()
     {
         if (!empty($_COOKIE['user_name'])) {
-            $userData = user::where('user_name', $_COOKIE['user_name'])->first();
+            $userData = User::where('user_name', $_COOKIE['user_name'])->first();
             if (!isset($userData->id)) {
                 setcookie('user_name', '', time() + 1, '/');
             }
