@@ -21,19 +21,25 @@ class AuthController extends Controller
         if (!$_GET['code']) {
             exit('error code');
         }
-        $token = json_decode(file_get_contents('https://oauth.vk.com/access_token?client_id=' . Setting::Constants()['ID'] . '&redirect_uri=' . Setting::Constants()['URL'] . '&client_secret=' . Setting::Constants()['KEY'] . '&code=' . $_GET['code']), true);
+        $token = json_decode(file_get_contents('https://oauth.vk.com/access_token?client_id=' .
+            Setting::Constants()['ID'] . '&redirect_uri=' . Setting::Constants()['URL'] . '&client_secret=' .
+            Setting::Constants()['KEY'] . '&code=' . $_GET['code']), true);
 
         if (!$token) {
             exit('error token');
         }
-        $data = json_decode(file_get_contents('https://api.vk.com/method/users.get?user_id=' . $token['user_id'] . '&access_token=' . $token['access_token'] . '&fields=uid,first_name,last_name,photo_big,sex,nickname' . '&v=5.52'), true);
+        $data = json_decode(file_get_contents('https://api.vk.com/method/users.get?user_id=' .
+            $token['user_id'] . '&access_token=' . $token['access_token'] .
+            '&fields=uid,first_name,last_name,photo_big,sex,nickname' . '&v=5.52'), true);
 
         if (!$data) {
             exit('error data');
         }
+
         $userData = $data['response'][0];
 
-        Auth::login($token['email']);
+        return var_dump($token);
+        //  Auth::login($token['email']);
         //return $result;
         /*
         // Find user in DB.
