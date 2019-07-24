@@ -2,29 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5535a9f-1778-4d81-9cf5-b97ef289d0c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NvutiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NvutiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/double_game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Double_game.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/double_game_bet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Double_game_bet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/nvuti_game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nvuti_game.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/nvuti_game_bet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Nvuti_game_bet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/referals.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Referal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/social_networks.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Social_networks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/vk.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Vk.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/wallet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Wallet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_10_114948_create_referals_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_10_114948_create_referals_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/nvuti.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/nvuti.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/views/3987189daf19a417685719dd21cb5da9e98cbd4d.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/3987189daf19a417685719dd21cb5da9e98cbd4d.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/page/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/page/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,17 +31,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="14" column="56" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="56" />
+            <state relative-caret-position="340">
+              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="65" column="55" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
+            <state relative-caret-position="510">
+              <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+              <folding>
+                <element signature="e#40#53#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/auth.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="27" column="182" selection-start-line="27" selection-start-column="182" selection-end-line="27" selection-end-column="182" />
             </state>
           </provider>
         </entry>
@@ -96,9 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114825_create_double_game_bets_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114849_create_messages_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114918_create_nvuti_games_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_10_114931_create_nvuti_game_bets_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_10_120347_create_vk_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_10_121402_create_social_networks_table.php" />
@@ -127,15 +128,12 @@
         <option value="$PROJECT_DIR$/resources/views/page/game/double.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/JackpotController.php" />
         <option value="$PROJECT_DIR$/resources/views/games.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/js/nvuti.js" />
         <option value="$PROJECT_DIR$/resources/js/double.js" />
         <option value="$PROJECT_DIR$/app/nvuti_game.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/NvutiController.php" />
-        <option value="$PROJECT_DIR$/resources/views/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php" />
         <option value="$PROJECT_DIR$/public/js/nvuti.js" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Vk.php" />
         <option value="$PROJECT_DIR$/app/Wallet.php" />
@@ -147,6 +145,12 @@
         <option value="$PROJECT_DIR$/app/Message.php" />
         <option value="$PROJECT_DIR$/app/Double_game_bet.php" />
         <option value="$PROJECT_DIR$/app/Double_game.php" />
+        <option value="$PROJECT_DIR$/resources/views/header.blade.php" />
+        <option value="$PROJECT_DIR$/config/settings.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/resources/views/page/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" />
       </list>
     </option>
   </component>
@@ -250,10 +254,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1262" />
-    <option name="y" value="79" />
-    <option name="width" value="1307" />
-    <option name="height" value="931" />
+    <option name="x" value="1526" />
+    <option name="width" value="1041" />
+    <option name="height" value="1087" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -287,6 +290,11 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="4tune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="4tune" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="4tune" type="b2602c69:ProjectViewProjectNode" />
@@ -423,7 +431,8 @@
       <workItem from="1563022719107" duration="2683000" />
       <workItem from="1563035582446" duration="624000" />
       <workItem from="1563086636113" duration="42711000" />
-      <workItem from="1563887012567" duration="628000" />
+      <workItem from="1563887012567" duration="2539000" />
+      <workItem from="1563945683937" duration="12518000" />
     </task>
     <task id="LOCAL-00001" summary="add login page and change authorization">
       <created>1563017474739</created>
@@ -481,11 +490,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563297980395</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rename models to standard">
+      <created>1563887818689</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1563887818689</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85798000" />
+    <option name="totallyTimeSpent" value="100227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -497,10 +513,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1262" y="79" width="1307" height="931" extended-state="0" />
+    <frame x="1526" y="0" width="1041" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993565" visible="true" weight="0.2381716" />
+      <window_info auto_hide="true" content_ui="combo" x="1957" y="173" width="179" height="741" id="Project" order="0" sideWeight="0.4993565" weight="0.18246686" />
       <window_info id="Structure" order="1" sideWeight="0.5006435" side_tool="true" weight="0.33985764" />
       <window_info id="Favorites" order="2" sideWeight="0.5006435" side_tool="true" weight="0.33985764" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -512,7 +528,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.25096524" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.32947233" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.24686716" />
+      <window_info anchor="bottom" auto_hide="true" id="Version Control" order="9" weight="0.22327045" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32947233" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -572,21 +588,10 @@
     <MESSAGE value="add if and buttons to nvuti" />
     <MESSAGE value="add double js" />
     <MESSAGE value="add nvuti button change amount and chance game and add js" />
-    <option name="LAST_COMMIT_MESSAGE" value="add nvuti button change amount and chance game and add js" />
+    <MESSAGE value="rename models to standard" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename models to standard" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/console.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthorizationController.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/profile.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
     <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php" />
     <entry file="file://$PROJECT_DIR$/public/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -634,13 +639,6 @@
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -752,13 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/games.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/double.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -788,20 +779,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/nvuti.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NvutiController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -834,27 +811,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
-          <folding>
-            <element signature="e#40#53#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Social_networks.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="56" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -909,8 +869,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/game/nvuti.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="65" column="55" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
+        <state relative-caret-position="503">
+          <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="45" column="47" lean-forward="true" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/games.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nvuti.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="27" column="182" selection-start-line="27" selection-start-column="182" selection-end-line="27" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

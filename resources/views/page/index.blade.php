@@ -25,9 +25,8 @@
                 <p class="mx-auto col-lg-7 my-3">
                     Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях.
                 </p>
-                <!--
-                <a href="https://oauth.vk.com/authorize?client_id={{\config\Setting::Constants()['ID']}}&display=page&redirect_uri={{\config\Setting::Constants()['URL']}}&response_type=code" class="btn btn-light px-3"><i class="fa fa-vk"></i> Войти через VK</a>
-          -->
+                <a href="https://oauth.vk.com/authorize?client_id={{\config\Setting::Constants()['ID']}}&display=page&redirect_uri={{\config\Setting::Constants()['URL']}}&scope=email&response_type=code" class="btn btn-light px-3"><i class="fa fa-vk"></i> Войти через VK</a>
+
             </div>
             <div class="row services">
                 <div class="col-lg-3 text-center px-4 my-3">

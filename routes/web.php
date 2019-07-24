@@ -20,6 +20,13 @@ Route::get('/games/nvuti/setBet','NvutiController@setBet');
 
 Route::get('/profile','ProfileController@indexAction');
 
+
+
+
+Route::get('/vk', 'AuthController@vk');
+
+
+
 Route::middleware('guest')->group(function (){
 
     Route::post('/ulogin', 'AuthController@loginBeta');

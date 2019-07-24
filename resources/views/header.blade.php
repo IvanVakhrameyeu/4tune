@@ -52,14 +52,10 @@
                                     </li>
                                 </a>
                             @else
-                            <!--
-                                <li class="nav-item mx-4">
-                                    <a class="nav-link" href="/login">Вход </a>
-                                </li>-->
-                                <li class="nav-item mx-4">
+                            <!--    <li class="nav-item mx-4">
                                     @include('auth.social')
                                     @yield('js')
-                                </li>
+                                </li>-->
                             @endif
                         </ul>
                     </li>
