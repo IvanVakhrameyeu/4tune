@@ -26,6 +26,12 @@ Route::get('/profile','ProfileController@indexAction');
 Route::get('/vk', 'AuthController@vk');
 
 
+$namespace = 'SocialAuthorization';
+
+Route::post('/provider/vk', "$namespace\\VkAuthController@redirectToProvider");
+Route::get('/provider/vk', "$namespace\\VkAuthController@handleProviderCallback");
+
+
 
 Route::middleware('guest')->group(function (){
 
