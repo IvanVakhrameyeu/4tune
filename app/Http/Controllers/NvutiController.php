@@ -36,7 +36,7 @@ class NvutiController extends Controller
         $userId = $this->getIdUser();
         $nvutiGame = $this->getNvutiGame($userId);
 
-        if (empty($request['chance'])) {
+        if (empty($request['chance']) || empty($request['stake'])) {
             $hash = $this->createNewGame($userId);
             return response()->json(['success' => false, 'hash' => $hash]);
         }
