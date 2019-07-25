@@ -33,9 +33,9 @@ class AuthController extends Controller
         }
         $userData = $data['response'][0];
 
-        Auth::login($token['email']);
+        //Auth::login($token['email']);
         //return $result;
-        /*
+
         // Find user in DB.
         $userDataDB = User::where('email', $token['email'])->first();
 
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
             } // Wrong status.
             else {
-               }
+            }
 
             // return redirect()->route('home');
             return redirect()->back();
@@ -60,30 +60,29 @@ class AuthController extends Controller
 
             $newUser = User::create([
                 //  'uid' => $userData['identity'],
-                  'vk_id' => $newVkUser['id'],
                 'user_name' => $userData['id'],//$userData['nickname']==''?'test':$userData['nickname'],
                 'first_name' => $userData['first_name'],
                 'last_name' => $userData['last_name'],
-                'photo' => $userData['photo_big']==null?"test-avatar.png":$userData['photo_big'],
+                'photo' => $userData['photo_big'] == null ? "test-avatar.png" : $userData['photo_big'],
                 'email' => $token['email'],
                 'password' => Hash::make(str_random(8)),
-                'remember_token' =>$token['access_token'],
+                'remember_token' => $token['access_token'],
                 'roles' => 'user',
                 'is_active' => '1',
-             //   'last_ip' => $request->ip()
+                //   'last_ip' => $request->ip()
             ]);
             Wallet::create([
                 'user_id' => $newUser->id,
                 'balance' => 0,
                 'type' => 'dollar',
             ]);
-        Vk::create([
- 'user_id' => $newUser->id,
+            Vk::create([
+                'user_id' => $newUser->id,
             ]);
-            setcookie('user_name',$userData['id'], time() + 3600 * 24 * 7, '/');
+            setcookie('user_name', $userData['id'], time() + 3600 * 24 * 7, '/');
 
             return redirect()->route('games');
-        }*/
+        }
     }
 
     public function logout()

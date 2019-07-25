@@ -16,7 +16,9 @@ Route::get('/games','MainController@games')->name('games');
 Route::get('/games/double','DoubleController@index');
 Route::get('/games/jackpot','JackpotController@index');
 Route::get('/games/nvuti','NvutiController@index')->name('nvuti');
-Route::get('/games/nvuti/setBet','NvutiController@setBet');
+
+Route::post('/games/nvuti/setBet','NvutiController@setBet');
+
 
 Route::get('/profile','ProfileController@indexAction');
 

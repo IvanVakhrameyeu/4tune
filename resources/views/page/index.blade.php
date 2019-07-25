@@ -82,9 +82,6 @@
             </div>
         </div>
     </div>
-
-
-
 </main>
 </body>
 @endsection

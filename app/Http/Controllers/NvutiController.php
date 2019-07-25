@@ -9,6 +9,7 @@ use Illuminate\View\View;
 
 use Hash;
 use mysql_xdevapi\Session;
+use function PHPSTORM_META\elementType;
 
 class NvutiController extends Controller
 {
@@ -39,15 +40,60 @@ class NvutiController extends Controller
             ['status', '=', 'в процессе'], // статус изменить
         ])->first();
 
-        $result = $this->isNumberMore($nvuti_game->game_number,5,10);
+
+        $number = $this->getChance($request['amount'], $request['chance']);
+        if ($request['stake'] == 'less')
+            $result = $this->isNumberMore($nvuti_game->game_number, 0, $number['min']); // from and to промежуток
+        else
+            $result = $this->isNumberMore($nvuti_game->game_number, $number['max'], 999999); // from and to промежуток
+
+
         $newGame = Nvuti_game::find($nvuti_game->id);
         $newGame->status = 'сыграно';
         $newGame->name = ($result == 0 ? 'проиграл' : 'выиграл');
         $newGame->save();
-        return redirect()->route('nvuti');
+
+        //$result =$this->createNewGame($userData);
+
+        return response()->json(['success' => true, 'hash' => $this->createNewGame($userData)]);
+        //return
     }
 
+    /**
+     * получаем шанс победы
+     * @param $amount
+     * @param $chance
+     * @return array (минимум, максимум, коэффициент победы)
+     */
+    private  function getChance($amount, $chance)
+    {
+        $win_amount = $amount / $chance * 100; // коэффициент полученных бабок
+        $min = floor(($chance) / 100 * 999999);
+        $max = floor(999999 - ($chance) / 100 * 999999);
+        // ('0-' + min);
+        //(max + '-999999');
 
+        return ['min' => $min, 'max' => $max, 'win_amount' => $win_amount];
+    }
+
+    /*** создание новой игры
+     * @param $userData
+     * @return mixed
+     */
+    private function createNewGame($userData){
+        $data = $this->newData(); // получение сгенерированных солей и числа
+        $hash = Hash::make($data['game_salt'] . $data['rand_number'] . $data['game_salt2']);
+        Nvuti_game::create([
+            'name' => '',
+            'status' => 'в процессе',
+            'game_hash' => $hash,
+            'game_salt' => $data['game_salt'],
+            'game_salt2' => $data['game_salt2'],
+            'game_number' => $data['rand_number'],
+            'user_id' => $userData->id,
+        ]);
+        return $hash;
+    }
     public function game($userData) // проверка на существование игры
     {
         $nvuti_game = Nvuti_game::where([
@@ -82,38 +128,24 @@ class NvutiController extends Controller
         }
     }
 
-    private function isNumberMore($number,$from, $to)
+    private function isNumberMore($number, $from, $to)
     {  // проверка на принадлежность к промежутку игрока
-            if ( $number  >= $from && $number <=$to)
-                return 1;
-
+        if ($number >= $from && $number <= $to)
+            return 1;
         return 0;
     }
+
     /***
-     * получение исходных данных
+     * генерация двух солей и числа
      * @return array['game_salt', 'game_salt2', 'rand_number']
      */
     private function newData()
     {
         $game_salt = Hash::make(str_random(10));
         $game_salt2 = Hash::make(str_random(10));
-        $rand_number = mt_rand(1, 30);
-
+        $rand_number = mt_rand(0, 999999);
         return ['game_salt' => $game_salt, 'game_salt2' => $game_salt2, 'rand_number' => $rand_number];
     }
 
-    private function getNumber($salt1, $salt2, $hash, $from, $to)
-    {
-
-        for ($i = 1; $i < 1000000; $i++) {
-
-            if (Hash::make($salt1 . $i . $salt2) == $hash)
-                return $i;
-
-            if ($i >= $from && $i <= $to) {
-                return 0;
-            }
-        }
-    }
 
 }
