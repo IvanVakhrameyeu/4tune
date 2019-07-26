@@ -11,7 +11,7 @@ class VkAccountRepository
 {
     public static function findOrCreateAccount($oauthUser)
     {
-        $account = VkAccount::where('uid', $oauthUser->id)->first();
+        $account = VkAccount::find($oauthUser->id);
 
         if ($account) {
             return self::updateAccount($account, $oauthUser);
