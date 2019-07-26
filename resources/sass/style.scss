@@ -1,0 +1,26 @@
+$transition-duration                       : 0.7s;
+$brand-color                               : #1697ed;
+$fa-font-path                              : "../fonts";
+
+//
+
+@import "fonts";
+@import "fontawesome/font-awesome";
+@import "variables";
+//
+
+@import "base";
+
+@import "header";
+
+@import "promo";
+@import "profile";
+@import "game";
+
+@import "modes";
+
+@import "footer";
+
+//
+
+@import "modal";

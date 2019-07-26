@@ -9,6 +9,6 @@ use Illuminate\View\View;
 class DoubleController extends Controller
 {
     public function index():View{
-        return view('page.game.double');
+        return view('pages.game.double');
     }
 }
