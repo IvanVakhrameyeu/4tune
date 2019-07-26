@@ -1,2 +1,6 @@
-.idea/
+.editorconfig
 .env
+.env.example
+.idea/
+composer.lock
+vendor/
