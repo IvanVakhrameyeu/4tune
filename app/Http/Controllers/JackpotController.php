@@ -8,6 +8,6 @@ use Illuminate\View\View;
 class JackpotController extends Controller
 {
     public function index():View{
-        return view('page.game.jackpot');
+        return view('pages.game.jackpot');
     }
 }

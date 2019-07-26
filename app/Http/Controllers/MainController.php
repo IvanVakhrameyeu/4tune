@@ -4,23 +4,21 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
     public function index()
     {
-        if (!empty($_COOKIE['user_name'])) {
-            $userData = User::where('user_name', $_COOKIE['user_name'])->first();
-            if (!isset($userData->id)) {
-                setcookie('user_name', '', time() + 1, '/');
-            }
+        if (Auth::user()) {
+            return view('layouts.games');
         }
 
-        return view('page.index');
+        return view('layouts.promo-page');
     }
 
     public function games()
     {
-        return view('games');
+        return view('layouts.games');
     }
 }

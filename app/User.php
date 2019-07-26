@@ -2,23 +2,50 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Permissions\HasPermissionsTrait;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Authenticatable
 {
-    protected $fillable=['uid','user_name','first_name','last_name','photo','photo_rec','hash',
-        'roles','is_active','registration_ip','email','email_verified_at','password',
-        'last_ip','user_ips','registration_time','referrals_id','referral_link','remember_token'];
-    static public function getUser($user_identity){
-        return static::select('id','user_name','photo')->where('uid','=',$user_identity)->get();
+    use Notifiable, HasPermissionsTrait;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->password = Hash::make(str_random(8));
     }
-    static public function getPhoto($user_name){
-        return static::where('user_name', $user_name)->first()->photo;
-    }
-    static public function getName($user_name){
-        return static::where('user_name', $user_name)->first()->user_name;
-    }
-    static public function getId($user_name){
-        return static::where('user_name', $user_name)->first()->id;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'active', 'referral_link', 'avatar'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function vkAccount()
+    {
+        return $this->hasOne('App\VkAccount');
     }
 }

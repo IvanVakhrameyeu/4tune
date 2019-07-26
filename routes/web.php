@@ -11,38 +11,25 @@
 |
 */
 
+/* ================Pages============= */
 Route::get('/','MainController@index')->name('home');
-Route::get('/games','MainController@games')->name('games');
-Route::get('/games/double','DoubleController@index');
-Route::get('/games/jackpot','JackpotController@index');
-Route::get('/games/nvuti','NvutiController@index')->name('nvuti');
-Route::get('/games/nvuti/setBet','NvutiController@setBet');
-
-Route::get('/profile','ProfileController@indexAction');
 
 
+/* ============Actions============== */
+
+/* ------------Nvuti---------------- */
+Route::get('/nvuti/setBet','NvutiController@setBet');
 
 
-Route::get('/vk', 'AuthController@vk');
-
-
-
-Route::middleware('guest')->group(function (){
-
-    Route::post('/ulogin', 'AuthController@loginBeta');
-
-    //Route::get('/login', 'AuthController@index')->name('login');
-    //Route::post('/login', 'AuthController@login')->name('login.action');
-
-    //Route::get('/register', 'RegistrationController@index')->name('registration');
-    //Route::post('/register', 'RegistrationController@register')->name('registration.action');
-
-});
-
-Route::get('/logout', 'AuthController@logout');
+/* Auth */
+Route::get('/login/{provider}', "Auth\LoginController@redirectToProvider");
+Route::get('/login/{provider}/callback', "Auth\LoginController@handleProviderCallback");
+Route::get('/logout', "Auth\LoginController@logout");
 
 Route::middleware('auth')->group(function (){
-
+    Route::get('/double','DoubleController@index');
+    Route::get('/jackpot','JackpotController@index');
+    Route::get('/nvuti','NvutiController@index')->name('nvuti');
+    Route::get('/profile','ProfileController@indexAction');
 });
-
 

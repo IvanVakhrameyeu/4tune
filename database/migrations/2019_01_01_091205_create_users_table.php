@@ -15,29 +15,15 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-             $table->integer('uid');
-             $table->string('user_name');
-           $table->string('first_name');
-             $table->string('last_name');
-             $table->string('photo');
-             $table->string('photo_rec');
-             $table->string('hash');
-             $table->text('roles'); // потом изменить на айди роли
-             $table->binary('is_active');
-             $table->string('registration_ip');
-             $table->string('email');
-             $table->timestamp('email_verified_at')->nullable();
-             $table->string('password');
-             $table->string('last_ip');
-             $table->text('user_ips');
-             $table->dateTime('registration_time');
-             $table->integer('referrals_id');
-             $table->string('referral_link');
+            $table->string('name');
+            $table->string('email')->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->boolean('active')->default(true);
+            $table->string('referral_link')->nullable();
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role_id')->references('id')->on('roles');
         });
     }
 
