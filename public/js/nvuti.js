@@ -36,7 +36,6 @@ $(document).ready(function() {
             success: function (response, status) {
                 console.log(response);
                 $('.hash-value').text(response.hash);
-              //  $('.hash-value').text('fds');
                // $('.wallet-balance').text(response.balance)
             }
         });
