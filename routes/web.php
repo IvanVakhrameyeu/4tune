@@ -18,7 +18,7 @@ Route::get('/','MainController@index')->name('home');
 /* ============Actions============== */
 
 /* ------------Nvuti---------------- */
-Route::get('/nvuti/setBet','NvutiController@setBet');
+Route::post('/nvuti/setBet','NvutiController@setBet');
 
 
 /* Auth */

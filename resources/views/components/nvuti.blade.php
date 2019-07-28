@@ -1,4 +1,4 @@
-@extends('games')
+@extends('layouts.games')
 @section('game')
     <script>
         function change_input($this, $name) {

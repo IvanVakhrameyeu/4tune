@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\NvutiGame;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 use Hash;
@@ -14,18 +15,17 @@ class NvutiController extends Controller
 {
     public function index(): View
     {
-        if (!empty($_COOKIE['user_name'])) {// заменить проверку на авторизованность
-
-            $userData = User::where('user_name', $_COOKIE['user_name'])->first();
-            if (isset($userData->id)) {  // если пользователь существует, то проверка на существование игры и добавление\изменение данных игры
-                $hash = $this->game($userData);
+        $user= Auth::user();
+        $id= Auth::id();
+        if (!empty($user)) {// заменить проверку на авторизованность
+            if (isset($id)) {  // если пользователь существует, то проверка на существование игры и добавление\изменение данных игры
+                $hash = $this->getNewHash();
             } else {
-                return redirect()->route('games'); // пользователя не существует или не авторизован, возврат к играм и вывод на экран о просьбе авторизации
+                return redirect()->route('nvuti'); // пользователя не существует или не авторизован, возврат к играм и вывод на экран о просьбе авторизации
             }
         }
-        return view('pages.game.nvuti', compact('hash'));
+        return view('components.nvuti', compact('hash'));
     }
-
     /**
      * @Route("/setBet", name="nvutiBet")
      * @param Request $request
@@ -33,87 +33,118 @@ class NvutiController extends Controller
      */
     public function setBet(Request $request)
     {
-        $userData = User::where('user_name', $_COOKIE['user_name'])->first();
-        $nvuti_game = NvutiGame::where([
-            ['user_id', '=', $userData->id],
-            ['status', '=', 'в процессе'], // статус изменить
-        ])->first();
-
-        $result = $this->isNumberMore($nvuti_game->game_number,5,10);
-        $newGame = NvutiGame::find($nvuti_game->id);
-        $newGame->status = 'сыграно';
-        $newGame->name = ($result == 0 ? 'проиграл' : 'выиграл');
+        $userId = Auth::id();
+        $nvutiGame = $this->getNvutiGame($userId);
+        if (empty($request['chance']) || empty($request['stake'])) {
+            $hash = $this->createNewGame($userId);
+            return response()->json(['success' => false, 'hash' => $hash]);
+        }
+        $number = $this->getMinMaxSegment($request['chance']);
+        if ($request['stake'] == 'less')
+            $result = $this->isPointBelongSegment($nvutiGame->game_number, 0, $number['min']); // from and to промежуток
+        else
+            $result = $this->isPointBelongSegment($nvutiGame->game_number, $number['max'], 999999); // from and to промежуток
+        $newGame = NvutiGame::find($nvutiGame->id);
+        $newGame->status = 'done';
+        $newGame->name = ($result == 0 ? 'lose' : 'win');
         $newGame->save();
-        return redirect()->route('nvuti');
+        $hash = $this->createNewGame($userId);
+        return response()->json(['success' => true, 'hash' => $hash]);
     }
-
-
-    public function game($userData) // проверка на существование игры
+    /**
+     * get min max of the segment
+     * @param $chance
+     * @return array (min, max)
+     */
+    private function getMinMaxSegment($chance)
     {
-        $nvuti_game = NvutiGame::where([
-            ['user_id', '=', $userData->id],
-            ['status', '=', 'в процессе'], // статус изменить
+        $min = floor(($chance) / 100 * 999999);
+        $max = floor(999999 - ($chance) / 100 * 999999);
+        return ['min' => $min, 'max' => $max];
+    }
+    /***
+     * @param $userId
+     * @return mixed
+     */
+    private function createNewGame($userId)
+    {
+        $data = $this->getNewData();
+        $hash = Hash::make($data['gameSalt'] . $data['randNumber']);
+        NvutiGame::create([
+            'name' => '',
+            'status' => 'plays',
+            'game_hash' => $hash,
+            'game_salt' => $data['gameSalt'],
+            'game_number' => $data['randNumber'],
+            'user_id' => $userId,
+        ]);
+        return $hash;
+    }
+    /***
+     * get current game
+     * @param $userId
+     * @return mixed
+     */
+    private function getNvutiGame($userId)
+    {
+        return NvutiGame::where([
+            ['user_id', '=', $userId],
+            ['status', '=', 'plays'],
         ])->first();
-        // Check exist user.
-        // если пользователь существует и игра в процессе, то генерятся новые 2 соли и число
-        if (isset($nvuti_game->id)) {
-            $data = $this->newData(); // получение сгенерированных солей и числа
-            $newGame = NvutiGame::find($nvuti_game->id);
-            $newGame->game_salt = $data['game_salt'];
-            $newGame->game_salt2 = $data['game_salt2'];
-            $newGame->game_hash = Hash::make($data['game_salt'] . $data['rand_number'] . $data['game_salt2']);
-            $newGame->game_number = $data['rand_number'];
+    }
+    /***
+     * create or update game data and getHash
+     * @return mixed
+     */
+    public function getNewHash()
+    {
+        $userId = Auth::id();
+        $currentGame = $this->getNvutiGame($userId);
+        if (!empty($currentGame)) {
+            $currentGameId = $this->getNvutiGame($userId)->id;
+            $data = $this->getNewData();
+            $newGame = NvutiGame::find($currentGameId);
+            $newGame->game_salt = $data['gameSalt'];
+            $newGame->game_hash = Hash::make($data['gameSalt'] . $data['randNumber']);
+            $newGame->game_number = $data['randNumber'];
             $newGame->save();
             return $newGame->game_hash;
         } else {
-            $data = $this->newData(); // получение сгенерированных солей и числа
-            $userData = User::where('user_name', $_COOKIE['user_name'])->first(); // юсера получаем
-            $hash = Hash::make($data['game_salt'] . $data['rand_number'] . $data['game_salt2']);
+            $data = $this->getNewData();
+            $hash = Hash::make($data['gameSalt'] . $data['randNumber']);
             NvutiGame::create([
                 'name' => '',
-                'status' => 'в процессе',
+                'status' => 'plays',
                 'game_hash' => $hash,
-                'game_salt' => $data['game_salt'],
-                'game_salt2' => $data['game_salt2'],
-                'game_number' => $data['rand_number'],
-                'user_id' => $userData->id,
+                'game_salt' => $data['gameSalt'],
+                'game_number' => $data['randNumber'],
+                'user_id' => $userId,
             ]);
             return $hash;
         }
     }
-
-    private function isNumberMore($number,$from, $to)
-    {  // проверка на принадлежность к промежутку игрока
-            if ( $number  >= $from && $number <=$to)
-                return 1;
-
+    /***
+     * Does a point belong to a segment?
+     * @param $number
+     * @param $from
+     * @param $to
+     * @return int
+     */
+    private function isPointBelongSegment($number, $from, $to)
+    {
+        if ($number >= $from && $number <= $to)
+            return 1;
         return 0;
     }
     /***
-     * получение исходных данных
-     * @return array['game_salt', 'game_salt2', 'rand_number']
+     * generation new sole and randomNumber
+     * @return array['game_salt', 'gameSalt2', 'randNumber']
      */
-    private function newData()
+    private function getNewData()
     {
         $game_salt = Hash::make(str_random(10));
-        $game_salt2 = Hash::make(str_random(10));
-        $rand_number = mt_rand(1, 30);
-
-        return ['game_salt' => $game_salt, 'game_salt2' => $game_salt2, 'rand_number' => $rand_number];
-    }
-
-    private function getNumber($salt1, $salt2, $hash, $from, $to)
-    {
-
-        for ($i = 1; $i < 1000000; $i++) {
-
-            if (Hash::make($salt1 . $i . $salt2) == $hash)
-                return $i;
-
-            if ($i >= $from && $i <= $to) {
-                return 0;
-            }
-        }
+        $rand_number = mt_rand(0, 999999);
+        return ['gameSalt' => $game_salt, 'randNumber' => $rand_number];
     }
 
 }

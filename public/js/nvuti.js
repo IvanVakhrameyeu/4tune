@@ -23,18 +23,21 @@ $(document).ready(function() {
             'stake': stake
         };
 
-        alert($(this).attr('about')); // вызывается ток less
-
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
-            url: './setBet',
+            method: 'POST',
+            url: './nvuti/setBet',
             data: data,
             dataType: 'json',
             async: true,
             success: function (response, status) {
                 console.log(response);
                 $('.hash-value').text(response.hash);
-                $('.wallet-balance').text(response.balance)
+                // $('.wallet-balance').text(response.balance)
             }
         });
     });
