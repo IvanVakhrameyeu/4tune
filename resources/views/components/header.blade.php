@@ -1,4 +1,5 @@
 <header>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand logo" href="/"></a>
@@ -22,7 +23,7 @@
                         <ul class="navbar-nav ml-auto">
                             @guest
                                 <li class="nav-item mx-4">
-                                    <a class="nav-link" href="http://127.0.0.1:8000/login/vkontakte">Вход</a>
+                                    <a class="nav-link" href="/login/vkontakte">Вход</a>
                                 </li>
                             @else
                                 <a class="nav-link" href="/profile">
