@@ -16,7 +16,6 @@ class CreateNvutiGamesTable extends Migration
         Schema::create('nvuti_games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->dateTime('time');
             $table->string('status');
             $table->string('game_hash');
             $table->string('game_salt');
