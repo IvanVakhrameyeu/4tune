@@ -48,4 +48,24 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\VkAccount');
     }
+
+    public function bonusProgramsLinks()
+    {
+        $this->hasMany('App\BonusProgramLink');
+    }
+
+    public function bonusPrograms()
+    {
+        $this->hasManyThrough('App\BonusProgram', 'App\BonusProgramLink');
+    }
+
+    public function referrer()
+    {
+        $this->hasOne('App\Referral');
+    }
+
+    public function referrals()
+    {
+        $this->hasManyThrough('App\Referral', 'App\BonusProgramLink');
+    }
 }
