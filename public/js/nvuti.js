@@ -37,7 +37,7 @@ $(document).ready(function() {
             success: function (response, status) {
                 console.log(response);
                 $('.hash-value').text(response.hash);
-                // $('.wallet-balance').text(response.balance)
+                $('.wallet-balance').text(response.balance)
             }
         });
     });

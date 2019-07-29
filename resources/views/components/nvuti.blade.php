@@ -19,6 +19,8 @@
             }
             if($name == "count_game"){
                 document.getElementById($name).value >1000? document.getElementById($name).value =1000:null;
+
+
             }
             else{
                 document.getElementById($name).value >95? document.getElementById($name).value =95:null;
@@ -26,6 +28,9 @@
             if (document.getElementById($name).value < 1 || isNaN(document.getElementById($name).value)) {
                 document.getElementById($name).value = 1;
             }
+
+
+
             $('.nvuti-chance').trigger("change");
         }
     </script>

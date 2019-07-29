@@ -29,12 +29,12 @@
                                 <a class="nav-link" href="/profile">
                                     <li class="nav-item ml-4 profile">
                                         <a class="nav-link" href="#">
-                                            <img src="{{Auth::user()->photo}}">
+                                            <img src="{{Auth::user()->avatar}}">
                                         </a>
                                     </li>
                                     <li>
                                         <b>{{\Illuminate\Support\Facades\Auth::user()->name}}</b>
-                                        <span class="caret">100</span>
+                                        <a class="wallet-balance">{{Auth::user()->balance}}</a>
                                     </li>
                                     <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">
