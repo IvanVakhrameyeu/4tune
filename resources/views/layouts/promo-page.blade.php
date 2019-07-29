@@ -7,7 +7,7 @@
                     <p class="mx-auto col-lg-7 my-3">
                         Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях.
                     </p>
-                    <a href="http://127.0.0.1:8000/login/vkontakte" class="btn btn-light px-3" id="vk_login">
+                    <a href="/login/vkontakte" class="btn btn-light px-3" id="vk_login">
                         <i class="fa fa-vk"></i>
                         Войти через VK
                     </a>
