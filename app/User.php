@@ -5,16 +5,31 @@ namespace App;
 use App\Permissions\HasPermissionsTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
-{
-    use Notifiable, HasPermissionsTrait;
+use Bavix\Wallet\Traits\HasWallet;
+use Bavix\Wallet\Traits\HasWallets;
+use Bavix\Wallet\Interfaces\Wallet;
 
+class User extends Authenticatable implements Wallet
+{
+    use HasWallet, HasWallets;
+
+
+    use Notifiable, HasPermissionsTrait;
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         $this->password = Hash::make(str_random(8));
+
+
+      /*  $user = Auth::user();
+        $wallet = $user->createWallet([
+            'name' => 'New Wallet',
+            'slug' => 'my-wallet',
+        ]);
+        $wallet->deposit(100);*/
     }
 
     /**
