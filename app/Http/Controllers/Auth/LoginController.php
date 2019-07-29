@@ -52,9 +52,7 @@ class LoginController extends Controller
         $user = UserRepository::findOrCreateUserFromOAuth($oauthUser);
 
         Auth::login($user);
-        $user = Auth::user();
-        if(isset($user))
-            $user->balance;
+
         return redirect($this->redirectTo);
     }
 

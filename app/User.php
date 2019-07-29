@@ -23,13 +23,6 @@ class User extends Authenticatable implements Wallet
         parent::__construct($attributes);
         $this->password = Hash::make(str_random(8));
 
-
-      /*  $user = Auth::user();
-        $wallet = $user->createWallet([
-            'name' => 'New Wallet',
-            'slug' => 'my-wallet',
-        ]);
-        $wallet->deposit(100);*/
     }
 
     /**
