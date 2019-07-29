@@ -21,26 +21,4 @@ class MainController extends Controller
     {
         return view('layouts.games');
     }
-
-
-    public function wallet()
-    {
-
-
-          $user = Auth::user();
-          if(isset($user))
-        $user->balance;
-        /*/return var_dump($user);
-          $wallet = $user->createWallet([
-              'name' => 'Coin',
-              'slug' => 'my-coin',
-          ]);
-          $wallet->deposit(100);*/
-
-
-        return var_dump($user->balance);
-    }
-
-
-
 }

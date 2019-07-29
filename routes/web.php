@@ -15,10 +15,6 @@
 Route::get('/','MainController@index')->name('home');
 
 
-
-Route::get('/wallet','MainController@wallet')->name('home');
-
-
 /* ============Actions============== */
 
 /* ------------Nvuti---------------- */
