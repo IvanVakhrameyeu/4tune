@@ -3250,7 +3250,7 @@ header nav.navbar .collapse ul.navbar-nav li.nav-item.profile:after {
   display: none;
 }
 
-body.full header {
+.app header {
   background: #1789ff;
   /* Old browsers */
   /* FF3.6-15 */

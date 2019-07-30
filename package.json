@@ -18,5 +18,9 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "vue-reactive-storage": "git+https://github.com/ropbla9/vue-reactive-storage.git",
+        "vue-router": "^3.0.7"
     }
 }

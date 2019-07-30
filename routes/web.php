@@ -13,23 +13,24 @@
 
 /* ================Pages============= */
 Route::get('/','MainController@index')->name('home');
-
-
-/* ============Actions============== */
-
-/* ------------Nvuti---------------- */
-Route::get('/nvuti/setBet','NvutiController@setBet');
-
-
-/* Auth */
+//
+//
+///* ============Actions============== */
+//
+///* ------------Nvuti---------------- */
+//Route::get('/nvuti/setBet','NvutiController@setBet');
+//
+//
+///* Auth */
 Route::get('/login/{provider}', "Auth\LoginController@redirectToProvider");
 Route::get('/login/{provider}/callback', "Auth\LoginController@handleProviderCallback");
 Route::get('/logout', "Auth\LoginController@logout");
-
-Route::middleware('auth')->group(function (){
-    Route::get('/double','DoubleController@index');
-    Route::get('/jackpot','JackpotController@index');
-    Route::get('/nvuti','NvutiController@index')->name('nvuti');
-    Route::get('/profile','ProfileController@indexAction');
-});
+Route::get('/getUser', 'MainController@getUser');
+//
+//Route::middleware('auth')->group(function (){
+//    Route::get('/double','DoubleController@index');
+//    Route::get('/jackpot','JackpotController@index');
+//    Route::get('/nvuti','NvutiController@index')->name('nvuti');
+//    Route::get('/profile','ProfileController@indexAction');
+//});
 
