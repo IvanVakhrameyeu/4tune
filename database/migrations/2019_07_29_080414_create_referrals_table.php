@@ -15,12 +15,12 @@ class CreateReferralsTable extends Migration
     {
         Schema::create('referrals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ref_user_id')->unique();
-            $table->integer('bonus_program_link_id');
+            $table->integer('user_id')->unique();
+            $table->integer('user_bonus_program_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bonus_program_link_id')->references('bonus_program_links')->onDelete('cascade');
+            $table->foreign('user_bonus_program_id')->references('user_bonus_programs')->onDelete('cascade');
         });
     }
 

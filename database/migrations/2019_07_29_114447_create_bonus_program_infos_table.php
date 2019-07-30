@@ -13,12 +13,12 @@ class CreateBonusProgramInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_bonus_programs_info', function (Blueprint $table) {
+        Schema::create('user_bonus_program_infos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('bonus_program_id')->unsigned();
-            $table->boolean('active')->default(true);
-            $table->integer('bonus_program_level')->default(1);
+            $table->integer('user_bonus_program_id')->unsigned();
+            $table->json('progress');
+            $table->integer('level')->default(1);
+            $table->string('status');
             $table->json('bonus_history');
             $table->timestamps();
 

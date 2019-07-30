@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class BonusProgramSettings extends Model
 {
-    const BONUS_PROGRAM_TYPE_DEPOSIT = 'deposit';
-    const BONUS_PROGRAM_TYPE_WITHDRAW = 'withdraw';
-    const BONUS_PROGRAM_TYPE_FREE = 'free';
-    const BONUS_PROGRAM_TYPE_REFERRAL = 'referral';
+    const BONUS_PROGRAM_RULE_ONE_TIME_BONUS = 'one_time_bonus';
+    const BONUS_PROGRAM_RULE_INFINITY_TIME_BONUS = 'infinity_time_bonus';
+    const BONUS_PROGRAM_RULE_COUNT_TIME_BONUS = 'count_time_bonus';
 
     protected $fillable = [
         'bonus_program_id',
         'code',
         'end_time',
-        'bonus_program_type',
+        'active',
     ];
 
     public function bonusProgram()

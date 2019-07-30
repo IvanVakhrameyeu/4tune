@@ -51,12 +51,12 @@ class User extends Authenticatable
 
     public function bonusProgramsLinks()
     {
-        $this->hasMany('App\BonusProgramLink');
+        $this->hasMany('App\UserBonusProgram');
     }
 
     public function bonusPrograms()
     {
-        $this->hasManyThrough('App\BonusProgram', 'App\BonusProgramLink');
+        $this->hasManyThrough('App\BonusProgram', 'App\UserBonusProgram');
     }
 
     public function referrer()
@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function referrals()
     {
-        $this->hasManyThrough('App\Referral', 'App\BonusProgramLink');
+        $this->hasManyThrough('App\Referral', 'App\UserBonusProgram');
     }
 }

@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BonusProgramLink extends Model
+class UserBonusProgram extends Model
 {
     protected $fillable = [
         'user_id',
-        'bonus_program_id'
+        'bonus_program_id',
+        'join_url'
     ];
 
     public function user()
@@ -19,6 +20,11 @@ class BonusProgramLink extends Model
     public function bonusProgram()
     {
         $this->belongsTo('App\BonusProgram');
+    }
+
+    public function userBonusProgramInfo()
+    {
+        $this->hasOne('App\UserBonusProgramInfo');
     }
 
     public function referrals()

@@ -8,7 +8,7 @@ class Referral extends Model
 {
     protected $fillable = [
         'user_id',
-        'bonus_program_link_id'
+        'user_bonus_program_id'
     ];
 
     public function user()
@@ -16,13 +16,13 @@ class Referral extends Model
         $this->belongsTo('App\User');
     }
 
-    public function bonusProgramLink()
+    public function userBonusProgram()
     {
-        $this->belongsTo('App\BonusProgramLink');
+        $this->belongsTo('App\UserBonusProgram');
     }
 
     public function referredBy()
     {
-        $this->hasManyThrough('App\User', 'App\BonusProgramLink')->first();
+        $this->hasManyThrough('App\User', 'App\UserBonusProgram')->first();
     }
 }

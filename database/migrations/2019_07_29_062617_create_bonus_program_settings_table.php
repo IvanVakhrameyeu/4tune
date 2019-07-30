@@ -16,9 +16,9 @@ class CreateBonusProgramSettingsTable extends Migration
         Schema::create('bonus_program_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bonus_program_id')->unsigned()->unique();
-            $table->enum('bonus_program_type', ['deposit', 'withdraw', 'free', 'referral']);
             $table->string('code', 36)->index();
             $table->dateTime('end_time');
+            $table->boolean('active')->default(false);
             $table->timestamps();
 
             $table->foreign('bonus_program_id')->references('id')->on('bonus_programs')->onDelete('cascade');

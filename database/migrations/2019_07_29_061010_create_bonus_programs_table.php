@@ -18,7 +18,7 @@ class CreateBonusProgramsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->integer('bonus_id')->unsigned();
-            $table->boolean('active')->default(false);
+            $table->enum('type', ['deposit', 'withdraw', 'free', 'referral']);
             $table->timestamps();
 
             $table->foreign('bonus_id')->references('id')->on('bonuses')->onDelete('cascade');

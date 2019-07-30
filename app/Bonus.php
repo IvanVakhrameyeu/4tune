@@ -13,8 +13,8 @@ class Bonus extends Model
         'name',
         'slug',
         'bonus_type_id',
-        'bonus_amount_type',
-        'bonus_amount'
+        'bonus_amount',
+        'bonus_amount_type'
     ];
 
     public function bonusType()
