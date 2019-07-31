@@ -1,7 +1,7 @@
 <template>
         <div class="container-fluid" v-bind:class="{'app': user, 'promo': !user}">
                 <app-header></app-header>
-                <games v-if="user"></games>
+                <router-view v-if="user"></router-view>
                 <promo v-else></promo>
                 <app-footer></app-footer>
         </div>

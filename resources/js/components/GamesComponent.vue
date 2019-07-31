@@ -10,10 +10,10 @@
                                 <h5 class="text-center">Выбор режима:</h5>
                                 <div class="row">
                                     <div class="col-lg-4 text-center">
-                                        <a href="/games/double" class="btn">Double</a>
+                                        <router-link :to="{name: 'double'}" class="btn active">Double</router-link>
                                     </div>
                                     <div class="col-lg-4 text-center">
-                                        <a href="/games/jackpot" class="btn active">Jackpot</a>
+                                        <router-link :to="{name: 'jackpot'}" class="btn active">Jackpot</router-link>
                                     </div>
                                     <div class="col-lg-4 text-center">
                                         <router-link :to="{name: 'nvuti'}" class="btn active">Nvuti</router-link>
@@ -27,126 +27,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="chat">
-                            <div class="chat-content">
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <div class="message-head">
-                                        <div class="message-avatar">
-                                            <img src="images/test-avatar.png">
-                                        </div>
-                                        <div class="message-user-info">
-                                            <div class="name">Name</div>
-                                            <div class="id">@144153</div>
-                                        </div>
-                                    </div>
-                                    <div class="message-text">
-                                        Щас ред, точно
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-form form-inline">
-                                <input type="text" class="form-control" placeholder="Напишите что нибудь">
-                                <button type="submit" class="btn ml-auto float-lg-right">GO</button>
-                            </div>
-                        </div>
+                        <chat></chat>
                     </div>
                 </div>
             </div>

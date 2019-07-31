@@ -10,10 +10,6 @@ class MainController extends Controller
 {
     public function index()
     {
-//        if (Auth::user()) {
-//            return view('layouts.games');
-//        }
-
         return view('layouts.index');
     }
 

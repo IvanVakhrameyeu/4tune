@@ -14,12 +14,17 @@ import reactiveStorage from "vue-reactive-storage";
 
 window.Vue.use(VueRouter);
 
-import HeaderComponent from './components/HeaderComponent.vue';
-import FooterComponent from './components/FooterComponent.vue';
-import PromoComponent from './components/PromoComponent.vue';
-import GamesComponent from './components/GamesComponent.vue';
-import AppComponent from './components/AppComponent.vue';
-import NvutiGameComponent from './components/NvutiGameComponent.vue';
+import HeaderComponent from './components/HeaderComponent';
+import FooterComponent from './components/FooterComponent';
+import PromoComponent from './components/PromoComponent';
+import GamesComponent from './components/GamesComponent';
+import AppComponent from './components/AppComponent';
+import NvutiGameComponent from './components/NvutiGameComponent';
+import ProfileComponent from './components/ProfileComponent';
+import DoubleGameComponent from "./components/DoubleGameComponent";
+import JackpotGameComponent from "./components/JackpotGameComponent";
+import JackpotGameRoomComponent from "./components/JackpotGameRoomComponent";
+import ChatComponent from './components/ChatComponent';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,14 +38,41 @@ Vue.component('games', GamesComponent);
 Vue.component('app-header', HeaderComponent);
 Vue.component('app-footer', FooterComponent);
 Vue.component('app', AppComponent);
-Vue.component('nvuti', NvutiGameComponent);
+Vue.component('chat', ChatComponent);
 
 const routes = [
-
     {
-        path: '/nvuti',
-        component: NvutiGameComponent,
-        name: 'nvuti'
+        path: '/profile',
+        component: ProfileComponent,
+        name: 'profile'
+    },
+    {
+        path: '/',
+        component: GamesComponent,
+        name: 'games',
+        children: [
+            {
+                path: '/nvuti',
+                component: NvutiGameComponent,
+                name: 'nvuti'
+            },
+            {
+                path: '/jackpot',
+                component: JackpotGameComponent,
+                name: 'jackpot',
+                children: [
+                    {
+                        path: '/jackpot/:room',
+                        component: JackpotGameRoomComponent
+                    }
+                ]
+            },
+            {
+                path: '/double',
+                component: DoubleGameComponent,
+                name: 'double'
+            }
+        ]
     }
 ];
 
