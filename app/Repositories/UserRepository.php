@@ -12,7 +12,6 @@ class UserRepository
     {
         $vkAccount = VkAccountRepository::findOrCreateAccount($oauthUser);
 
-
         if ($user = $vkAccount->user) {
             return $user;
         }
