@@ -34,7 +34,7 @@
                                     </li>
                                     <li>
                                         <b>{{\Illuminate\Support\Facades\Auth::user()->name}}</b>
-                                        <a class="wallet-balance">{{Auth::user()->balance}}</a>
+                                        <a class="wallet-balance">{{Auth::user()->balanceFloat}}</a>
                                     </li>
                                     <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">
@@ -45,18 +45,8 @@
                                     </li>
                                 </a>
                             @endguest
-
-
-                        @if(isset($_COOKIE['user_name']))
-                            <!-- отображение пользователя -->
-
-                        @else
-
-
-                            @endif
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>

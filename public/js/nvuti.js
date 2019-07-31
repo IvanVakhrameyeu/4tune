@@ -6,16 +6,16 @@ $(document).ready(function() {
 
     $('.nvuti-chance').on("change paste keyup", function () {
         let win_amount = $('.nvuti-amount').val() / $('.nvuti-chance').val() * 100;
-        $('.nvuti-win').text(win_amount.toFixed(2));
-        let min = Math.floor(parseInt($('.nvuti-chance').val()) / 100 * 999999);
-        let max = Math.floor(999999 - parseInt($('.nvuti-chance').val()) / 100 * 999999);
+        $('.nvuti-win').text(win_amount.toFixed(2) + " N");
+        let min = Math.floor(parseFloat($('.nvuti-chance').val()) / 100 * 999999);
+        let max = Math.floor(999999 - parseFloat($('.nvuti-chance').val()) / 100 * 999999);
         $('.nvuti-min').text('0-' + min);
         $('.nvuti-max').text(max + '-999999');
     });
 
     $('.nvuti-btn').click(function (e) {
-        let chance = parseInt($('.nvuti-chance').val());
-        let amount = parseInt($('.nvuti-amount').val());
+        let chance = parseFloat($('.nvuti-chance').val());
+        let amount = parseFloat($('.nvuti-amount').val());
         let stake = $('.nvuti-btn').attr('about');
         let data = {
             'chance': chance,
@@ -42,3 +42,28 @@ $(document).ready(function() {
         });
     });
 });
+function change_input($this, $name) {
+    switch ($this.type) {
+        case "double":
+            document.getElementById($name).value *= 2;
+            break;
+        case "half":
+            document.getElementById($name).value /= 2;
+            break;
+        case "min":
+            document.getElementById($name).value = 1;
+            break;
+        case "max":
+            ($name == "count_game") ? document.getElementById($name).value = 1000 : document.getElementById($name).value = 95;
+            break;
+    }
+    if($name == "count_game"){
+        document.getElementById($name).value >1000? document.getElementById($name).value =1000:null;
+    }    else{
+        document.getElementById($name).value >95? document.getElementById($name).value =95:null;
+    }
+    if (document.getElementById($name).value < 1 || isNaN(document.getElementById($name).value)) {
+        document.getElementById($name).value = 1;
+    }
+    $('.nvuti-chance').trigger("change");
+}
