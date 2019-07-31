@@ -45,7 +45,7 @@ class NvutiRepository
         $nvutiGame->save();
         $hash = self::getNewHash($userId);
 
-        return (['success' => true, 'hash' => $hash, 'balance' => $balance, '$numberForMin'=> $numberForMin, '$numberForMax'=>$numberForMax,'$stake'=>$stake]);
+        return (['success' => true, 'hash' => $hash, 'balance' => $balance, '$stake'=>$stake]);
     }
 
 
@@ -89,7 +89,7 @@ class NvutiRepository
     }
 
     /***
-     * create or update game data and getHash
+     * @param $userId
      * @return mixed
      */
     static public function getNewHash($userId)
@@ -140,9 +140,9 @@ class NvutiRepository
      */
     static private function getNewData()
     {
-        $game_salt = Hash::make(str_random(10));
-        $rand_number = mt_rand(0, 999999);
-        return ['gameSalt' => $game_salt, 'randNumber' => $rand_number];
+        $gameSalt = Hash::make(str_random(10));
+        $randNumber = mt_rand(0, 999999);
+        return ['gameSalt' => $gameSalt, 'randNumber' => $randNumber];
     }
 
 }
