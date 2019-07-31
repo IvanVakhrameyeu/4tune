@@ -15,6 +15,11 @@ class NvutiController extends Controller
 {
     private $nvutiRepository;
 
+    public function __construct()
+    {
+        $this->nvutiRepository = new NvutiRepository();
+    }
+
     /***
      * @return View
      */
@@ -22,7 +27,9 @@ class NvutiController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            $hash = NvutiRepository::getNewHash();
+            $userId = $user->id;
+            $user->depositFloat(1000);
+            $hash = NvutiRepository::getNewHash($userId);
         }
 
         return view('components.nvuti', compact('hash'));
@@ -36,8 +43,8 @@ class NvutiController extends Controller
     public function setBet(Request $request)
     {
         $user = Auth::user();
+        $userId = $user->id;
         $user->wallet->refreshBalance();
-        $this->nvutiRepository = new NvutiRepository();
         $balance = $user->balanceFloat;
 
         $chance = $request['chance'];
@@ -45,10 +52,10 @@ class NvutiController extends Controller
         $stake = $request['stake'];
 
         if (empty($chance) || empty($amount) || empty($stake || empty($nvutiGame))) {
-            $hash = NvutiRepository::getNewHash();
+            $hash = NvutiRepository::getNewHash($userId);
             return response()->json(['success' => false, 'hash' => $hash, 'balance' => $balance]);
         } elseif ($amount > $balance) {
-            $hash = NvutiRepository::getNewHash();
+            $hash = NvutiRepository::getNewHash($userId);
             return response()->json(['success' => false, 'hash' => $hash, 'balance' => $balance]);
         }
 

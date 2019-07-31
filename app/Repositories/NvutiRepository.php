@@ -5,8 +5,6 @@ namespace App\Repositories;
 
 
 use App\NvutiGame;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use Hash;
 
@@ -25,13 +23,13 @@ class NvutiRepository
         $nvutiGame = $this->getNvutiGame($userId);
         $number = $this->getMinMaxSegment($chance);
 
-        $numberMin = $number['min'];
-        $numberMax = $number['max'];
+        $numberForMin = $number['min'];
+        $numberForMax = $number['max'];
 
         if ($stake == 'less') {
-            $result = $this->isPointBelongSegment($nvutiGame->game_number, NvutiGame::GAME_MIN, $numberMin);
+            $result = $this->isPointBelongSegment($nvutiGame->game_number, NvutiGame::NVUTI_GAME_GAME_MIN, $numberForMin);
         } else {
-            $result = $this->isPointBelongSegment($nvutiGame->game_number, $numberMax, NvutiGame::GAME_MAX);
+            $result = $this->isPointBelongSegment($nvutiGame->game_number, $numberForMax, NvutiGame::NVUTI_GAME_GAME_MAX);
         }
 
         if ($result == 0) {
@@ -42,12 +40,12 @@ class NvutiRepository
         }
         $balance = $user->balanceFloat;
 
-        $nvutiGame->status = NvutiGame::STATUS_DONE;
+        $nvutiGame->status = NvutiGame::NVUTI_GAME_STATUS_CLOSED;
         $nvutiGame->name = ($result == 0 ? 'lose' : 'win');
         $nvutiGame->save();
-        $hash = self::getNewHash();
+        $hash = self::getNewHash($userId);
 
-        return (['success' => true, 'hash' => $hash, 'balance' => $balance]);
+        return (['success' => true, 'hash' => $hash, 'balance' => $balance, '$numberForMin'=> $numberForMin, '$numberForMax'=>$numberForMax,'$stake'=>$stake]);
     }
 
 
@@ -71,8 +69,8 @@ class NvutiRepository
      */
     private function getMinMaxSegment($chance)
     {
-        $min = floor(($chance) / 100 * NvutiGame::GAME_MAX);
-        $max = floor(NvutiGame::GAME_MAX - ($chance) / 100 * NvutiGame::GAME_MAX);
+        $min = floor(($chance) / 100 * NvutiGame::NVUTI_GAME_GAME_MAX);
+        $max = floor(NvutiGame::NVUTI_GAME_GAME_MAX - ($chance) / 100 * NvutiGame::NVUTI_GAME_GAME_MAX);
 
         return ['min' => $min, 'max' => $max];
     }
@@ -86,7 +84,7 @@ class NvutiRepository
     {
         return NvutiGame::where([
             ['user_id', '=', $userId],
-            ['status', '=', NvutiGame::STATUS_PLAYS],
+            ['status', '=', NvutiGame::NVUTI_GAME_STATUS_PENDING],
         ])->first();
     }
 
@@ -94,9 +92,8 @@ class NvutiRepository
      * create or update game data and getHash
      * @return mixed
      */
-    static public function getNewHash()
+    static public function getNewHash($userId)
     {
-        $userId = Auth::id();
         $currentGame = self::getNvutiGame($userId);
         $data = self::getNewData();
 
@@ -112,7 +109,7 @@ class NvutiRepository
 
             NvutiGame::create([
                 'name' => '',
-                'status' => NvutiGame::STATUS_PLAYS,
+                'status' => NvutiGame::NVUTI_GAME_STATUS_PENDING,
                 'game_hash' => $hash,
                 'game_salt' => $data['gameSalt'],
                 'game_number' => $data['randNumber'],
