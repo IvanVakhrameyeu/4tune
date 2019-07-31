@@ -30,6 +30,8 @@ class UserRepository
 
         $user->addRole('user');
 
+        WalletRepository::createWallet($user); // create wallets for user
+
         return $user;
     }
 }
