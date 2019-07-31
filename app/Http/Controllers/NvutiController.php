@@ -28,7 +28,6 @@ class NvutiController extends Controller
         $user = Auth::user();
         if ($user) {
             $userId = $user->id;
-            $user->depositFloat(1000);
             $hash = NvutiRepository::getNewHash($userId);
         }
 
