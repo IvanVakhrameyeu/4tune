@@ -26,6 +26,9 @@ Route::get('/login/{provider}', "Auth\LoginController@redirectToProvider");
 Route::get('/login/{provider}/callback', "Auth\LoginController@handleProviderCallback");
 Route::get('/logout', "Auth\LoginController@logout");
 Route::get('/getUser', 'MainController@getUser');
+
+
+Route::get('/getHash', 'NvutiController@getHash');
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

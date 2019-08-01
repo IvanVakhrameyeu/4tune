@@ -4,26 +4,26 @@
             <div class="col-lg-3">
                 <div class="game-chance-block mx-auto">
                     <span>Размер игры</span>
-                    <input type="text" id="count_game" class="form-control nvuti-amount" v-on:change="amount_input"
+                    <input type="text" id="count_game" class="form-control nvuti-amount" v-on:change="amountInput"
                            v-model="amount">
                     <div class="size-buttons">
-                        <a v-on:click="amount_input('double')" class="btn">Удвоить</a>
-                        <a v-on:click="amount_input('half')" class="btn ml-auto">1/2</a>
-                        <a v-on:click="amount_input('min')" class="btn">Минимум</a>
-                        <a v-on:click="amount_input('max')" class="btn ml-auto">Макс</a>
+                        <a v-on:click="amountInput('double')" class="btn">Удвоить</a>
+                        <a v-on:click="amountInput('half')" class="btn ml-auto">1/2</a>
+                        <a v-on:click="amountInput('min')" class="btn">Минимум</a>
+                        <a v-on:click="amountInput('max')" class="btn ml-auto">Макс</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="game-chance-block mx-auto">
                     <span>Шанс игры %</span>
-                    <input type="text" id="chance_game" class="form-control nvuti-chance" v-on:change="change_input"
+                    <input type="text" id="chance_game" class="form-control nvuti-chance" v-on:change="changeInput"
                            v-model="chance">
                     <div class="chance-buttons">
-                        <a v-on:click="change_input('double')" class="btn nvuti-chance-double">Удвоить</a>
-                        <a v-on:click="change_input('half')" class="btn ml-auto">1/2</a>
-                        <a v-on:click="change_input('min')" class="btn">Минимум</a>
-                        <a v-on:click="change_input('max')" class="btn ml-auto">Макс</a>
+                        <a v-on:click="changeInput('double')" class="btn nvuti-chance-double">Удвоить</a>
+                        <a v-on:click="changeInput('half')" class="btn ml-auto">1/2</a>
+                        <a v-on:click="changeInput('min')" class="btn">Минимум</a>
+                        <a v-on:click="changeInput('max')" class="btn ml-auto">Макс</a>
                     </div>
                 </div>
             </div>
@@ -34,11 +34,11 @@
                     <div class="buttons">
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="nvuti-min">0 - 949999</p>
+                                <p class="nvuti-min" >{{this.leftRange}}</p>
                                 <a class="btn nvuti-btn" about="less">Меньше</a>
                             </div>
                             <div class="col-lg-6">
-                                <p class="nvuti-max">49999 - 999999</p>
+                                <p class="nvuti-max">{{this.rightRange}}</p>
                                 <a class="btn nvuti-btn" about="more">Больше</a>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                 <div class="hash text-center">
                     <h4 class="mx-auto text-center">Hash игры</h4>
                     <p class="hash-value">
-                        {{}}
+                        {{this.hash}}
                     </p>
                     <a href="#" class="whatis mx-auto">Что такое hash</a>
                 </div>
@@ -64,17 +64,28 @@
     export default {
         name: "NvutiGameComponent",
 
+        mounted() {
+            let app = this;
+            console.log(this);
+            axios.get('/getHash')
+                .then(function (resp) {
+                    app.hash = resp.data;
+                })
+        },
 
         data: function () {
             return {
                 chance: 95,
                 amount: 1,
                 possibleWin: 1.05,
+                hash: null,
+                leftRange: "0 - 949999",
+                rightRange: "49999 - 999999",
             }
         },
 
         methods: {
-            change_input: function (type) {
+            changeInput: function (type) {
                 switch (type) {
                     case "double":
                         this.chance *= 2;
@@ -101,9 +112,10 @@
                 if (this.chance < 1 || isNaN(this.chance)) {
                     this.chance = 1;
                 }
-                this.possible_win();
+                this.changePossibleWin();
+                this.changeRange();
             },
-            amount_input: function (type) {
+            amountInput: function (type) {
                 switch (type) {
                     case "double":
                         this.amount *= 2;
@@ -129,11 +141,15 @@
                 if (this.amount < 1 || isNaN(this.amount)) {
                     this.amount = 1;
                 }
-               this.possible_win();
+               this.changePossibleWin();
             },
-            possible_win: function () {
+            changePossibleWin: function () {
                 this.possibleWin=this.amount/ this.chance * 100;
                 this.possibleWin=Math.round(parseFloat(this.possibleWin)*100)/100;
+            },
+            changeRange: function () {
+                this.leftRange='0-'+ (Math.floor(parseFloat(this.chance) / 100 * 999999));
+                this.rightRange= (Math.floor(999999 - parseFloat(this.chance) / 100 * 999999))+'-999999';
             }
         }
     }

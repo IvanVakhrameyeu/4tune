@@ -20,6 +20,11 @@ class NvutiController extends Controller
         $this->nvutiRepository = new NvutiRepository();
     }
 
+    public function getHash(){
+        $userId=Auth::user()->id;
+        $hash = NvutiRepository::getNewHash($userId);
+        return $hash;
+    }
     /***
      * @return View
      */
