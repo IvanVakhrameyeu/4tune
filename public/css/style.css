@@ -3658,15 +3658,35 @@ header nav.navbar .collapse ul.navbar-nav li.nav-item.profile:after {
 
 .game-page .game .game-zone .room .jackpot-process .jackpot-progress {
   position: relative;
-  position: relative;
   padding: 35px 10px 0px;
   background: #c5e0f7;
 }
 
+.game-page .game .game-zone .room .jackpot-process .jackpot-progress .bar {
+  width: 100%;
+  overflow: hidden;
+  height: 57px;
+}
+
 .game-page .game .game-zone .room .jackpot-process .jackpot-progress .progress {
-  border-radius: 10px;
   height: 57px;
   position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.game-page .game .game-zone .room .jackpot-process .jackpot-progress .progress .progress-bar,
+.game-page .game .game-zone .room .jackpot-process .jackpot-progress .progress .overdiv {
+  position: absolute;
+  height: 57px;
+}
+
+.game-page .game .game-zone .room .jackpot-process .jackpot-progress .progress .overdiv {
+  width: 1500%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
 }
 
 .game-page .game .game-zone .room .jackpot-process .jackpot-progress .arrow {

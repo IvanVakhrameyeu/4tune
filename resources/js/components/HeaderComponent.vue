@@ -28,7 +28,7 @@
                         <li v-if="this.localStorage.user" class="nav-item profile">
                             <router-link :to="{name: 'profile'}" class="nav-link">
                                 <b>{{this.localStorage.user.name}}</b>
-                                <span>100 р</span>
+                                <span><i class="fa fa-coin"></i>100</span>
                             </router-link>
                         </li>
                         <li v-if="this.localStorage.user" class="nav-item ml-3">
