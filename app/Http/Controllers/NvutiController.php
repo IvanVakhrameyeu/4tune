@@ -47,7 +47,7 @@ class NvutiController extends Controller
         $balance = $user->balanceFloat;
 
         $request->validate([
-            'chance' => 'required|numeric|between:1,95',
+            'chance' => 'required|integer|between:1,95',
             'amount' => 'required|numeric|between:1,1000',
             'stake' => 'required|string|in:less,more',
         ]);
