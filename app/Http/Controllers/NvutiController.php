@@ -46,14 +46,16 @@ class NvutiController extends Controller
         $user->wallet->refreshBalance();
         $balance = $user->balanceFloat;
 
-        $chance = $request['chance'];
-        $amount = $request['amount'];
-        $stake = $request['stake'];
-
-        if (empty($chance) || empty($amount) || empty($stake || empty($nvutiGame))) {
+        if(!$request->has('chance') || !$request->has('amount') || !$request->has('stake')) {
             $hash = NvutiRepository::getNewHash($userId);
             return response()->json(['success' => false, 'hash' => $hash, 'balance' => $balance]);
-        } elseif ($amount > $balance) {
+        }
+
+        $chance = $request->input('chance');
+        $amount = $request->input('amount');
+        $stake = $request->input('stake');
+
+        if ($amount > $balance) {
             $hash = NvutiRepository::getNewHash($userId);
             return response()->json(['success' => false, 'hash' => $hash, 'balance' => $balance]);
         }
