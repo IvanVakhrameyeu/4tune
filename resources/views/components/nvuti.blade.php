@@ -58,5 +58,4 @@
         </div>
     </div>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script type="text/javascript" src="{{\Illuminate\Support\Facades\URL::asset('js/nvuti.js')}}"></script>
 @endsection
