@@ -10,13 +10,13 @@
                                 <h5 class="text-center">Выбор режима:</h5>
                                 <div class="row">
                                     <div class="col-lg-4 text-center">
-                                        <a href="/games/double" class="btn">Double</a>
+                                        <a href="/double" class="btn">Double</a>
                                     </div>
                                     <div class="col-lg-4 text-center">
-                                        <a href="/games/jackpot" class="btn active">Jackpot</a>
+                                        <a href="/jackpot" class="btn active">Jackpot</a>
                                     </div>
                                     <div class="col-lg-4 text-center">
-                                        <a href="/games/nvuti" class="btn">Nvuti</a>
+                                        <a href="/nvuti" class="btn">Nvuti</a>
                                     </div>
                                 </div>
                             </div>

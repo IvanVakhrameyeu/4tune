@@ -1,4 +1,5 @@
 <header>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand logo" href="/"></a>
@@ -28,12 +29,12 @@
                                 <a class="nav-link" href="/profile">
                                     <li class="nav-item ml-4 profile">
                                         <a class="nav-link" href="#">
-                                            <img src="{{Auth::user()->photo}}">
+                                            <img src="{{Auth::user()->avatar}}">
                                         </a>
                                     </li>
                                     <li>
                                         <b>{{\Illuminate\Support\Facades\Auth::user()->name}}</b>
-                                        <span class="caret">100</span>
+                                        <a class="wallet-balance">{{Auth::user()->balanceFloat}}</a>
                                     </li>
                                     <!-- Выход из авторизации -->
                                     <li class="nav-item ml-3">
@@ -44,18 +45,8 @@
                                     </li>
                                 </a>
                             @endguest
-
-
-                        @if(isset($_COOKIE['user_name']))
-                            <!-- отображение пользователя -->
-
-                        @else
-
-
-                            @endif
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>

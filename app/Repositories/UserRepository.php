@@ -12,7 +12,6 @@ class UserRepository
     {
         $vkAccount = VkAccountRepository::findOrCreateAccount($oauthUser);
 
-
         if ($user = $vkAccount->user) {
             return $user;
         }
@@ -29,6 +28,8 @@ class UserRepository
         $vkAccount->save();
 
         $user->addRole('user');
+
+        WalletRepository::createWallet($user); // create wallets for user
 
         return $user;
     }
