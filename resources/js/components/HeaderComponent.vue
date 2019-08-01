@@ -22,13 +22,14 @@
 
                         <li v-if="this.localStorage.user" class="nav-item ml-4 profile">
                             <a class="nav-link" href="#">
-                                <img :src="this.localStorage.user.avatar"/>
+                                <img :src="this.localStorage.user[0].avatar"/>
                             </a>
                         </li>
                         <li v-if="this.localStorage.user" class="nav-item profile">
                             <router-link :to="{name: 'profile'}" class="nav-link">
-                                <b>{{this.localStorage.user.name}}</b>
-                                <span><i class="fa fa-coin"></i>100</span>
+                                <b>{{this.localStorage.user[0].name}}</b>
+
+                                <span><i class="fa fa-coin"></i>{{this.localStorage.user[1]}}</span>
                             </router-link>
                         </li>
                         <li v-if="this.localStorage.user" class="nav-item ml-3">

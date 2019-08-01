@@ -20,6 +20,6 @@ class MainController extends Controller
 
     public function getUser()
     {
-        return Auth::user();
+        return [Auth::user(),Auth::user()->balanceFloat];
     }
 }

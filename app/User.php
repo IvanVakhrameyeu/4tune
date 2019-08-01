@@ -16,7 +16,7 @@ use Bavix\Wallet\Interfaces\WalletFloat;
 
 class User extends Authenticatable implements Wallet, WalletFloat
 {
-    use  HasWallets, HasWalletFloat;
+    use HasWallets, HasWalletFloat;
     use Notifiable, HasPermissionsTrait;
 
     public function __construct(array $attributes = [])
