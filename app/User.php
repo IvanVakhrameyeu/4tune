@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Hash;
 use Bavix\Wallet\Traits\HasWallet;
 use Bavix\Wallet\Traits\HasWallets;
 use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\HasWalletFloat;
+use Bavix\Wallet\Interfaces\WalletFloat;
 
-class User extends Authenticatable implements Wallet
+class User extends Authenticatable implements Wallet, WalletFloat
 {
-    use HasWallet, HasWallets;
-
-
+    use  HasWallets, HasWalletFloat;
     use Notifiable, HasPermissionsTrait;
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

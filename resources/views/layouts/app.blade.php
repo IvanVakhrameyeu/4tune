@@ -13,20 +13,6 @@
     </head>
 </head>
 <body>
-    <div id="vk_api_transport"></div>
-    <script type="text/javascript">
-        window.vkAsyncInit = function() {
-            VK.init({apiId: 6687245});
-        };
-
-        setTimeout(function() {
-            var el = document.createElement("script");
-            el.type = "text/javascript";
-            el.src = "https://vk.com/js/api/openapi.js?161";
-            el.async = true;
-            document.getElementById("vk_api_transport").appendChild(el);
-        }, 0);
-    </script>
     @guest
         <div class="container-fluid promo">
     @else
