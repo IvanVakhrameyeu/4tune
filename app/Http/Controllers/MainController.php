@@ -20,6 +20,11 @@ class MainController extends Controller
 
     public function getUser()
     {
-        return [Auth::user(),Auth::user()->balanceFloat];
+        if(Auth::user())
+        {
+            $balance=Auth::user()->balanceFloat;
+
+            return [Auth::user(),$balance];
+        }
     }
 }
