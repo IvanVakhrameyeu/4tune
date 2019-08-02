@@ -66,12 +66,13 @@
         name: "NvutiGameComponent",
 
         mounted() {
-            let app = this;
-            console.log(this);
-            axios.get('/getHash')
-                .then(function (resp) {
-                    app.hash = resp.data;
-                })
+            this.newHash();
+        },
+        created(){
+           this.updateHashWithSetInterval();
+        },
+        beforeDestroy(){
+            clearInterval(this.polling);
         },
 
         data: function () {
@@ -82,6 +83,7 @@
                 hash: null,
                 leftRange: "0 - 949999",
                 rightRange: "49999 - 999999",
+                polling: null,
             }
         },
 
@@ -166,7 +168,6 @@
                     })
 
             },
-
             getUpdateUser: function () {
                 let app = this;
                 console.log(this);
@@ -176,6 +177,19 @@
                         app.user = resp.data;
                     })
             },
+            updateHashWithSetInterval:function () {
+                this.polling=setInterval(()=>{
+                    this.newHash();
+                },120000);
+            },
+            newHash:function () {
+                let app = this;
+                console.log(this);
+                axios.get('/getHash')
+                    .then(function (resp) {
+                        app.hash = resp.data;
+                    })
+            }
         }
     }
 </script>
