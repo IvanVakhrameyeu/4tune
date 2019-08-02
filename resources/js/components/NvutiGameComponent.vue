@@ -62,16 +62,27 @@
 </template>
 
 <script>
+
+    import Toasted from 'vue-toasted';
+    import * as Vue from "vue";
+
+    Vue.use(Toasted);
+
     export default {
+
         name: "NvutiGameComponent",
+        modules: [
+            '@nuxtjs/toast',
+        ],
 
         mounted() {
+
             this.newHash();
         },
-        created(){
-           this.updateHashWithSetInterval();
+        created() {
+            this.updateHashWithSetInterval();
         },
-        beforeDestroy(){
+        beforeDestroy() {
             clearInterval(this.polling);
         },
 
@@ -84,6 +95,8 @@
                 leftRange: "0 - 949999",
                 rightRange: "49999 - 999999",
                 polling: null,
+                WonOrLose: '',
+                money: '',
             }
         },
 
@@ -155,8 +168,8 @@
                 this.rightRange = (Math.floor(999999 - parseFloat(this.chance) / 100 * 999999)) + ' - 999999';
             },
             starting: function (stake) {
-
                 let app = this;
+
                 console.log(this);
                 axios.post('/setBet', {
                     chance: this.chance,
@@ -164,9 +177,10 @@
                     stake: stake
                 })
                     .then(function (resp) {
-                        app.hash = resp.data;
-                    })
-
+                        app.hash = resp.data['hash'];
+                        app.WonOrLose = resp.data['WonOrLose'];
+                        app.money = resp.data['money'];
+                    });
             },
             getUpdateUser: function () {
                 let app = this;
@@ -175,20 +189,29 @@
                     .then(function (resp) {
                         app.localStorage.user = resp.data;
                         app.user = resp.data;
-                    })
+                    });
+
+                this.getResult(this.WonOrLose, this.money);
             },
-            updateHashWithSetInterval:function () {
-                this.polling=setInterval(()=>{
+            updateHashWithSetInterval: function () {
+                this.polling = setInterval(() => {
                     this.newHash();
-                },120000);
+                }, 120000);
             },
-            newHash:function () {
+            newHash: function () {
                 let app = this;
                 console.log(this);
                 axios.get('/getHash')
                     .then(function (resp) {
                         app.hash = resp.data;
                     })
+            },
+            getResult: function (result, amount) {
+                Vue.toasted.show(result + ' ' + amount, {
+                    theme: "toasted-primary",
+                    position: "bottom-center",
+                    duration: 2000
+                });
             }
         }
     }

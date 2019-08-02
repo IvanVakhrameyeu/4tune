@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "vue-reactive-storage": "git+https://github.com/ropbla9/vue-reactive-storage.git",
-        "vue-router": "^3.0.7"
+        "vue-router": "^3.0.7",
+        "vue-toasted": "^1.1.27"
     }
 }
