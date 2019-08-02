@@ -34,12 +34,13 @@
                     <div class="buttons">
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="nvuti-min" >{{this.leftRange}}</p>
-                                <a class="btn nvuti-btn" about="less">Меньше</a>
+                                <p class="nvuti-min">{{this.leftRange}}</p>
+                                <a v-on:click="starting('less'); getUpdateUser()" class="btn nvuti-btn" about="less">Меньше</a>
                             </div>
                             <div class="col-lg-6">
                                 <p class="nvuti-max">{{this.rightRange}}</p>
-                                <a class="btn nvuti-btn" about="more">Больше</a>
+                                <a v-on:click="starting('more'); getUpdateUser()" class="btn nvuti-btn"
+                                   about="more">Больше</a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                         if (isNaN(parseFloat(this.amount))) {
                             this.amount = 1;
                         } else {
-                            this.amount = Math.round(parseFloat(this.amount)*100)/100;
+                            this.amount = Math.round(parseFloat(this.amount) * 100) / 100;
                         }
                 }
                 this.amount > 1000 ? this.amount = 1000 : null;
@@ -141,16 +142,40 @@
                 if (this.amount < 1 || isNaN(this.amount)) {
                     this.amount = 1;
                 }
-               this.changePossibleWin();
+                this.changePossibleWin();
             },
             changePossibleWin: function () {
-                this.possibleWin=this.amount/ this.chance * 100;
-                this.possibleWin=Math.round(parseFloat(this.possibleWin)*100)/100;
+                this.possibleWin = this.amount / this.chance * 100;
+                this.possibleWin = Math.round(parseFloat(this.possibleWin) * 100) / 100;
             },
             changeRange: function () {
-                this.leftRange='0-'+ (Math.floor(parseFloat(this.chance) / 100 * 999999));
-                this.rightRange= (Math.floor(999999 - parseFloat(this.chance) / 100 * 999999))+'-999999';
-            }
+                this.leftRange = '0 - ' + (Math.floor(parseFloat(this.chance) / 100 * 999999));
+                this.rightRange = (Math.floor(999999 - parseFloat(this.chance) / 100 * 999999)) + ' - 999999';
+            },
+            starting: function (stake) {
+
+                let app = this;
+                console.log(this);
+                axios.post('/setBet', {
+                    chance: this.chance,
+                    amount: this.amount,
+                    stake: stake
+                })
+                    .then(function (resp) {
+                        app.hash = resp.data;
+                    })
+
+            },
+
+            getUpdateUser: function () {
+                let app = this;
+                console.log(this);
+                axios.get('/getUser')
+                    .then(function (resp) {
+                        app.localStorage.user = resp.data;
+                        app.user = resp.data;
+                    })
+            },
         }
     }
 </script>

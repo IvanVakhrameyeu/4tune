@@ -63,7 +63,7 @@ class NvutiController extends Controller
 
         if ($amount > $balance) {
             $hash = NvutiRepository::getNewHash($userId);
-            return response()->json(['success' => false, 'hash' => $hash, 'balance' => $balance]);
+            return response()->json(['hash' => $hash]);
         }
 
         $result = $this->nvutiRepository->setBet($user, $chance, $amount, $stake);

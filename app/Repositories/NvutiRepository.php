@@ -38,14 +38,13 @@ class NvutiRepository
             $winAmount = $this->getWinAmount($amount, $chance);
             $user->depositFloat($winAmount);
         }
-        $balance = $user->balanceFloat;
 
         $nvutiGame->status = NvutiGame::NVUTI_GAME_STATUS_CLOSED;
         $nvutiGame->name = ($result == 0 ? 'lose' : 'win');
         $nvutiGame->save();
         $hash = self::getNewHash($userId);
 
-        return (['success' => true, 'hash' => $hash, 'balance' => $balance, '$stake'=>$stake]);
+        return  $hash;
     }
 
 
