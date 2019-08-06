@@ -20,44 +20,46 @@ class NvutiRepository
      */
     public function setBet($user, $chance, $amount, $stake)
     {
+
         $userId = $user->id;
         $nvutiGame = $this->getNvutiGame($userId);
         $number = $this->getMinMaxSegment($chance);
+
 
         $numberForMin = $number['min'];
         $numberForMax = $number['max'];
 
         if ($stake == 'less') {
-            $numberRange=NvutiGame::NVUTI_GAME_GAME_MIN .' - '. $numberForMin;
+            $numberRange = NvutiGame::NVUTI_GAME_GAME_MIN . ' - ' . $numberForMin;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, NvutiGame::NVUTI_GAME_GAME_MIN, $numberForMin);
         } else {
 
-            $numberRange=$numberForMax .' - '. NvutiGame::NVUTI_GAME_GAME_MAX;
+            $numberRange = $numberForMax . ' - ' . NvutiGame::NVUTI_GAME_GAME_MAX;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, $numberForMax, NvutiGame::NVUTI_GAME_GAME_MAX);
         }
 
-        $resultGameWonOrLose= ($result == 0 ? 'lose' : 'win');
+        $resultGameWonOrLose = ($result == 0 ? 'lose' : 'win');
 
 
         if ($result == 0) {
             $user->withdrawFloat($amount);
-            $resultGameMoney= $amount;
+            $resultGameMoney = $amount;
         } else {
             $winAmount = $this->getWinAmount($amount, $chance);
-            $resultGameMoney= $winAmount;
-            $resultGameMoney= round($resultGameMoney*100)/100;
+            $resultGameMoney = $winAmount;
+            $resultGameMoney = round($resultGameMoney * 100) / 100;
             $user->depositFloat($winAmount);
         }
         $nvutiGame->status = NvutiGame::NVUTI_GAME_STATUS_CLOSED;
         $nvutiGame->name = $resultGameWonOrLose;
         $nvutiGame->save();
 
-        $wallet = ($user)['wallet']['slug'];
-        $this->setGameNvuteBet($userId,$amount,$numberRange,$resultGameWonOrLose,$wallet);
+        //$wallet = $user['wallet']['slug'];
+        $this->setGameNvuteBet($userId, $amount, $numberRange, $resultGameWonOrLose, 'default',$nvutiGame->id);
 
         $hash = self::getNewHash($userId);
 
-        return  ['hash'=> $hash,'WonOrLose'=> $resultGameWonOrLose,'money'=> $resultGameMoney];
+        return ['hash' => $hash, 'WonOrLose' => $resultGameWonOrLose, 'money' => $resultGameMoney];
     }
 
     /***
@@ -67,7 +69,8 @@ class NvutiRepository
      * @param $status
      * @param $currency
      */
-    private function setGameNvuteBet($userId,$amount,$numberRange,$status,$currency){
+    private function setGameNvuteBet($userId, $amount, $numberRange, $status, $currency,$id)
+    {
 
         NvutiGameBet::create([
             'numbers_range' => $numberRange,
@@ -75,9 +78,11 @@ class NvutiRepository
             'currency' => $currency,
             'status' => $status,
             'user_id' => $userId,
+            'game_id' => $id,
         ]);
 
     }
+
     /***
      * @param $amount
      * @param $chance

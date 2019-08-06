@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PlayNvutiGame;
 use App\NvutiGame;
 use App\Repositories\NvutiRepository;
 use App\User;
@@ -13,7 +14,6 @@ use Hash;
 
 class NvutiController extends Controller
 {
-    private $nvutiRepository;
 
     public function __construct()
     {
@@ -61,16 +61,21 @@ class NvutiController extends Controller
             return response()->json(['hash' => $hash]);
         }
 
-        $result = $this->nvutiRepository->setBet($user, $chance, $amount, $stake);
+        // $result =  dispatch(new PlayNvutiGame($user,$chance, $amount, $stake));
+        dispatch(new PlayNvutiGame($user,$chance, $amount, $stake));
 
-        return response()->json($result);
+        //$result = $this->nvutiRepository->setBet($user, $chance, $amount, $stake);
+
+        //return response()->json($result);
+        return response()->json('');
     }
 
     /***
      * @return mixed
      */
-    public function getHash(){
-        $userId=Auth::user()->id;
+    public function getHash()
+    {
+        $userId = Auth::user()->id;
         $hash = NvutiRepository::getNewHash($userId);
         return $hash;
     }
