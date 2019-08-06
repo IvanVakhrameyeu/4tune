@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class NvutiGameBet extends Model
 {
-    protected $fillable = ['numbers_range', 'amount', 'currency', 'status', 'user_id'];
+    protected $fillable = ['numbers_range', 'amount', 'currency', 'status', 'user_id','game_id'];
 }
 
