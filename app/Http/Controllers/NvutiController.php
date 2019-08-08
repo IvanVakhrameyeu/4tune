@@ -62,7 +62,7 @@ class NvutiController extends Controller
         }
 
         // $result =  dispatch(new PlayNvutiGame($user,$chance, $amount, $stake));
-        dispatch(new PlayNvutiGame($user,$chance, $amount, $stake));
+        dispatch(new PlayNvutiGame($user,$chance, $amount, $stake))->onQueue('nvutiGameProcessing');
 
         //$result = $this->nvutiRepository->setBet($user, $chance, $amount, $stake);
 

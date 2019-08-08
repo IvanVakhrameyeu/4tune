@@ -208,7 +208,25 @@
 
 <script>
     export default {
-        name: "DoubleGameComponent"
+        name: "DoubleGameComponent",
+        mounted() {
+
+            this.starting();
+        },
+        methods: {
+            starting: function (stake) {
+                    let app = this;
+                    console.log(this);
+                    axios.post('/setBetDouble', {
+
+                    })
+                        .then(function (resp) {
+
+                        });
+                }
+            ,
+        }
+
     }
 </script>
 

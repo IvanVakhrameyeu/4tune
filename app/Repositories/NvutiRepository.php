@@ -80,7 +80,6 @@ class NvutiRepository
             'user_id' => $userId,
             'game_id' => $id,
         ]);
-
     }
 
     /***
