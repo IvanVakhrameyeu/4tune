@@ -18,8 +18,9 @@ Route::get('/','MainController@index')->name('home');
 ///* ============Actions============== */
 //
 ///* ------------Nvuti---------------- */
-//Route::get('/nvuti/setBet','NvutiController@setBet');
 //
+Route::get('/getHash', 'NvutiController@getHash');
+Route::post('/setBet', 'NvutiController@setBet');
 //
 ///* Auth */
 Route::get('/login/{provider}', "Auth\LoginController@redirectToProvider");
@@ -28,8 +29,6 @@ Route::get('/logout', "Auth\LoginController@logout");
 Route::get('/getUser', 'MainController@getUser');
 
 
-Route::get('/getHash', 'NvutiController@getHash');
-Route::post('/setBet', 'NvutiController@setBet');
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');
