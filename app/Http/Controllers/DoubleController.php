@@ -13,14 +13,4 @@ class DoubleController extends Controller
     {
         return view('pages.game.double');
     }
-
-    public function setBet()
-    {
-        $this->getText();
-    }
-
-    private function getText()
-    {
-        dispatch(new PlayDoubleGame(3))->onQueue('doubleGameProcessing');
-    }
 }
