@@ -38,6 +38,9 @@
                 <p class="red">1</p>
                 <p class="black">12</p>
                 <p class="green">0</p>
+                <p class="green">0</p>
+                <p class="green">0</p>
+                <p class="green">0</p>
                 <p class="red">1</p>
             </div>
         </div>
@@ -48,17 +51,18 @@
             </div>
         </div>
         <div class="double-bet-form">
-            <input type="text" class="form-control mx-auto" placeholder="Введите сумму">
+            <input type="text" v-model="amount" v-on:change="checkAmount"
+                   class="form-control mx-auto" placeholder="Введите сумму">
             <div class="bet-buttons float-lg-right text-lg-right">
-                <a href="#" class="btn btn-sm">+10</a>
-                <a href="#" class="btn btn-sm">+100</a>
-                <a href="#" class="btn btn-sm">+10</a>
-                <a href="#" class="btn btn-sm">+100</a>
-
-                <a href="#" class="btn btn-sm">+10</a>
-                <a href="#" class="btn btn-sm">+100</a>
-                <a href="#" class="btn btn-sm">+10</a>
-                <a href="#" class="btn btn-sm">+100</a>
+                <a v-on:click="add(1)" class="btn btn-sm">+1</a>
+                <a v-on:click="add(10)" class="btn btn-sm">+10</a>
+                <a v-on:click="add(100)" class="btn btn-sm">+100</a>
+                <a v-on:click="add(1000)" class="btn btn-sm">+1000</a>
+                <br>
+                <a v-on:click="reduce(1)" class="btn btn-sm">-1</a>
+                <a v-on:click="reduce(10)" class="btn btn-sm">-10</a>
+                <a v-on:click="reduce(100)" class="btn btn-sm">-100</a>
+                <a v-on:click="reduce(1000)" class="btn btn-sm">-1000</a>
             </div>
         </div>
         <div class="double-bets">
@@ -209,22 +213,41 @@
 <script>
     export default {
         name: "DoubleGameComponent",
+        data: function () {
+            return {
+                amount: 1,
+            }
+        },
         mounted() {
 
-            this.starting();
         },
         methods: {
-            starting: function (stake) {
-                    let app = this;
-                    console.log(this);
-                    axios.post('/setBetDouble', {
-
-                    })
-                        .then(function (resp) {
-
-                        });
+            add: function (amount) {
+                this.amount += parseInt(amount);
+                if (parseInt(this.amount) > 1000) {
+                    this.amount = 1000;
                 }
-            ,
+
+            },
+            reduce: function (amount) {
+                this.amount -= parseInt(amount);
+                if (parseInt(this.amount) < 0) {
+                    this.amount = 1;
+                }
+            },
+            checkAmount: function () {
+                if (isNaN(this.amount)) {
+                    this.amount = 1;
+                } else {
+                    if (parseInt(this.amount) > 1000) {
+                        this.amount = 1000;
+                    } else {
+                        if (parseInt(this.amount) < 0) {
+                            this.amount = 1;
+                        }
+                    }
+                }
+            },
         }
 
     }
