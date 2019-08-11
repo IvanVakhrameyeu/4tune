@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Jobs\PlayDoubleGame;
 
 class doubleStart extends Command
 {
@@ -37,6 +38,6 @@ class doubleStart extends Command
      */
     public function handle()
     {
-        dispatch(new PlayDoubleGame(3))->onQueue('doubleGameProcessing');
+        dispatch(new PlayDoubleGame())->onQueue('doubleGameProcessing');
     }
 }
