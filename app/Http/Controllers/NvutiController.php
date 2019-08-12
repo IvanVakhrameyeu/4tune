@@ -44,6 +44,8 @@ class NvutiController extends Controller
         $user = Auth::user();
         $userId = $user->id;
         $user->wallet->refreshBalance();
+
+       // $user->depositFloat(10000); // УДАЛИТЬ
         $balance = $user->balanceFloat;
 
         $request->validate([

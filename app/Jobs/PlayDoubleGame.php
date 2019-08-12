@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Repositories\DoubleRepository;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -34,6 +35,8 @@ class PlayDoubleGame implements ShouldQueue
         dispatch(new PlayDoubleGame())
             ->onQueue('doubleGameProcessing')
             ->delay(Carbon::now()->addSeconds(30));
+
+        (new DoubleRepository())->start();
 
 
     }

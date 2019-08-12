@@ -20,7 +20,6 @@ class NvutiRepository
      */
     public function setBet($user, $chance, $amount, $stake)
     {
-
         $userId = $user->id;
         $nvutiGame = $this->getNvutiGame($userId);
         $number = $this->getMinMaxSegment($chance);

@@ -2,46 +2,8 @@
     <div class="double">
         <div class="double-history">
             <span>История игр:</span>
-            <div class="history">
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
-                <p class="black">12</p>
-                <p class="green">0</p>
-                <p class="green">0</p>
-                <p class="green">0</p>
-                <p class="green">0</p>
-                <p class="red">1</p>
+            <div class="history" v-for="(object,index) in history">
+                <p class="green">{{object.number}}</p>
             </div>
         </div>
         <div class="double-wheel">
@@ -86,42 +48,6 @@
                                     <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
                                 </div>
                             </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,33 +79,6 @@
                                     <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
                                 </div>
                             </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,7 +90,6 @@
                         </div>
 
                         <p>Поставлено: <b>0</b></p>
-
                         <div class="bet-players">
                             <div class="player">
                                 <div class="player-avatar">
@@ -216,6 +114,18 @@
         data: function () {
             return {
                 amount: 1,
+                history: [
+                    {color: 'red', number: 1},
+                    {color: 'red', number: 2},
+                    {color: 'red', number: 3},
+                    {color: 'red', number: 4},
+                    {color: 'red', number: 5},
+                    {color: 'red', number: 6},
+                    {color: 'red', number: 7},
+                    {color: 'black', number: 8},
+                    {color: 'black', number: 9},
+                    {color: 'green', number: 0},
+                ],
             }
         },
         mounted() {
