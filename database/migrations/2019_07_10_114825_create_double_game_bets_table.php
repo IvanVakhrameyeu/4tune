@@ -25,7 +25,7 @@ class CreateDoubleGameBetsTable extends Migration
         });
         Schema::table('double_game_bets', function (Blueprint $table) {
             $table->integer('user_id')->references('id')->on('users');
-            //$table->integer('game_id')->references('id')->on('game');
+            $table->integer('game_id')->references('id')->on('double_games');
         });
     }
 

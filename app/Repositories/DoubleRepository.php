@@ -11,17 +11,60 @@ class DoubleRepository
 {
     public function start()
     {
-        $this->changeStatus();
+        $this->checkGame();
+        //$this->changeStatusBet();
+
     }
 
     /***
-     * change status current game
+     *
      */
-    private function changeStatus()
+    private function checkGame()
+    {
+        $game = DoubleGame::where([
+            ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
+        ])->first();
+        if ($game) {
+            DoubleGame::where([
+                ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
+            ])->update(['status' => DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
+        }
+        $this->createGame();
+    }
+
+    /***
+     * @return mixed
+     */
+    private function getIdGame()
+    {
+        $game = DoubleGame::where([
+            ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
+        ])->first();
+            return $game->id;
+    }
+
+    /***
+     * create game
+     */
+    private function createGame()
+    {
+        DoubleGame::create([
+            'name' => 'это лишнее',
+            'status' => DoubleGame::DOUBLE_GAME_STATUS_PENDING,
+            'game_hash' => 'это хэш',
+            'game_salt' => 'это соль',
+            'game_number' => mt_rand(0, 14),
+        ]);
+    }
+
+    /***
+     * change status money game
+     */
+    private function changeStatusBet()
     {
         DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
-        ])->update(['status'=> DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
+        ])->update(['status' => DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
     }
 
     /***
@@ -31,10 +74,12 @@ class DoubleRepository
      */
     public function depositMoney($amount, $color, $userId)
     {
+        $gameId = $this->getIdGame();
         $deposit = DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
             ['anticipated_event', '=', $color],
             ['user_id', '=', $userId],
+            ['game_id', '=', $gameId],
         ])->first();
 
         if ($deposit) {
@@ -47,13 +92,13 @@ class DoubleRepository
 
     private function createBet($amount, $color, $userId)
     {
+        $gameId = $this->getIdGame();
         DoubleGameBet::create([
             'anticipated_event' => $color,
             'amount' => $amount,
-            'status' => DoubleGame::DOUBLE_GAME_STATUS_PENDING,
+            'status' => 'тут статус, победил или нет',
             'user_id' => $userId,
+            'game_id' => $gameId,
         ]);
     }
-
-
 }
