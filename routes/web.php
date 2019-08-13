@@ -31,6 +31,8 @@ Route::get('/getUser', 'MainController@getUser');
 Route::get('/getHash', 'NvutiController@getHash');
 Route::post('/setBet', 'NvutiController@setBet');
 
+Route::post('/setBetDouble', 'DoubleController@setBetDouble');
+
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

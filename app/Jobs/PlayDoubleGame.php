@@ -37,7 +37,5 @@ class PlayDoubleGame implements ShouldQueue
             ->delay(Carbon::now()->addSeconds(30));
 
         (new DoubleRepository())->start();
-
-
     }
 }

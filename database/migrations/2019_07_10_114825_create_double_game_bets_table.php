@@ -16,9 +16,9 @@ class CreateDoubleGameBetsTable extends Migration
         Schema::create('double_game_bets', function (Blueprint $table) {
             $table->increments('id');
             $table->string('anticipated_event');
-            $table->string('game_type');
+            //$table->string('game_type');
             $table->double('amount');
-            $table->string('currency');
+            //$table->string('currency');
             //$table->dateTime('bet_time');
             $table->string('status');
             $table->timestamps();

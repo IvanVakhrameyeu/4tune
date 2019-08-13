@@ -2,8 +2,17 @@
     <div class="double">
         <div class="double-history">
             <span>История игр:</span>
-            <div class="history" v-for="(object,index) in history">
-                <p class="green">{{object.number}}</p>
+            <div class="history">
+                <p v-bind:class="[history[0].color]">{{history[0].number}}</p>
+                <p v-bind:class="[history[1].color]">{{history[1].number}}</p>
+                <p v-bind:class="[history[2].color]">{{history[2].number}}</p>
+                <p v-bind:class="[history[3].color]">{{history[3].number}}</p>
+                <p v-bind:class="[history[4].color]">{{history[4].number}}</p>
+                <p v-bind:class="[history[5].color]">{{history[5].number}}</p>
+                <p v-bind:class="[history[6].color]">{{history[6].number}}</p>
+                <p v-bind:class="[history[7].color]">{{history[7].number}}</p>
+                <p v-bind:class="[history[8].color]">{{history[8].number}}</p>
+                <p v-bind:class="[history[9].color]">{{history[9].number}}</p>
             </div>
         </div>
         <div class="double-wheel">
@@ -31,7 +40,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="bet-block mx-auto">
-                        <div class="bet-head red">
+                        <div class="bet-head red" v-on:click="takeButton('red')">
                             Ставка <b>1-7</b>
                             <span>x2</span>
                         </div>
@@ -53,7 +62,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="bet-block mx-auto">
-                        <div class="bet-head green">
+                        <div class="bet-head green" v-on:click="takeButton('green')">
                             Ставка <b>0</b>
                             <span>x14</span>
                         </div>
@@ -84,7 +93,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="bet-block mx-auto">
-                        <div class="bet-head black">
+                        <div class="bet-head black" v-on:click="takeButton('black')">
                             Ставка <b>8-14</b>
                             <span>x2</span>
                         </div>
@@ -114,6 +123,7 @@
         data: function () {
             return {
                 amount: 1,
+                color: '',
                 history: [
                     {color: 'red', number: 1},
                     {color: 'red', number: 2},
@@ -126,12 +136,29 @@
                     {color: 'black', number: 9},
                     {color: 'green', number: 0},
                 ],
+
             }
         },
         mounted() {
-
+            this.getHistory();
         },
         methods: {
+            takeButton: function(color){
+                this.color=color;
+                let app = this;
+
+                console.log(this);
+                axios.post('/setBetDouble', {
+                    amount: this.amount,
+                    color: this.color
+                })
+                    .then(function (resp) {
+
+                    });
+            },
+            getHistory: function () {
+
+            },
             add: function (amount) {
                 this.amount += parseInt(amount);
                 if (parseInt(this.amount) > 1000) {
@@ -141,7 +168,7 @@
             },
             reduce: function (amount) {
                 this.amount -= parseInt(amount);
-                if (parseInt(this.amount) < 0) {
+                if (parseInt(this.amount) <= 0) {
                     this.amount = 1;
                 }
             },
@@ -152,7 +179,7 @@
                     if (parseInt(this.amount) > 1000) {
                         this.amount = 1000;
                     } else {
-                        if (parseInt(this.amount) < 0) {
+                        if (parseInt(this.amount) <= 0) {
                             this.amount = 1;
                         }
                     }
