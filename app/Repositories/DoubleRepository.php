@@ -19,11 +19,11 @@ class DoubleRepository
      */
     private function changeStatus()
     {
-        $games = DoubleGameBet::where([
+        DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
-        ])->get();
-        $games->status = DoubleGame::DOUBLE_GAME_STATUS_CLOSED;
-        $games->save();
+        ])->update(['status'=> DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
+        //$games->status = DoubleGame::DOUBLE_GAME_STATUS_CLOSED;
+        //$games->save();
     }
 
     /***
