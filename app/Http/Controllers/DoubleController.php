@@ -18,7 +18,6 @@ class DoubleController extends Controller
     public function setBetDouble(Request $request)
     {
         $user = Auth::user();
-        $userId = $user->id;
         $user->wallet->refreshBalance();
 
         $balance = $user->balanceFloat;
@@ -35,7 +34,7 @@ class DoubleController extends Controller
             return response()->json();
         }
 
-        (new DoubleRepository())->depositMoney($amount, $color, $userId);
+        (new DoubleRepository())->depositMoney($amount, $color, $user);
 
         return response()->json(['color' => 'df']);
     }

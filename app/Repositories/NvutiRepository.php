@@ -32,7 +32,6 @@ class NvutiRepository
             $numberRange = NvutiGame::NVUTI_GAME_GAME_MIN . ' - ' . $numberForMin;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, NvutiGame::NVUTI_GAME_GAME_MIN, $numberForMin);
         } else {
-
             $numberRange = $numberForMax . ' - ' . NvutiGame::NVUTI_GAME_GAME_MAX;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, $numberForMax, NvutiGame::NVUTI_GAME_GAME_MAX);
         }

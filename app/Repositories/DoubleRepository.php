@@ -72,8 +72,11 @@ class DoubleRepository
      * @param $color
      * @param $userId
      */
-    public function depositMoney($amount, $color, $userId)
+    public function depositMoney($amount, $color, $user)
     {
+        $user->withdrawFloat($amount);
+        $userId=$user->id;
+
         $gameId = $this->getIdGame();
         $deposit = DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
