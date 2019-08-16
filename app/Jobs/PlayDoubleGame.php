@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Repositories\DoubleRepository;
+use App\Repositories\DoubleSocketRepository;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -17,6 +18,8 @@ class PlayDoubleGame implements ShouldQueue
     public $timeout =5;
     public $tries = 1;
 
+    private $serverMessage;
+
     /**
      * Create a new job instance.
      *
@@ -24,6 +27,7 @@ class PlayDoubleGame implements ShouldQueue
      */
     public function __construct()
     {
+        $this->serverMessage=new DoubleSocketRepository();
     }
 
     /**
@@ -35,7 +39,7 @@ class PlayDoubleGame implements ShouldQueue
     {
         dispatch(new PlayDoubleGame())
             ->onQueue('doubleGameProcessing')
-            ->delay(Carbon::now()->addSeconds(30));
+            ->delay(Carbon::now()->addSeconds(15));
 
         (new DoubleRepository())->start();
     }

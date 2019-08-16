@@ -24,7 +24,6 @@ class NvutiRepository
         $nvutiGame = $this->getNvutiGame($userId);
         $number = $this->getMinMaxSegment($chance);
 
-
         $numberForMin = $number['min'];
         $numberForMax = $number['max'];
 
@@ -37,7 +36,6 @@ class NvutiRepository
         }
 
         $resultGameWonOrLose = ($result == 0 ? 'lose' : 'win');
-
 
         if ($result == 0) {
             $user->withdrawFloat($amount);
@@ -53,7 +51,7 @@ class NvutiRepository
         $nvutiGame->save();
 
         //$wallet = $user['wallet']['slug'];
-        $this->setGameNvuteBet($userId, $amount, $numberRange, $resultGameWonOrLose, 'default',$nvutiGame->id);
+        $this->setGameNvuteBet($userId, $amount, $numberRange, $resultGameWonOrLose, 'default', $nvutiGame->id);
 
         $hash = self::getNewHash($userId);
 
@@ -67,7 +65,7 @@ class NvutiRepository
      * @param $status
      * @param $currency
      */
-    private function setGameNvuteBet($userId, $amount, $numberRange, $status, $currency,$id)
+    private function setGameNvuteBet($userId, $amount, $numberRange, $status, $currency, $id)
     {
 
         NvutiGameBet::create([

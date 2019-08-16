@@ -64,10 +64,11 @@ class NvutiController extends Controller
             return response()->json(['hash' => $hash]);
         }
 
-        // $result =  dispatch(new PlayNvutiGame($user,$chance, $amount, $stake));
-        dispatch(new PlayNvutiGame($user,$chance, $amount, $stake))->onQueue('nvutiGameProcessing');
+        $nvutiGame=(new PlayNvutiGame($user, $chance, $amount, $stake))->onQueue('nvutiGameProcessing');
 
-        //$result = $this->nvutiRepository->setBet($user, $chance, $amount, $stake);
+        dispatch($nvutiGame);
+       // $data=$nvutiGame->result;
+        //info($data['hash']);
 
         //return response()->json($result);
         return response()->json('');

@@ -3,16 +3,9 @@
         <div class="double-history">
             <span>История игр:</span>
             <div class="history">
-                <p v-bind:class="[history[0].color]">{{history[0].number}}</p>
-                <p v-bind:class="[history[1].color]">{{history[1].number}}</p>
-                <p v-bind:class="[history[2].color]">{{history[2].number}}</p>
-                <p v-bind:class="[history[3].color]">{{history[3].number}}</p>
-                <p v-bind:class="[history[4].color]">{{history[4].number}}</p>
-                <p v-bind:class="[history[5].color]">{{history[5].number}}</p>
-                <p v-bind:class="[history[6].color]">{{history[6].number}}</p>
-                <p v-bind:class="[history[7].color]">{{history[7].number}}</p>
-                <p v-bind:class="[history[8].color]">{{history[8].number}}</p>
-                <p v-bind:class="[history[9].color]">{{history[9].number}}</p>
+                <div v-for="story in history">
+                    <p v-bind:class="[story.color]">{{story.number}}</p>
+                </div>
             </div>
         </div>
         <div class="double-wheel">
@@ -48,13 +41,13 @@
                         <p>Поставлено: <b>0</b></p>
 
                         <div class="bet-players">
-                            <div class="player">
+                            <div class="player" v-for="redRate in redRates">
                                 <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
+                                    <img v-bind:src="[redRate.name]">
                                 </div>
                                 <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
+                                    <div class="name">{{redRate.name}}</div>
+                                    <div class="bet-sum">{{redRate.sum}} <i class="fa fa-rub"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -70,22 +63,13 @@
                         <p>Поставлено: <b>0</b></p>
 
                         <div class="bet-players">
-                            <div class="player">
+                            <div class="player" v-for="greenRate in greenRates">
                                 <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
+                                    <img v-bind:src="[greenRate.name]">
                                 </div>
                                 <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
-                                </div>
-                            </div>
-                            <div class="player">
-                                <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
-                                </div>
-                                <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
+                                    <div class="name">{{greenRate.name}}</div>
+                                    <div class="bet-sum">{{greenRate.sum}} <i class="fa fa-rub"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -100,13 +84,13 @@
 
                         <p>Поставлено: <b>0</b></p>
                         <div class="bet-players">
-                            <div class="player">
+                            <div class="player" v-for="blackRate in blackRates">
                                 <div class="player-avatar">
-                                    <img src="images/test-avatar.png">
+                                    <img v-bind:src="[blackRate.name]">
                                 </div>
                                 <div class="player-info">
-                                    <div class="name">Name</div>
-                                    <div class="bet-sum">100 <i class="fa fa-rub"></i></div>
+                                    <div class="name">{{blackRate.name}}</div>
+                                    <div class="bet-sum">{{blackRate.sum}} <i class="fa fa-rub"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -124,27 +108,31 @@
             return {
                 amount: 1,
                 color: '',
-                history: [
-                    {color: 'red', number: 1},
-                    {color: 'red', number: 2},
-                    {color: 'red', number: 3},
-                    {color: 'red', number: 4},
-                    {color: 'red', number: 5},
-                    {color: 'red', number: 6},
-                    {color: 'red', number: 7},
-                    {color: 'black', number: 8},
-                    {color: 'black', number: 9},
-                    {color: 'green', number: 0},
-                ],
-
+                conn: null,
+                redRates: [],
+                blackRates: [],
+                greenRates: [],
+                history: [],
             }
         },
         mounted() {
             this.getHistory();
+            this.startWebSocket();
+
+            this.getPlayerRate();
         },
         methods: {
-            takeButton: function(color){
-                this.color=color;
+            startWebSocket: function () {
+                this.conn = new WebSocket('ws://localhost:8080');
+                this.conn.onopen = function (e) {
+                    console.log('onopen');
+                };
+                this.conn.onmessage = function (e) {
+                    console.log('onmessage' + e.data);
+                };
+            },
+            takeButton: function (color) {
+                this.color = color;
                 let app = this;
 
                 console.log(this);
@@ -156,15 +144,34 @@
 
                     });
             },
+            getPlayerRate: function () {
+                this.blackRates.push({image: 'images/images/test-avatar.png', name: 'Ivan', sum: 32});
+                this.blackRates.push({image: 'images/test-avatar.png', name: 'Ivan1', sum: 132});
+                this.blackRates.push({image: 'images/test-avatar.png', name: 'Ivan2', sum: 232});
+                this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan3', sum: 332});
+                this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan4', sum: 432});
+                this.greenRates.push({image: 'images/test-avatar.png', name: 'Ivan5', sum: 532});
+            },
             getHistory: function () {
-
+                this.history.push({color: 'black', number: 1});
+                this.history.push({color: 'black', number: 2});
+                this.history.push({color: 'black', number: 3});
+                this.history.push({color: 'black', number: 4});
+                this.history.push({color: 'black', number: 5});
+                this.history.push({color: 'black', number: 6});
+                this.history.push({color: 'black', number: 7});
+                this.history.push({color: 'black', number: 8});
+                this.history.push({color: 'black', number: 9});
+            },
+            addNewStory: function (color, number) {
+                this.history.splice(0, 1);
+                this.history.push({color: color, number: number});
             },
             add: function (amount) {
                 this.amount += parseInt(amount);
                 if (parseInt(this.amount) > 1000) {
                     this.amount = 1000;
                 }
-
             },
             reduce: function (amount) {
                 this.amount -= parseInt(amount);
@@ -186,7 +193,6 @@
                 }
             },
         }
-
     }
 </script>
 

@@ -6,14 +6,18 @@ namespace App\Repositories;
 
 use App\DoubleGame;
 use App\DoubleGameBet;
+use App\Events\DoubleEvent;
 
 class DoubleRepository
 {
     public function start()
     {
         $this->checkGame();
-        //$this->changeStatusBet();
 
+        //$text = 'текст для джса';
+
+        //event(new DoubleEvent($text));
+        //$this->changeStatusBet();
     }
 
     /***
@@ -40,7 +44,7 @@ class DoubleRepository
         $game = DoubleGame::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
         ])->first();
-            return $game->id;
+        return $game->id;
     }
 
     /***
@@ -75,7 +79,7 @@ class DoubleRepository
     public function depositMoney($amount, $color, $user)
     {
         $user->withdrawFloat($amount);
-        $userId=$user->id;
+        $userId = $user->id;
 
         $gameId = $this->getIdGame();
         $deposit = DoubleGameBet::where([

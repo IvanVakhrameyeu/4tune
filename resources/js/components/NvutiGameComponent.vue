@@ -35,11 +35,11 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="nvuti-min">{{this.leftRange}}</p>
-                                <a v-on:click="starting('less'); getUpdateUser()" class="btn nvuti-btn" about="less">Меньше</a>
+                                <a v-on:click="starting('less')" class="btn nvuti-btn" about="less">Меньше</a>
                             </div>
                             <div class="col-lg-6">
                                 <p class="nvuti-max">{{this.rightRange}}</p>
-                                <a v-on:click="starting('more'); getUpdateUser()" class="btn nvuti-btn"
+                                <a v-on:click="starting('more')" class="btn nvuti-btn"
                                    about="more">Больше</a>
                             </div>
                         </div>
@@ -180,7 +180,10 @@
                         app.hash = resp.data['hash'];
                         app.WonOrLose = resp.data['WonOrLose'];
                         app.money = resp.data['money'];
+                       // this.getUpdateUser();
+                      //  this.getResult(this.WonOrLose, this.money);
                     });
+
             },
             getUpdateUser: function () {
                 let app = this;
@@ -190,8 +193,6 @@
                         app.localStorage.user = resp.data;
                         app.user = resp.data;
                     });
-
-                this.getResult(this.WonOrLose, this.money);
             },
             updateHashWithSetInterval: function () {
                 this.polling = setInterval(() => {

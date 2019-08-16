@@ -13,7 +13,7 @@ class PlayNvutiGame implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $timeout=10;
+    public $timeout = 10;
     public $result;
     protected $nvutiRepository;
     protected $user;
@@ -26,7 +26,7 @@ class PlayNvutiGame implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($user,$chance,$amount,$stake)
+    public function __construct($user, $chance, $amount, $stake)
     {
         $this->nvutiRepository = new NvutiRepository();
         $this->user = $user;
@@ -45,4 +45,5 @@ class PlayNvutiGame implements ShouldQueue
         $this->result = $this->nvutiRepository->setBet($this->user, $this->chance, $this->amount, $this->stake);
 
     }
+
 }
