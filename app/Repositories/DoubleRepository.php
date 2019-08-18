@@ -54,9 +54,6 @@ class DoubleRepository
             ['anticipated_event', '!=', $winColor],
         ])->update(['status' => 'lose']);
 
-        info($winColor);
-        info($gameId);
-        info($players);
         return $players;
     }
 
