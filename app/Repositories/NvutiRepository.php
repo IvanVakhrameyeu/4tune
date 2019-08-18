@@ -67,7 +67,6 @@ class NvutiRepository
      */
     private function setGameNvuteBet($userId, $amount, $numberRange, $status, $currency, $id)
     {
-
         NvutiGameBet::create([
             'numbers_range' => $numberRange,
             'amount' => $amount,

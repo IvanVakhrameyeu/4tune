@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use BeyondCode\LaravelWebSockets\Server\Logger\HttpLogger;
+//use BeyondCode\LaravelWebSockets\Server\Logger\HttpLogger;
 use Illuminate\Console\Command;
 
 use Ratchet\Http\HttpServer;

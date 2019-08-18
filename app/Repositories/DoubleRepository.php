@@ -12,6 +12,7 @@ class DoubleRepository
 {
     public function start()
     {
+        $this->getWinPlayers();
         $this->checkGame();
 
         //$text = 'текст для джса';
@@ -21,7 +22,7 @@ class DoubleRepository
     }
 
     /***
-     *
+     * change game to closed
      */
     private function checkGame()
     {
@@ -29,22 +30,62 @@ class DoubleRepository
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
         ])->first();
         if ($game) {
-            DoubleGame::where([
-                ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
-            ])->update(['status' => DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
+            $game->update(['status' => DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
         }
         $this->createGame();
     }
 
     /***
+     * return players why win
      * @return mixed
      */
-    private function getIdGame()
+    private function getWinPlayers(){
+        $game=$this->getGame();
+        $gameId=$game->id;
+
+        $winColor=$this->getColorWin();
+
+        $players=DoubleGameBet::where([
+            ['game_id', '=', $gameId],
+            ['anticipated_event', '=', $winColor],
+        ])->update(['status' => 'win']);
+        DoubleGameBet::where([
+            ['game_id', '=', $gameId],
+            ['anticipated_event', '!=', $winColor],
+        ])->update(['status' => 'lose']);
+
+        info($winColor);
+        info($gameId);
+        info($players);
+        return $players;
+    }
+
+    /***
+     * get color of random number
+     * @return string
+     */
+    private function getColorWin(){
+        $game=$this->getGame();
+        switch ($game->game_number){
+            case 0:
+                return DoubleGame::DOUBLE_GAME_COLOR_GREEN;
+            case $game->game_number<=7:
+                return DoubleGame::DOUBLE_GAME_COLOR_RED;
+            case $game->game_number>=8:
+                return DoubleGame::DOUBLE_GAME_COLOR_BLACK;
+            default:
+                break;
+        }
+    }
+    /***
+     * @return mixed
+     */
+    private function getGame()
     {
         $game = DoubleGame::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
         ])->first();
-        return $game->id;
+        return $game;
     }
 
     /***
@@ -81,7 +122,8 @@ class DoubleRepository
         $user->withdrawFloat($amount);
         $userId = $user->id;
 
-        $gameId = $this->getIdGame();
+        $game = $this->getGame();
+        $gameId =$game->id;
         $deposit = DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
             ['anticipated_event', '=', $color],
@@ -99,7 +141,8 @@ class DoubleRepository
 
     private function createBet($amount, $color, $userId)
     {
-        $gameId = $this->getIdGame();
+        $game = $this->getGame();
+        $gameId = $game->id;
         DoubleGameBet::create([
             'anticipated_event' => $color,
             'amount' => $amount,
