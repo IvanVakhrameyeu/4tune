@@ -3,8 +3,8 @@
         <div class="double-history">
             <span>История игр:</span>
             <div class="history">
-                <div v-for="story in history">
-                    <p v-bind:class="[story.color]">{{story.number}}</p>
+                <div v-for="history in histories">
+                    <p v-bind:class="[getColor(history.game_number)]">{{history.game_number}}</p>
                 </div>
             </div>
         </div>
@@ -112,14 +112,15 @@
                 redRates: [],
                 blackRates: [],
                 greenRates: [],
-                history: [],
+                histories: [],
             }
         },
         mounted() {
-            this.getHistory();
+            this.getHistories();
             this.startWebSocket();
 
             this.getPlayerRate();
+
         },
         methods: {
             startWebSocket: function () {
@@ -152,20 +153,33 @@
                 this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan4', sum: 432});
                 this.greenRates.push({image: 'images/test-avatar.png', name: 'Ivan5', sum: 532});
             },
-            getHistory: function () {
-                this.history.push({color: 'black', number: 1});
-                this.history.push({color: 'black', number: 2});
-                this.history.push({color: 'black', number: 3});
-                this.history.push({color: 'black', number: 4});
-                this.history.push({color: 'black', number: 5});
-                this.history.push({color: 'black', number: 6});
-                this.history.push({color: 'black', number: 7});
-                this.history.push({color: 'black', number: 8});
-                this.history.push({color: 'black', number: 9});
+            getHistories: function () {
+                let app = this;
+                console.log(this);
+                axios.get('/getHistories')
+                    .then(function (resp) {
+                        app.histories = resp.data;
+                    });
             },
-            addNewStory: function (color, number) {
-                this.history.splice(0, 1);
-                this.history.push({color: color, number: number});
+            getColor: function (number) {
+                switch (number) {
+                    case 0:
+                        return 'green';
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                        return 'red';
+                    default:
+                        return 'black';
+                }
+            },
+            addNewStory: function (number) {
+                this.histories.splice(0, 1);
+                this.histories.push({ game_number: number});
             },
             add: function (amount) {
                 this.amount += parseInt(amount);

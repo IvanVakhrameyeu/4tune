@@ -29,6 +29,7 @@ Route::get('/getUser', 'MainController@getUser');
 
 
 Route::get('/getHash', 'NvutiController@getHash');
+Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBet', 'NvutiController@setBet');
 
 Route::post('/setBetDouble', 'DoubleController@setBetDouble');

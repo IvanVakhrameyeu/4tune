@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DoubleGame;
 use App\Repositories\DoubleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,4 +40,11 @@ class DoubleController extends Controller
         return response()->json(['color' => 'df']);
     }
 
+    public function getHistories()
+    {
+        $histories = DoubleGame::select('game_number')->
+        orderBy('id', 'DESC')->get()->take(10);
+        $histories=array_reverse($histories->toArray());
+        return $histories;
+    }
 }
