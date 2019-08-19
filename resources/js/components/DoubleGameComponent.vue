@@ -11,7 +11,7 @@
         <div class="double-wheel">
             <div class="wheel-block mx-auto">
                 <b class="wheel-number red mx-auto">1</b>
-                <div class="wheel mx-auto"></div>
+                <span v-html=styleRotateZ> </span>
             </div>
         </div>
         <div class="double-bet-form">
@@ -106,6 +106,9 @@
         name: "DoubleGameComponent",
         data: function () {
             return {
+                rotateZ: 0,
+                rotateNumber: 0,
+                styleRotateZ: '',
                 amount: 1,
                 color: '',
                 conn: null,
@@ -118,8 +121,9 @@
         mounted() {
             this.getHistories();
             this.startWebSocket();
+            this.getAnimation();
 
-            this.getPlayerRate();
+            this.getPlayerRate();//delete
 
         },
         methods: {
@@ -177,11 +181,67 @@
                         return 'black';
                 }
             },
-            addNewStory: function (number) {
+            getAnimation: function (newNumber) {
+                //    let newRotate=this.getPosition(newNumber);
+
+                while(this.rotateZ<=5){
+                    this.rotateZ += 1;
+
+                    this.styleRotateZ = '<div class="wheel mx-auto" style="transform: rotateZ(' + this.rotateZ + 'deg);"></div>';
+                }
+
+                /*
+                if(newRotate-this.rotateZ>0){ // по часовой, меньше круга
+                }
+                else{
+                }*/
+                //this.styleRotateZ= '<div class="wheel mx-auto" style="transform: rotateZ('+ this.getPosition(this.rotateZ) +'deg);"></div>';
+            },
+            getPosition: function (number) {
+                switch (number) {
+                    case 0:
+                        this.rotateZ = 0;
+                    case 1:
+                        this.rotateZ = -25;
+                    case 2:
+                        this.rotateZ = -73.5;
+                    case 3:
+                        this.rotateZ = -120;
+                    case 4:
+                        this.rotateZ = -167.5;
+                    case 5:
+                        this.rotateZ = -215;
+                    case 6:
+                        this.rotateZ = -263;
+                    case 7:
+                        this.rotateZ = -312;
+                    case 8:
+                        this.rotateZ = -50;
+                    case 9:
+                        this.rotateZ = -94;
+                    case 10:
+                        this.rotateZ = -144;
+                    case 11:
+                        this.rotateZ = -191;
+                    case 12:
+                        this.rotateZ = -239;
+                    case 13:
+                        this.rotateZ = -286;
+                    case 14:
+                        this.rotateZ = -336;
+                }
+                return this.rotateZ;
+            },
+            addNewPersona: function (image, name, amount) {
+                this.blackRates.push({image: image, name: name, sum: amount});
+            },
+            addNewHistory: function (number) {
                 this.histories.splice(0, 1);
-                this.histories.push({ game_number: number});
+                this.histories.push({game_number: number});
             },
             add: function (amount) {
+                this.getAnimation();
+
                 this.amount += parseInt(amount);
                 if (parseInt(this.amount) > 1000) {
                     this.amount = 1000;
