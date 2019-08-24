@@ -2,15 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\DoublePusher;
-use App\Repositories\DoubleSocketRepository;
+use App\Events\DoubleEvent;
 use Illuminate\Console\Command;
-use App\Jobs\PlayDoubleGame;
-use Ratchet\Http\HttpServer;
-use Ratchet\Server\IoServer;
-use Ratchet\WebSocket\WsServer;
-use Thruway\Peer\Client;
-use Thruway\Transport\PawlTransportProvider;
 
 class doubleStart extends Command
 {
@@ -19,7 +12,7 @@ class doubleStart extends Command
      *
      * @var string
      */
-    protected $signature = 'command:doubleStart';
+    protected $signature = 'double:gameStart';
 
     /**
      * The console command description.
@@ -44,21 +37,8 @@ class doubleStart extends Command
      * @return mixed
      */
     public function handle()
-    { $loop = \React\EventLoop\Factory::create();
-
-        //DoublePusher::send();
-        $client=new Client('double', $loop);
-        $client->addTransportProvider(new PawlTransportProvider('ws://127.0.0.1:9090'));
-
-        $client->on('open', function (\Thruway\ClientSession $clientSession) {
-            for ($i = 0; $i < 5; $i++) {
-                $clientSession->publish('double', ['Hello #' . $i]);
-            }
-
-            $clientSession->close();
-
-       });
-        $client->start();
+    {
+        DoubleEvent::dispatch('this is message');
 
        // dispatch(new PlayDoubleGame())->onQueue('doubleGameProcessing');
     }

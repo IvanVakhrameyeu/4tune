@@ -96,6 +96,8 @@
                         </div>
                     </div>
                 </div>
+                <input type="text" v-model="rotation" v-on:change="checkAmount"
+                       class="form-control mx-auto">
             </div>
         </div>
     </div>
@@ -103,8 +105,10 @@
 
 <script>
     //import * as autobahn from "autobahn";
-   // import Echo from "laravel-echo";
+    // import Echo from "laravel-echo";
 
+
+    import Echo from "laravel-echo";
 
     export default {
         name: "DoubleGameComponent",
@@ -112,7 +116,7 @@
             return {
                 connection: null,
                 webSocketScript: null,
-                rotation: null,
+                rotation: [],
                 rotateZ: 0,
                 rotateNumber: 0,
                 styleRotateZ: '',
@@ -138,8 +142,23 @@
         },
         methods: {
             startWebSocket: function () {
+                window.Echo.channel('DoubleChannel')
+                    .listen('DoubleEvent', ({rotation}) => {
+                    this.rotation.push(rotation);
+                });
 
-
+             /*   Echo.join('DoubleChannel')
+                    .here((users) => {
+                        this.users_viewing = users;
+                        this.$forceUpdate();
+                    })
+                    .joining((user) => {
+                        if (this.checkIfUserAlreadyViewingSurvey(user)) {
+                            this.users_viewing.push(user);
+                            this.$forceUpdate();
+                        }
+                    });*/
+                console.log(12312);
             },
             takeButton: function (color) {
                 this.color = color;

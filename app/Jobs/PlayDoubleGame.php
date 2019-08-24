@@ -12,9 +12,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Thruway\ClientSession;
-use Thruway\Peer\Client;
-use Thruway\Transport\PawlTransportProvider;
+//use Thruway\ClientSession;
+//use Thruway\Peer\Client;
+//use Thruway\Transport\PawlTransportProvider;
 
 class PlayDoubleGame implements ShouldQueue
 {

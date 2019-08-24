@@ -15,14 +15,16 @@ class DoubleEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $rotation;
-    /**
-     * Create a new event instance.
-     *
-     * @return void
+
+    /***
+     * DoubleEvent constructor.
+     * @param $rotation
      */
     public function __construct($rotation)
     {
         $this->rotation=$rotation;
+
+
     }
 
     /**
