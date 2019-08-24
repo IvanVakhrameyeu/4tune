@@ -22,9 +22,7 @@ class DoubleEvent implements ShouldBroadcast
      */
     public function __construct($rotation)
     {
-        $this->rotation=$rotation;
-
-
+        $this->rotation = $rotation;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Events\DoubleEvent;
+use App\Jobs\PlayDoubleGame;
 use Illuminate\Console\Command;
 
 class doubleStart extends Command
@@ -38,8 +39,6 @@ class doubleStart extends Command
      */
     public function handle()
     {
-        DoubleEvent::dispatch('this is message');
-
-       // dispatch(new PlayDoubleGame())->onQueue('doubleGameProcessing');
+        dispatch(new PlayDoubleGame())->onQueue('doubleGameProcessing');
     }
 }

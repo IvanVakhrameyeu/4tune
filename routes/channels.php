@@ -11,6 +11,23 @@
 |
 */
 
+
+/*
 Broadcast::channel('App.user.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+*/
+
+use Illuminate\Support\Facades\Broadcast;
+/*
+Broadcast::channel('DoubleChannel', function ($rotate) {
+    return [
+        'rotate' => $rotate,
+    ];
+});*/
+
+/*
+Broadcast::channel('DoubleChannel', function ($user, $orderId) {
+    return $user->id === Order::findOrNew($orderId)->user_id;
+});
+*/

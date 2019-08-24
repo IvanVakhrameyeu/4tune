@@ -12,6 +12,7 @@
 */
 
 /* ================Pages============= */
+
 Route::get('/','MainController@index')->name('home');
 //
 //
@@ -33,7 +34,6 @@ Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBet', 'NvutiController@setBet');
 
 Route::post('/setBetDouble', 'DoubleController@setBetDouble');
-
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

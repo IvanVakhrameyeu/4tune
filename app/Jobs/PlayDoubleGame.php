@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\DoubleGame;
+use App\Events\DoubleEvent;
 use App\Repositories\DoublePusher;
 use App\Repositories\DoubleRepository;
 use App\Repositories\DoubleSocketRepository;
@@ -12,9 +13,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-//use Thruway\ClientSession;
-//use Thruway\Peer\Client;
-//use Thruway\Transport\PawlTransportProvider;
 
 class PlayDoubleGame implements ShouldQueue
 {
@@ -45,7 +43,7 @@ class PlayDoubleGame implements ShouldQueue
     {
         dispatch(new PlayDoubleGame())
             ->onQueue('doubleGameProcessing')
-            ->delay(Carbon::now()->addSeconds(15));
+            ->delay(Carbon::now()->addSeconds(5));
 
         (new DoubleRepository())->start();
     }

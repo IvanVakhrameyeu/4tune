@@ -7,18 +7,20 @@ namespace App\Repositories;
 use App\Console\Commands\DoublePushServer;
 use App\DoubleGame;
 use App\DoubleGameBet;
+use App\Events\DoubleEvent;
 
 
 class DoubleRepository
 {
+    private $winNumber;
+
     public function start()
     {
-        $this->getWinPlayers();
+        $this->changeStatusPlayers();
         $this->checkGame();
 
-        //$text = 'текст для джса';
 
-
+        DoubleEvent::dispatch($this->winNumber);
     }
 
     /***
@@ -39,14 +41,15 @@ class DoubleRepository
      * return players why win
      * @return mixed
      */
-    private function getWinPlayers()
+    private function changeStatusPlayers()
     {
         $game = $this->getGame();
         $gameId = $game->id;
+        $this->winNumber = $game->game_number;
 
         $winColor = $this->getColorWin();
 
-        $players = DoubleGameBet::where([
+        DoubleGameBet::where([
             ['game_id', '=', $gameId],
             ['anticipated_event', '=', $winColor],
         ])->update(['status' => 'win']);
@@ -55,7 +58,6 @@ class DoubleRepository
             ['anticipated_event', '!=', $winColor],
         ])->update(['status' => 'lose']);
 
-        return $players;
     }
 
     /***
@@ -85,7 +87,13 @@ class DoubleRepository
         $game = DoubleGame::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
         ])->first();
-        return $game;
+        if ($game) {
+            return $game;
+        }
+        else{
+            $this->createGame();
+            return $this->getGame();
+        }
     }
 
     /***

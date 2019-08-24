@@ -10,7 +10,7 @@
         </div>
         <div class="double-wheel">
             <div class="wheel-block mx-auto">
-                <b class="wheel-number red mx-auto">1</b>
+                <b class="wheel-number red mx-auto">{{rotateNumber}}</b>
                 <span v-html=styleRotateZ> </span>
             </div>
         </div>
@@ -96,8 +96,6 @@
                         </div>
                     </div>
                 </div>
-                <input type="text" v-model="rotation" v-on:change="checkAmount"
-                       class="form-control mx-auto">
             </div>
         </div>
     </div>
@@ -105,10 +103,7 @@
 
 <script>
     //import * as autobahn from "autobahn";
-    // import Echo from "laravel-echo";
 
-
-    import Echo from "laravel-echo";
 
     export default {
         name: "DoubleGameComponent",
@@ -116,7 +111,6 @@
             return {
                 connection: null,
                 webSocketScript: null,
-                rotation: [],
                 rotateZ: 0,
                 rotateNumber: 0,
                 styleRotateZ: '',
@@ -131,34 +125,26 @@
         mounted() {
 
             this.getHistories();
-            this.getAnimation(this.getPosition(0));
-            //   this.getPlayerRate();//delete
-
+            this.getAnimation();
 
             this.startWebSocket();
+
+            this.rotateNumber= 0;
+           // this.rotateNumber= this.histories[0].game_number;
+            //console.log( this.histories[0].game_number);
+            //console.log(this.rotateNumber);
         },
         beforeDestroy() {
             clearInterval(this.connection);
         },
         methods: {
             startWebSocket: function () {
-                window.Echo.channel('DoubleChannel')
-                    .listen('DoubleEvent', ({rotation}) => {
-                    this.rotation.push(rotation);
-                });
-
-             /*   Echo.join('DoubleChannel')
-                    .here((users) => {
-                        this.users_viewing = users;
-                        this.$forceUpdate();
-                    })
-                    .joining((user) => {
-                        if (this.checkIfUserAlreadyViewingSurvey(user)) {
-                            this.users_viewing.push(user);
-                            this.$forceUpdate();
-                        }
-                    });*/
-                console.log(12312);
+                window.Echo.channel(`DoubleChannel`)
+                    .listen('DoubleEvent', (e) => {
+                        this.rotateNumber = e['rotation'];
+                        this.getAnimation();
+                        this.addNewHistory(this.rotateNumber);
+                    });
             },
             takeButton: function (color) {
                 this.color = color;
@@ -205,23 +191,10 @@
                         return 'black';
                 }
             },
-            getAnimation: function (newNumber) {
-                //    let newRotate=this.getPosition(newNumber);
-
-                //while(this.rotateZ<=5){
-                this.rotateZ = newNumber;
-                if (newNumber - this.rotateZ > 0) {
-                    null;
-                }
+            getAnimation: function () {
+                this.rotateZ = this.getPosition(this.rotateNumber);
                 this.styleRotateZ = '<div class="wheel mx-auto" style="transform: rotateZ(' + this.rotateZ + 'deg);"></div>';
 
-
-                /*
-                if(newRotate-this.rotateZ>0){ // по часовой, меньше круга
-                }
-                else{
-                }*/
-                //this.styleRotateZ= '<div class="wheel mx-auto" style="transform: rotateZ('+ this.getPosition(this.rotateZ) +'deg);"></div>';
             },
             getPosition: function (number) {
                 switch (number) {
@@ -277,6 +250,7 @@
                 this.blackRates.push({image: image, name: name, sum: amount});
             },
             addNewHistory: function (number) {
+
                 this.histories.splice(0, 1);
                 this.histories.push({game_number: number});
             },
