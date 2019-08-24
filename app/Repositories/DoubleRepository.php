@@ -4,9 +4,10 @@
 namespace App\Repositories;
 
 
+use App\Console\Commands\DoublePushServer;
 use App\DoubleGame;
 use App\DoubleGameBet;
-use App\Events\DoubleEvent;
+
 
 class DoubleRepository
 {
@@ -17,8 +18,7 @@ class DoubleRepository
 
         //$text = 'текст для джса';
 
-        //event(new DoubleEvent($text));
-        //$this->changeStatusBet();
+
     }
 
     /***
@@ -39,13 +39,14 @@ class DoubleRepository
      * return players why win
      * @return mixed
      */
-    private function getWinPlayers(){
-        $game=$this->getGame();
-        $gameId=$game->id;
+    private function getWinPlayers()
+    {
+        $game = $this->getGame();
+        $gameId = $game->id;
 
-        $winColor=$this->getColorWin();
+        $winColor = $this->getColorWin();
 
-        $players=DoubleGameBet::where([
+        $players = DoubleGameBet::where([
             ['game_id', '=', $gameId],
             ['anticipated_event', '=', $winColor],
         ])->update(['status' => 'win']);
@@ -61,19 +62,21 @@ class DoubleRepository
      * get color of random number
      * @return string
      */
-    private function getColorWin(){
-        $game=$this->getGame();
-        switch ($game->game_number){
+    private function getColorWin()
+    {
+        $game = $this->getGame();
+        switch ($game->game_number) {
             case 0:
                 return DoubleGame::DOUBLE_GAME_COLOR_GREEN;
-            case $game->game_number<=7:
+            case $game->game_number <= 7:
                 return DoubleGame::DOUBLE_GAME_COLOR_RED;
-            case $game->game_number>=8:
+            case $game->game_number >= 8:
                 return DoubleGame::DOUBLE_GAME_COLOR_BLACK;
             default:
                 break;
         }
     }
+
     /***
      * @return mixed
      */
@@ -120,7 +123,7 @@ class DoubleRepository
         $userId = $user->id;
 
         $game = $this->getGame();
-        $gameId =$game->id;
+        $gameId = $game->id;
         $deposit = DoubleGameBet::where([
             ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
             ['anticipated_event', '=', $color],

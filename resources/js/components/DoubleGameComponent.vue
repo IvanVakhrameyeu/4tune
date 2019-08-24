@@ -102,16 +102,22 @@
 </template>
 
 <script>
+    //import * as autobahn from "autobahn";
+   // import Echo from "laravel-echo";
+
+
     export default {
         name: "DoubleGameComponent",
         data: function () {
             return {
+                connection: null,
+                webSocketScript: null,
+                rotation: null,
                 rotateZ: 0,
                 rotateNumber: 0,
                 styleRotateZ: '',
                 amount: 1,
                 color: '',
-                conn: null,
                 redRates: [],
                 blackRates: [],
                 greenRates: [],
@@ -119,22 +125,21 @@
             }
         },
         mounted() {
+
             this.getHistories();
+            this.getAnimation(this.getPosition(0));
+            //   this.getPlayerRate();//delete
+
+
             this.startWebSocket();
-            this.getAnimation();
-
-            this.getPlayerRate();//delete
-
+        },
+        beforeDestroy() {
+            clearInterval(this.connection);
         },
         methods: {
             startWebSocket: function () {
-                this.conn = new WebSocket('ws://localhost:8080');
-                this.conn.onopen = function (e) {
-                    console.log('onopen');
-                };
-                this.conn.onmessage = function (e) {
-                    console.log('onmessage' + e.data);
-                };
+
+
             },
             takeButton: function (color) {
                 this.color = color;
@@ -184,11 +189,13 @@
             getAnimation: function (newNumber) {
                 //    let newRotate=this.getPosition(newNumber);
 
-                while(this.rotateZ<=5){
-                    this.rotateZ += 1;
-
-                    this.styleRotateZ = '<div class="wheel mx-auto" style="transform: rotateZ(' + this.rotateZ + 'deg);"></div>';
+                //while(this.rotateZ<=5){
+                this.rotateZ = newNumber;
+                if (newNumber - this.rotateZ > 0) {
+                    null;
                 }
+                this.styleRotateZ = '<div class="wheel mx-auto" style="transform: rotateZ(' + this.rotateZ + 'deg);"></div>';
+
 
                 /*
                 if(newRotate-this.rotateZ>0){ // по часовой, меньше круга
@@ -201,36 +208,51 @@
                 switch (number) {
                     case 0:
                         this.rotateZ = 0;
+                        break;
                     case 1:
                         this.rotateZ = -25;
+                        break;
                     case 2:
                         this.rotateZ = -73.5;
+                        break;
                     case 3:
                         this.rotateZ = -120;
+                        break;
                     case 4:
                         this.rotateZ = -167.5;
+                        break;
                     case 5:
                         this.rotateZ = -215;
+                        break;
                     case 6:
                         this.rotateZ = -263;
+                        break;
                     case 7:
                         this.rotateZ = -312;
+                        break;
                     case 8:
                         this.rotateZ = -50;
+                        break;
                     case 9:
                         this.rotateZ = -94;
+                        break;
                     case 10:
                         this.rotateZ = -144;
+                        break;
                     case 11:
                         this.rotateZ = -191;
+                        break;
                     case 12:
                         this.rotateZ = -239;
+                        break;
                     case 13:
                         this.rotateZ = -286;
+                        break;
                     case 14:
                         this.rotateZ = -336;
+                        break;
                 }
-                return this.rotateZ;
+                return this.rotateZ + 360;
             },
             addNewPersona: function (image, name, amount) {
                 this.blackRates.push({image: image, name: name, sum: amount});
@@ -240,7 +262,10 @@
                 this.histories.push({game_number: number});
             },
             add: function (amount) {
-                this.getAnimation();
+                let min = 0;
+                let max = 14;
+                let rand = Math.floor(Math.random() * (max - min + 1) + min);
+                this.getAnimation(this.getPosition(rand));
 
                 this.amount += parseInt(amount);
                 if (parseInt(this.amount) > 1000) {

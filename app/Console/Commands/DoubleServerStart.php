@@ -2,11 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Repositories\DoubleRouteServer;
 use App\Repositories\DoubleSocketRepository;
 use Illuminate\Console\Command;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
+use Thruway\Transport\RatchetTransportProvider;
 
 class DoubleServerStart extends Command
 {
@@ -15,7 +17,7 @@ class DoubleServerStart extends Command
      *
      * @var string
      */
-    protected $signature = 'double:serve';
+    protected $signature = 'double:serverStart';
 
     /**
      * The console command description.
@@ -34,13 +36,14 @@ class DoubleServerStart extends Command
         parent::__construct();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
+
     public function handle()
     {
+        $router = new DoubleRouteServer();
+        $transportProvider = new RatchetTransportProvider("127.0.0.1", 9090);
+        $router->addTransportProvider($transportProvider);
+        $router->start();
+        /*
         info('start double game');
         $server = IoServer::factory(
             new HttpServer(
@@ -49,6 +52,6 @@ class DoubleServerStart extends Command
                 )
             ), 8080
         );
-        $server->run();
+        $server->run();*/
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\DoubleGame;
+use App\Repositories\DoublePusher;
 use App\Repositories\DoubleRepository;
 use App\Repositories\DoubleSocketRepository;
 use Carbon\Carbon;
@@ -10,15 +12,19 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Thruway\ClientSession;
+use Thruway\Peer\Client;
+use Thruway\Transport\PawlTransportProvider;
 
 class PlayDoubleGame implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $timeout =5;
+    public $timeout = 5;
     public $tries = 1;
 
-    private $serverMessage;
+   // private $serverMessage;
+    //private $client;
 
     /**
      * Create a new job instance.
@@ -27,7 +33,7 @@ class PlayDoubleGame implements ShouldQueue
      */
     public function __construct()
     {
-        $this->serverMessage=new DoubleSocketRepository();
+        //$this->serverMessage = new DoubleSocketRepository();
     }
 
     /**
