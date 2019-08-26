@@ -130,9 +130,6 @@
             this.startWebSocket();
 
             this.rotateNumber= 0;
-           // this.rotateNumber= this.histories[0].game_number;
-            //console.log( this.histories[0].game_number);
-            //console.log(this.rotateNumber);
         },
         beforeDestroy() {
             clearInterval(this.connection);
@@ -251,8 +248,10 @@
             },
             addNewHistory: function (number) {
 
-                this.histories.splice(0, 1);
+                this.histories.splice(9, 1);
+                this.histories=this.histories.reverse();
                 this.histories.push({game_number: number});
+                this.histories=this.histories.reverse();
             },
             add: function (amount) {
                 let min = 0;

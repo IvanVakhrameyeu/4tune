@@ -21,9 +21,6 @@ class PlayDoubleGame implements ShouldQueue
     public $timeout = 5;
     public $tries = 1;
 
-   // private $serverMessage;
-    //private $client;
-
     /**
      * Create a new job instance.
      *
@@ -31,7 +28,7 @@ class PlayDoubleGame implements ShouldQueue
      */
     public function __construct()
     {
-        //$this->serverMessage = new DoubleSocketRepository();
+
     }
 
     /**

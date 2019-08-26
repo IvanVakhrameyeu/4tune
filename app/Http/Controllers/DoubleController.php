@@ -43,8 +43,8 @@ class DoubleController extends Controller
     public function getHistories()
     {
         $histories = DoubleGame::select('game_number')->
-        orderBy('id', 'DESC')->get()->take(10);
-        $histories=array_reverse($histories->toArray());
+        orderBy('id', 'DESC')->get()->take(11);
+        $histories->shift();
         return $histories;
     }
 }
