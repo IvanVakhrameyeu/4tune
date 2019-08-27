@@ -109,8 +109,6 @@
         name: "DoubleGameComponent",
         data: function () {
             return {
-                connection: null,
-                webSocketScript: null,
                 rotateZ: 0,
                 rotateNumber: 0,
                 styleRotateZ: '',
@@ -123,7 +121,6 @@
             }
         },
         mounted() {
-
             this.getHistories();
             this.getAnimation();
 
@@ -135,7 +132,11 @@
             this.rotateNumber = 0;
         },
         beforeDestroy() {
-            clearInterval(this.connection);
+            window.Echo.channel(`DoubleChannel`)
+                .stopListening('DoubleEvent');
+
+            window.Echo.channel(`DoubleRateChannel`)
+               .stopListening('DoubleRateEvent');
         },
         methods: {
             startWebSocket: function () {
@@ -144,6 +145,12 @@
                         this.rotateNumber = e['rotation'];
                         this.getAnimation();
                         this.addNewHistory(this.rotateNumber);
+
+                        this.greenRates=[];
+                        this.blackRates=[];
+                        this.redRates=[];
+
+                        console.log('123');
                     });
             },
             startRateChannel: function () {
@@ -156,7 +163,6 @@
                 this.color = color;
                 let app = this;
 
-                console.log(this);
                 axios.post('/setBetDouble', {
                     amount: this.amount,
                     color: this.color
@@ -165,12 +171,10 @@
 
                     });
             },
-
             getPlayerRate: function () {
                 let app = this;
                 axios.post('/getRotatePlayers', {})
                     .then(function (resp) {
-                        console.log(resp.data);
                         for (let i = 0; i < resp.data[0].length; i++) {
                             let j = 0;
                             if (resp.data[0][i].user_id != resp.data[1][j].id) {
@@ -178,13 +182,10 @@
                             }
                             app.addNewPlayer(resp.data[1][j].avatar, resp.data[1][j].name, resp.data[0][i].amount, resp.data[0][i].anticipated_event)
                         }
-
-
                     });
             },
             getHistories: function () {
                 let app = this;
-                console.log(this);
                 axios.get('/getHistories')
                     .then(function (resp) {
                         app.histories = resp.data;
