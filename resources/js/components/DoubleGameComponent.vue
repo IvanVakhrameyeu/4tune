@@ -130,7 +130,7 @@
             this.startWebSocket();
             this.startRateChannel(); //channel rate
 
-            //this.getPlayerRate(); // delete function
+            this.getPlayerRate();
 
             this.rotateNumber = 0;
         },
@@ -149,7 +149,7 @@
             startRateChannel: function () {
                 window.Echo.channel(`DoubleRateChannel`)
                     .listen('DoubleRateEvent', (e) => {
-                        this.addNewPersona(e['image'], e['name'], e['amount'], e['color']);
+                        this.addNewPlayer(e['image'], e['name'], e['amount'], e['color']);
                     });
             },
             takeButton: function (color) {
@@ -165,15 +165,23 @@
 
                     });
             },
-            /*
+
             getPlayerRate: function () {
-                this.blackRates.push({image: 'images/images/test-avatar.png', name: 'Ivan', sum: 32});
-                this.blackRates.push({image: 'images/test-avatar.png', name: 'Ivan1', sum: 132});
-                this.blackRates.push({image: 'images/test-avatar.png', name: 'Ivan2', sum: 232});
-                this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan3', sum: 332});
-                this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan4', sum: 432});
-                this.greenRates.push({image: 'images/test-avatar.png', name: 'Ivan5', sum: 532});
-            },*/
+                let app = this;
+                axios.post('/getRotatePlayers', {})
+                    .then(function (resp) {
+                        console.log(resp.data);
+                        for (let i = 0; i < resp.data[0].length; i++) {
+                            let j = 0;
+                            if (resp.data[0][i].user_id != resp.data[1][j].id) {
+                                j++;
+                            }
+                            app.addNewPlayer(resp.data[1][j].avatar, resp.data[1][j].name, resp.data[0][i].amount, resp.data[0][i].anticipated_event)
+                        }
+
+
+                    });
+            },
             getHistories: function () {
                 let app = this;
                 console.log(this);
@@ -253,28 +261,34 @@
                 }
                 return this.rotateZ + 360;
             },
-            addNewPersona: function (image, name, amount, color) {
+            addNewPlayer: function (image, name, amount, color) {
                 switch (color) {
                     case 'green':
-                        if (typeof (this.greenRates.find(n => n.name)) == 'undefined') {
-                            this.greenRates.push({image: image, name: name, sum: amount});
-                        } else {
-                            this.greenRates.find(n => n.name).sum += amount;
+                        for (let i = 0; i <this.greenRates.length; i++){
+                            if(this.greenRates[i]['name']==name){
+                                this.greenRates[i]['sum']+=amount;
+                                return;
+                            }
                         }
+                        this.greenRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'black':
-                        if (typeof (this.blackRates.find(n => n.name)) == 'undefined') {
-                            this.blackRates.push({image: image, name: name, sum: amount});
-                        } else {
-                            this.blackRates.find(n => n.name).sum += amount;
+                        for (let i = 0; i <this.blackRates.length; i++){
+                            if(this.blackRates[i]['name']==name){
+                                this.blackRates[i]['sum']+=amount;
+                                return;
+                            }
                         }
+                        this.blackRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'red':
-                        if (typeof (this.redRates.find(n => n.name)) == 'undefined') {
-                            this.redRates.push({image: image, name: name, sum: amount});
-                        } else {
-                            this.redRates.find(n => n.name).sum += amount;
+                        for (let i = 0; i <this.redRates.length; i++){
+                            if(this.redRates[i]['name']==name){
+                                this.redRates[i]['sum']+=amount;
+                                return;
+                            }
                         }
+                        this.redRates.push({image: image, name: name, sum: amount});
                         break;
                 }
             },

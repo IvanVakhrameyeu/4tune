@@ -34,6 +34,7 @@ Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBet', 'NvutiController@setBet');
 
 Route::post('/setBetDouble', 'DoubleController@setBetDouble');
+Route::post('/getRotatePlayers', 'DoubleController@getRotatePlayers');
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

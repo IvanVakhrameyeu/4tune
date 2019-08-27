@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DoubleGame;
+use App\DoubleGameBet;
 use App\Events\DoubleRateEvent;
 use App\Repositories\DoubleRepository;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\View\View;
 
 class DoubleController extends Controller
 {
@@ -43,11 +43,54 @@ class DoubleController extends Controller
         return response()->json(['color' => 'df']);
     }
 
+    /***
+     * @return mixed
+     */
     public function getHistories()
     {
         $histories = DoubleGame::select('game_number')->
         orderBy('id', 'DESC')->get()->take(11);
         $histories->shift();
         return $histories;
+    }
+
+    /***
+     * @return mixed
+     */
+    public function getRotatePlayers()
+    {
+        $gameId = ($this->getLastGame())->id;
+        $players = DoubleGameBet::select('anticipated_event', 'amount', 'user_id')
+            ->orderBy('user_id', 'asc')
+            ->where([
+                ['game_id', '=', $gameId]])->get();
+
+        $playersId = DoubleGameBet::select('user_id')
+            ->where([
+                ['game_id', '=', $gameId]])->distinct()->get();
+
+        $users = $this->getUsers($playersId);
+
+        return [$players, $users];
+    }
+
+    public function getUsers($playersId)
+    {
+        $users = User::whereIn('id', $playersId)
+            ->orderBy('id', 'asc')
+            ->get();
+        return $users;
+    }
+
+    public function getLastGame()
+    {
+        $game = DoubleGame::where([
+            ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING]])->first();
+        if ($game) {
+            return $game;
+        } else {
+            $game = DoubleGame::orderBy('id', 'DESC')->first();
+            return $game;
+        }
     }
 }
