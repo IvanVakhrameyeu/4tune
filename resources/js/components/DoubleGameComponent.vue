@@ -256,13 +256,25 @@
             addNewPersona: function (image, name, amount, color) {
                 switch (color) {
                     case 'green':
-                        this.greenRates.push({image: image, name: name, sum: amount});
+                        if (typeof (this.greenRates.find(n => n.name)) == 'undefined') {
+                            this.greenRates.push({image: image, name: name, sum: amount});
+                        } else {
+                            this.greenRates.find(n => n.name).sum += amount;
+                        }
                         break;
                     case 'black':
-                        this.blackRates.push({image: image, name: name, sum: amount});
+                        if (typeof (this.blackRates.find(n => n.name)) == 'undefined') {
+                            this.blackRates.push({image: image, name: name, sum: amount});
+                        } else {
+                            this.blackRates.find(n => n.name).sum += amount;
+                        }
                         break;
                     case 'red':
-                        this.redRates.push({image: image, name: name, sum: amount});
+                        if (typeof (this.redRates.find(n => n.name)) == 'undefined') {
+                            this.redRates.push({image: image, name: name, sum: amount});
+                        } else {
+                            this.redRates.find(n => n.name).sum += amount;
+                        }
                         break;
                 }
             },
