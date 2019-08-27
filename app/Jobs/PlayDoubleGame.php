@@ -2,11 +2,7 @@
 
 namespace App\Jobs;
 
-use App\DoubleGame;
-use App\Events\DoubleEvent;
-use App\Repositories\DoublePusher;
 use App\Repositories\DoubleRepository;
-use App\Repositories\DoubleSocketRepository;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

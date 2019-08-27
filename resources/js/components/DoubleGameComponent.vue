@@ -128,8 +128,11 @@
             this.getAnimation();
 
             this.startWebSocket();
+            this.startRateChannel(); //channel rate
 
-            this.rotateNumber= 0;
+            //this.getPlayerRate(); // delete function
+
+            this.rotateNumber = 0;
         },
         beforeDestroy() {
             clearInterval(this.connection);
@@ -141,6 +144,12 @@
                         this.rotateNumber = e['rotation'];
                         this.getAnimation();
                         this.addNewHistory(this.rotateNumber);
+                    });
+            },
+            startRateChannel: function () {
+                window.Echo.channel(`DoubleRateChannel`)
+                    .listen('DoubleRateEvent', (e) => {
+                        this.addNewPersona(e['image'], e['name'], e['amount'], e['color']);
                     });
             },
             takeButton: function (color) {
@@ -156,6 +165,7 @@
 
                     });
             },
+            /*
             getPlayerRate: function () {
                 this.blackRates.push({image: 'images/images/test-avatar.png', name: 'Ivan', sum: 32});
                 this.blackRates.push({image: 'images/test-avatar.png', name: 'Ivan1', sum: 132});
@@ -163,7 +173,7 @@
                 this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan3', sum: 332});
                 this.redRates.push({image: 'images/test-avatar.png', name: 'Ivan4', sum: 432});
                 this.greenRates.push({image: 'images/test-avatar.png', name: 'Ivan5', sum: 532});
-            },
+            },*/
             getHistories: function () {
                 let app = this;
                 console.log(this);
@@ -243,15 +253,24 @@
                 }
                 return this.rotateZ + 360;
             },
-            addNewPersona: function (image, name, amount) {
-                this.blackRates.push({image: image, name: name, sum: amount});
+            addNewPersona: function (image, name, amount, color) {
+                switch (color) {
+                    case 'green':
+                        this.greenRates.push({image: image, name: name, sum: amount});
+                        break;
+                    case 'black':
+                        this.blackRates.push({image: image, name: name, sum: amount});
+                        break;
+                    case 'red':
+                        this.redRates.push({image: image, name: name, sum: amount});
+                        break;
+                }
             },
             addNewHistory: function (number) {
-
                 this.histories.splice(9, 1);
-                this.histories=this.histories.reverse();
+                this.histories = this.histories.reverse();
                 this.histories.push({game_number: number});
-                this.histories=this.histories.reverse();
+                this.histories = this.histories.reverse();
             },
             add: function (amount) {
                 let min = 0;

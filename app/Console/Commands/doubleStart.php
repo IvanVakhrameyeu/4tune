@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Events\DoubleEvent;
+use App\Events\DoubleRateEvent;
 use App\Jobs\PlayDoubleGame;
 use Illuminate\Console\Command;
 

@@ -25,9 +25,8 @@ class DoubleRepository
         $this->makeMoneyWinPlayer();
 
         $this->changeStatusGame();
+
         DoubleEvent::dispatch($this->winNumber);
-
-
     }
 
     /***
