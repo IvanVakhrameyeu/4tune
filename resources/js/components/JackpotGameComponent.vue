@@ -57,7 +57,18 @@
 
 <script>
     export default {
-        name: "JackpotComponent"
+        name: "JackpotComponent",
+        /*
+                data: function () {
+                    return {            }
+                },*/
+        mounted() {
+       //     alert(window.location.pathname);
+        },
+        beforeDestroy() {
+
+        },
+        // methods: {}
     }
 </script>
 

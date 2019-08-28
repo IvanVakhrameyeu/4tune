@@ -220,6 +220,17 @@
     export default {
         name: "JackpotGameRoom",
 
+    /*
+            data: function () {
+                return {            }
+            },*/
+    mounted() {
+
+       // alert(window.location.pathname);
+    },
+        beforeDestroy() {
+
+        },
         methods: {
             scroll() {
                 let prog = document.getElementsByClassName('progress')[0];

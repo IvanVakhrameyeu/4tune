@@ -149,8 +149,6 @@
                         this.greenRates=[];
                         this.blackRates=[];
                         this.redRates=[];
-
-                        console.log('123');
                     });
             },
             startRateChannel: function () {
