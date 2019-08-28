@@ -13,18 +13,9 @@
     </head>
 </head>
 <body>
-    @guest
-        <div class="container-fluid promo">
-    @else
-        <div class="container-fluid app">
-    @endguest
-            @include('components.header')
-            <div class="col-md-12">
-                @yield('content')
-            </div>
-            @include('components.footer')
 
-        </div>
+    @yield('app')
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -35,5 +26,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
             integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
             crossorigin="anonymous"></script>
+                <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

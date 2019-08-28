@@ -10,15 +10,21 @@ class MainController extends Controller
 {
     public function index()
     {
-        if (Auth::user()) {
-            return view('layouts.games');
-        }
-
-        return view('layouts.promo-page');
+        return view('layouts.index');
     }
 
     public function games()
     {
         return view('layouts.games');
+    }
+
+    public function getUser()
+    {
+        if(Auth::user())
+        {
+            $balance=Auth::user()->balanceFloat;
+
+            return [Auth::user(),$balance];
+        }
     }
 }

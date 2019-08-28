@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\NvutiGame;
 
+use App\NvutiGameBet;
 use Hash;
 
 class NvutiRepository
@@ -27,27 +28,54 @@ class NvutiRepository
         $numberForMax = $number['max'];
 
         if ($stake == 'less') {
+            $numberRange = NvutiGame::NVUTI_GAME_GAME_MIN . ' - ' . $numberForMin;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, NvutiGame::NVUTI_GAME_GAME_MIN, $numberForMin);
         } else {
+            $numberRange = $numberForMax . ' - ' . NvutiGame::NVUTI_GAME_GAME_MAX;
             $result = $this->isPointBelongSegment($nvutiGame->game_number, $numberForMax, NvutiGame::NVUTI_GAME_GAME_MAX);
         }
 
+        $resultGameWonOrLose = ($result == 0 ? 'lose' : 'win');
+
         if ($result == 0) {
             $user->withdrawFloat($amount);
+            $resultGameMoney = $amount;
         } else {
             $winAmount = $this->getWinAmount($amount, $chance);
+            $resultGameMoney = $winAmount;
+            $resultGameMoney = round($resultGameMoney * 100) / 100;
             $user->depositFloat($winAmount);
         }
-        $balance = $user->balanceFloat;
-
         $nvutiGame->status = NvutiGame::NVUTI_GAME_STATUS_CLOSED;
-        $nvutiGame->name = ($result == 0 ? 'lose' : 'win');
+        $nvutiGame->name = $resultGameWonOrLose;
         $nvutiGame->save();
+
+        //$wallet = $user['wallet']['slug'];
+        $this->setGameNvuteBet($userId, $amount, $numberRange, $resultGameWonOrLose, 'default', $nvutiGame->id);
+
         $hash = self::getNewHash($userId);
 
-        return (['success' => true, 'hash' => $hash, 'balance' => $balance, '$stake'=>$stake]);
+        return ['hash' => $hash, 'WonOrLose' => $resultGameWonOrLose, 'money' => $resultGameMoney];
     }
 
+    /***
+     * @param $userId
+     * @param $amount
+     * @param $numberRange
+     * @param $status
+     * @param $currency
+     */
+    private function setGameNvuteBet($userId, $amount, $numberRange, $status, $currency, $id)
+    {
+        NvutiGameBet::create([
+            'numbers_range' => $numberRange,
+            'amount' => $amount,
+            'currency' => $currency,
+            'status' => $status,
+            'user_id' => $userId,
+            'game_id' => $id,
+        ]);
+    }
 
     /***
      * @param $amount

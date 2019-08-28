@@ -217,14 +217,33 @@
 
                     .jackpot-progress {
                         position: relative;
-                        position: relative;
                         padding: 35px 10px 0px;
                         background: #c5e0f7;
 
+                        .bar {
+                            width: 100%;
+                            overflow: hidden;
+                            height: 57px;
+                        }
+
                         .progress {
-                            border-radius: 10px;
                             height: 57px;
                             position: relative;
+                            width: 100%;
+                            overflow: visible;
+
+                            .progress-bar, .overdiv {
+                                position: absolute;
+                                height: 57px;
+                            }
+
+                            .overdiv {
+                                width: 1500%;
+                                background-color: rgba(0,0,0,.1);
+                                z-index: 2;
+                                background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                                background-size: 1rem 1rem;
+                            }
                         }
 
                         .arrow {

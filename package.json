@@ -18,5 +18,13 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "autobahn": "^0.9.9",
+        "laravel-echo": "^1.5.4",
+        "socket.io-client": "^2.2.0",
+        "vue-reactive-storage": "git+https://github.com/ropbla9/vue-reactive-storage.git",
+        "vue-router": "^3.0.7",
+        "vue-toasted": "^1.1.27"
     }
 }
