@@ -22,7 +22,8 @@
                         <div class="overdiv"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 0%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 0%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 34%" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -31,7 +32,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 100%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 100%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 134%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -40,7 +42,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 200%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 200%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 234%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -49,7 +52,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 300%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 300%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 334%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -58,7 +62,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 400%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 400%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 434%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -67,7 +72,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 500%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 500%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 534%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -76,7 +82,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 600%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 600%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 634%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -85,7 +92,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 700%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 700%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 734%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -94,7 +102,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 800%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 800%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 834%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -103,7 +112,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 900%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 900%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 934%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -112,7 +122,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1000%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 1000%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 1034%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -121,7 +132,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1100%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 1100%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 1134%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -130,7 +142,8 @@
                              aria-valuemax="100"></div>
 
                         <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1200%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                             style="width: 34%; left: 1200%;" aria-valuenow="34" aria-valuemin="0"
+                             aria-valuemax="100"></div>
                         <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
                              role="progressbar" style="width: 30%; left: 1234%;" aria-valuenow="30" aria-valuemin="0"
                              aria-valuemax="100"></div>
@@ -147,70 +160,31 @@
             </div>
         </div>
         <div class="jackpot-bet-form">
-            <input type="text" class="form-control mx-auto" placeholder="Введите сумму">
+            <input type="text" class="form-control mx-auto" placeholder="Введите сумму" v-model="amount">
             <div class="balance ml-lg-5">Ваш баланс: 0</div>
-            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="scroll">Сделать ставку!</a>
+            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="scroll;takeButton();">Сделать ставку!</a>
         </div>
         <div class="jackpot-players">
-            <div class="player">
+            <div class="player" v-for="ratePlayer in ratePlayers">
                 <div class="player-avatar">
-                    <img src="images/test-avatar.png">
+                    <img v-bind:src="[ratePlayer.image]">
                 </div>
                 <div class="player-info">
                     <div class="name">
-                        Владимир Кузнецов
+                       {{ratePlayer.name}}
                     </div>
                     <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
+                        Поставил: <b>{{ratePlayer.amount}} <i class="fa fa-rub"></i></b>
                     </div>
                     <div class="ticket">
                         <span>Билет:</span>
-                        #5511-6511
+                        #{{ratePlayer.ticketRanges}}
                     </div>
                     <div class="percent">
-                        10%
+                        {{ratePlayer.percent}}%
                     </div>
                 </div>
-            </div>
-            <div class="player">
-                <div class="player-avatar">
-                    <img src="images/test-avatar.png">
-                </div>
-                <div class="player-info">
-                    <div class="name">
-                        Владимир Кузнецов
-                    </div>
-                    <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
-                    </div>
-                    <div class="ticket">
-                        <span>Билет:</span>
-                        #5511-6511
-                    </div>
-                    <div class="percent">
-                        10%
-                    </div>
-                </div>
-            </div>
-            <div class="player">
-                <div class="player-avatar">
-                    <img src="images/test-avatar.png">
-                </div>
-                <div class="player-info">
-                    <div class="name">
-                        Владимир Кузнецов
-                    </div>
-                    <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
-                    </div>
-                    <div class="ticket">
-                        <span>Билет:</span>
-                        #5511-6511
-                    </div>
-                    <div class="percent">
-                        10%
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -220,18 +194,49 @@
     export default {
         name: "JackpotGameRoom",
 
-    /*
-            data: function () {
-                return {            }
-            },*/
-    mounted() {
+        data: function () {
+            return {
+                roomNumber: 0,
+                amount: 1,
+                ratePlayers: [],
+            }
+        },
+        mounted() {
+            this.roomNumber = this.$route.path.substring(this.$route.path.length - 1);
 
-       // alert(window.location.pathname);
-    },
+            this.getRates();
+        },
         beforeDestroy() {
 
         },
         methods: {
+            addNewRotate: function () {
+
+            },
+            takeButton: function () {
+                let app = this;
+
+                axios.post('/setBetJackpot', {
+                    amount: this.amount,
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+
+                    });
+            },
+            getRates:function(){
+                this.addNewRates('images/test-avatar.png','Владимир ',34.4,'0-1000',40);
+                this.addNewRates('images/test-avatar.png','Владимир Кузнецов',324.4,'1000-2000',50);
+            },
+            addNewRates:function(image,name,amount,ticketRanges,percent,){
+                this.ratePlayers.push({
+                    image: image,
+                    name: name,
+                    amount: amount,
+                    ticketRanges: ticketRanges,
+                    percent: percent,
+                });
+            },
             scroll() {
                 let prog = document.getElementsByClassName('progress')[0];
                 console.log(prog);

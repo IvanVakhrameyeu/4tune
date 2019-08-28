@@ -16,7 +16,8 @@ class CreateJackpotGamesTable extends Migration
         Schema::create('jackpot_games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
-            $table->integer('game_number');
+            $table->integer('game_number')->nullable();
+            $table->integer('room_number');
             $table->timestamps();
         });
     }

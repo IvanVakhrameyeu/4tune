@@ -30,11 +30,13 @@ Route::get('/getUser', 'MainController@getUser');
 
 
 Route::get('/getHash', 'NvutiController@getHash');
-Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBet', 'NvutiController@setBet');
 
+Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBetDouble', 'DoubleController@setBetDouble');
 Route::post('/getRotatePlayers', 'DoubleController@getRotatePlayers');
+
+Route::post('/setBetJackpot', 'JackpotController@setBetJackpot');
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

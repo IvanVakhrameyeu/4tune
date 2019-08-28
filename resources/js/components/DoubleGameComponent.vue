@@ -145,7 +145,6 @@
                         this.rotateNumber = e['rotation'];
                         this.getAnimation();
                         this.addNewHistory(this.rotateNumber);
-
                         this.greenRates=[];
                         this.blackRates=[];
                         this.redRates=[];

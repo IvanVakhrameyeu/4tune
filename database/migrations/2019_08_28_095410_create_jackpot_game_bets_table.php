@@ -15,7 +15,8 @@ class CreateJackpotGameBetsTable extends Migration
     {
         Schema::create('jackpot_game_bets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tickets_range');
+            $table->integer('tickets_min_range');
+            $table->integer('tickets_max_range');
             $table->double('amount');
             $table->integer('room_number');
             $table->string('status');
