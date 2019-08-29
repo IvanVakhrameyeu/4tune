@@ -43,7 +43,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="redRate in redRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[redRate.name]">
+                                    <img v-bind:src="[redRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{redRate.name}}</div>
@@ -65,7 +65,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="greenRate in greenRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[greenRate.name]">
+                                    <img v-bind:src="[greenRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{greenRate.name}}</div>
@@ -86,7 +86,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="blackRate in blackRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[blackRate.name]">
+                                    <img v-bind:src="[blackRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{blackRate.name}}</div>
