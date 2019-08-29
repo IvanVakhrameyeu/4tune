@@ -10,35 +10,32 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class JackpotRateEvent implements ShouldBroadcast
+class JackpotFirstEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $image;
     public $name;
-    public $amount;
-    public $tickets;
+    public $winAmount;
+    public $ticketWin;
 
     /***
-     * JackpotRateEvent constructor.
-     * @param $image
+     * JackpotFirstEvent constructor.
      * @param $name
-     * @param $amount
-     * @param $tickets
+     * @param $winAmount
+     * @param $ticketWin
      */
-    public function __construct($image,$name,$amount,$tickets)
+    public function __construct($name,$winAmount,$ticketWin)
     {
-        $this->image=$image;
-        $this->name=$name;
-        $this->amount=$amount;
-        $this->tickets=$tickets;
+        $this->name= $name;
+        $this->winAmount= $winAmount;
+        $this->ticketWin= $ticketWin;
     }
 
-    /***
+    /**
      * @return Channel|Channel[]
      */
     public function broadcastOn()
     {
-        return new Channel('JackpotRateChannel');
+        return new Channel('JackpotFirstChannel');
     }
 }

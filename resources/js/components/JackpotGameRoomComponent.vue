@@ -4,13 +4,13 @@
             <h4 class="text-center mx-auto">Джекпот сейчас: <b>3570 <i class="fa fa-rub"></i></b></h4>
             <div class="win-info">
                 <div class="winner">
-                    <b>Победил:</b> Кирилл Валевский
+                    <b>Победил:</b> {{winResult.name}}
                 </div>
                 <div class="ticket">
-                    <b>Билет:</b> #180
+                    <b>Билет:</b> #{{winResult.ticketWin}}
                 </div>
                 <div class="win-sum">
-                    Выигрыш: <b>7135 <i class="fa fa-rub"></i></b>
+                    Выигрыш: <b>{{winResult.winAmount}} <i class="fa fa-rub"></i></b>
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
         <div class="jackpot-bet-form">
             <input type="text" class="form-control mx-auto" placeholder="Введите сумму" v-model="amount">
             <div class="balance ml-lg-5">Ваш баланс: 0</div>
-            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="scroll;takeButton();">Сделать ставку!</a>
+            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="takeButton()">Сделать ставку!</a>
         </div>
         <div class="jackpot-players">
             <div class="player" v-for="ratePlayer in ratePlayers">
@@ -171,7 +171,7 @@
                 </div>
                 <div class="player-info">
                     <div class="name">
-                       {{ratePlayer.name}}
+                        {{ratePlayer.name}}
                     </div>
                     <div class="bet">
                         Поставил: <b>{{ratePlayer.amount}} <i class="fa fa-rub"></i></b>
@@ -198,20 +198,63 @@
             return {
                 roomNumber: 0,
                 amount: 1,
+                totalAmount: 1,
+                winResult: ({
+                    name: '',
+                    winAmount: 0,
+                    ticketWin: 0,
+                }),
                 ratePlayers: [],
             }
         },
         mounted() {
             this.roomNumber = this.$route.path.substring(this.$route.path.length - 1);
 
-            this.getRates();
+            this.getPlayerRate();
+
+             this.startConnectToChannel();
+
+            this.winPlayer('gfdd', 324, 343434);
+
         },
         beforeDestroy() {
 
         },
         methods: {
-            addNewRotate: function () {
+            startConnectToChannel: function () {
+                switch (this.roomNumber) {
+                    case '1':
+                        this.startChannel('JackpotFirstChannel', 'JackpotFirstEvent');
+                        this.startRateChannel('JackpotRateFirstChannel', 'JackpotRateFirstEvent');
+                        break;
+                    case '2':
+                        this.startChannel('JackpotSecondChannel', 'JackpotSecondEvent');
+                        this.startRateChannel('JackpotRateSecondChannel', 'JackpotRateSecondEvent');
+                        break;
+                    case '3':
+                        this.startChannel('JackpotThirdChannel', 'JackpotThirdEvent');
+                        this.startRateChannel('JackpotRateThirdChannel', 'JackpotRateThirdEvent');
+                        break;
+                    default:
+                        return;
+                }
 
+            },
+            startChannel: function (nameChannel, nameEvent) {
+                window.Echo.channel(nameChannel)
+                    .listen(nameEvent, (e) => {
+                        this.getAnimation();
+
+                        this.winPlayer(e['name'], e['winAmount'], e['ticketWin']);
+
+                        this.ratePlayers = [];
+                    });
+            },
+            startRateChannel: function (nameChannel, nameEvent) {
+                window.Echo.channel(nameChannel)
+                    .listen(nameEvent, (e) => {
+                        this.addNewPlayer(e['image'], e['name'], e['amount'], e['tickets']);
+                    });
             },
             takeButton: function () {
                 let app = this;
@@ -221,14 +264,29 @@
                     roomNumber: this.roomNumber,
                 })
                     .then(function (resp) {
-
+                        app.totalAmount += app.amount;
                     });
             },
-            getRates:function(){
-                this.addNewRates('images/test-avatar.png','Владимир ',34.4,'0-1000',40);
-                this.addNewRates('images/test-avatar.png','Владимир Кузнецов',324.4,'1000-2000',50);
+            getPlayerRate: function () {
+                let app = this;
+                axios.post('/getJackpotRotatePlayers', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        console.log(resp);
+                        for (let i = 0; i < resp.data.length; i++) {
+                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range+'-'+resp.data[i].tickets_max_range),3)
+                        }
+                    });
             },
-            addNewRates:function(image,name,amount,ticketRanges,percent,){
+            winPlayer: function (name, winAmount, ticketWin) {
+                this.winResult = ({
+                    name: name,
+                    winAmount: winAmount,
+                    ticketWin: ticketWin,
+                });
+            },
+            addNewPlayer: function (image, name, amount, ticketRanges, percent,) {
                 this.ratePlayers.push({
                     image: image,
                     name: name,
@@ -237,7 +295,7 @@
                     percent: percent,
                 });
             },
-            scroll() {
+            getAnimation: function () {
                 let prog = document.getElementsByClassName('progress')[0];
                 console.log(prog);
                 prog.setAttribute('style', 'margin-left: -1052.34%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;');

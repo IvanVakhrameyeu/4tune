@@ -9,6 +9,9 @@ use App\JackpotGameBet;
 
 class JackpotRepository
 {
+    public $ticketMin;
+    public $ticketMax;
+
     public function start()
     {
         $winNumber = $this->setAndGetWinNumber();
@@ -46,9 +49,15 @@ class JackpotRepository
             'user_id' => $userId,
             'game_id' => $gameId,
         ]);
+
+        $this->ticketMin=$min;
+        $this->ticketMax=$max;
     }
 
-
+    /***
+     * @param $roomNumber
+     * @return mixed
+     */
     private function getGame($roomNumber)
     {
         $game = JackpotGame::where([

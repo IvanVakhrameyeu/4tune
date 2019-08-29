@@ -37,6 +37,7 @@ Route::post('/setBetDouble', 'DoubleController@setBetDouble');
 Route::post('/getRotatePlayers', 'DoubleController@getRotatePlayers');
 
 Route::post('/setBetJackpot', 'JackpotController@setBetJackpot');
+Route::post('/getJackpotRotatePlayers', 'JackpotController@getJackpotRotatePlayers');
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');
