@@ -60,26 +60,13 @@ class DoubleController extends Controller
     public function getRotatePlayers()
     {
         $gameId = ($this->getLastGame())->id;
-        $players = DoubleGameBet::select('anticipated_event', 'amount', 'user_id')
+        $players = DoubleGameBet::join('users', 'users.id', '=', 'double_game_bets.user_id')
+        ->select('anticipated_event', 'amount','users.name','users.avatar')
             ->orderBy('user_id', 'asc')
             ->where([
                 ['game_id', '=', $gameId]])->get();
 
-        $playersId = DoubleGameBet::select('user_id')
-            ->where([
-                ['game_id', '=', $gameId]])->distinct()->get();
-
-        $users = $this->getUsers($playersId);
-
-        return [$players, $users];
-    }
-
-    public function getUsers($playersId)
-    {
-        $users = User::whereIn('id', $playersId)
-            ->orderBy('id', 'asc')
-            ->get();
-        return $users;
+        return $players;
     }
 
     public function getLastGame()

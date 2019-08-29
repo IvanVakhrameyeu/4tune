@@ -124,7 +124,7 @@
             this.getHistories();
             this.getAnimation();
 
-            this.startWebSocket();
+            this.startChannel();
             this.startRateChannel(); //channel rate
 
             this.getPlayerRate();
@@ -139,7 +139,7 @@
                .stopListening('DoubleRateEvent');
         },
         methods: {
-            startWebSocket: function () {
+            startChannel: function () {
                 window.Echo.channel(`DoubleChannel`)
                     .listen('DoubleEvent', (e) => {
                         this.rotateNumber = e['rotation'];
@@ -172,12 +172,9 @@
                 let app = this;
                 axios.post('/getRotatePlayers', {})
                     .then(function (resp) {
-                        for (let i = 0; i < resp.data[0].length; i++) {
-                            let j = 0;
-                            if (resp.data[0][i].user_id != resp.data[1][j].id) {
-                                j++;
-                            }
-                            app.addNewPlayer(resp.data[1][j].avatar, resp.data[1][j].name, resp.data[0][i].amount, resp.data[0][i].anticipated_event)
+                        console.log(resp.data);
+                        for (let i = 0; i < resp.data.length; i++) {
+                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, resp.data[i].anticipated_event)
                         }
                     });
             },
