@@ -7,6 +7,7 @@ use App\Events\JackpotRateSecondEvent;
 use App\Events\JackpotRateThirdEvent;
 use App\JackpotGame;
 use App\JackpotGameBet;
+use App\Jobs\PlayJackpotGame;
 use App\Repositories\JackpotRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class JackpotController extends Controller
         ($JackpotRepository)->depositMoney($amount, $roomNumber, $user);
         $ticketRangeS = $JackpotRepository->ticketMin . '-' . $JackpotRepository->ticketMax;
 
-        info($roomNumber);
+      //  info($roomNumber);
 
         switch ($roomNumber) {
             case '1':
@@ -56,6 +57,9 @@ class JackpotController extends Controller
                 JackpotRateThirdEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
                 break;
         }
+        info(PlayJackpotGame::$minPlayersReadyFirstRoom);
+        info(PlayJackpotGame::$minPlayersReadySecondRoom);
+        info(PlayJackpotGame::$minPlayersReadyThirdRoom);
 
         return response()->json();
     }
@@ -79,13 +83,5 @@ class JackpotController extends Controller
         ])->get();
 
         return $players;
-    }
-
-    public function getUsers($playersId)
-    {
-        $users = User::whereIn('id', $playersId)
-            ->orderBy('id', 'asc')
-            ->get();
-        return $users;
     }
 }

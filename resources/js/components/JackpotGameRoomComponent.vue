@@ -273,7 +273,6 @@
                     roomNumber: this.roomNumber,
                 })
                     .then(function (resp) {
-                        console.log(resp);
                         for (let i = 0; i < resp.data.length; i++) {
                             app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range+'-'+resp.data[i].tickets_max_range),3)
                         }
