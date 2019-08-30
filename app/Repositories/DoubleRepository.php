@@ -44,7 +44,7 @@ class DoubleRepository
             $colorWin = $this->getColorWin();
             foreach ($players as $player) {
 
-                $user = $players = User::where([
+                $user = $players = User::where([ //wtf???
                     ['id', '=', $player->user_id],
                 ])->first();
                 if ($colorWin == 'green') {
