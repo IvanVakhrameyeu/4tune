@@ -98,7 +98,6 @@ class JackpotController extends Controller
 
     public function getLastJackpotAndWinner(Request $request)
     {
-
         $request->validate([
             'roomNumber' => 'required|numeric|between:1,3',
         ]);
@@ -132,6 +131,46 @@ class JackpotController extends Controller
         ])->sum('amount');
         $lastSum = $sum - ($sum * 10 / 100);
         return ['player' => $player, 'lastSum' => $lastSum, 'game' => $game];
+    }
 
+    public function getBankInfo()
+    {
+        $gameFirst = JackpotGame::where([
+            ['room_number', '=', 1],
+            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
+        ])->orderBy('id', 'desc')->first();
+
+        if ($gameFirst) {
+            $playerBetFirst = JackpotGameBet::where([
+                ['game_id', '=', $gameFirst->id],
+            ])->sum('amount');
+        }else {
+            $playerBetFirst = 0;
+        }
+        $gameSecond = JackpotGame::where([
+            ['room_number', '=', 2],
+            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
+        ])->orderBy('id', 'desc')->first();
+
+        if ($gameSecond) {
+            $playerBetSecond = JackpotGameBet::where([
+                ['game_id', '=', $gameSecond->id],
+            ])->sum('amount');
+        }else {
+            $playerBetSecond = 0;
+        }
+        $gameThird = JackpotGame::where([
+            ['room_number', '=', 3],
+            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
+        ])->orderBy('id', 'desc')->first();
+
+        if ($gameThird) {
+            $playerBetThird = JackpotGameBet::where([
+                ['game_id', '=', $gameThird->id],
+            ])->sum('amount');
+        } else {
+            $playerBetThird = 0;
+        }
+        return ['playerBetFirst' => $playerBetFirst, 'playerBetSecond' => $playerBetSecond, 'playerBetThird' => $playerBetThird];
     }
 }

@@ -204,7 +204,6 @@
                 currentJackpot: 0,
                 currentAmount: 0,
                 winResult: [],
-
                 ratePlayers: [],
             }
         },
@@ -214,7 +213,6 @@
             this.getPlayerRate();
 
             this.startConnectToChannel();
-
 
             this.getLastJackpotAndWinner();
         },

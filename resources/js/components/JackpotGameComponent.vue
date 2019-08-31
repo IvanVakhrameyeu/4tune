@@ -29,21 +29,21 @@
                     <a href="#" class="select-room-block mx-auto text-center">
                         <p>Название</p>
                         <b>от 10 <i class="fa fa-rub"></i></b>
-                        <span>Банк: <b>2484</b> <i class="fa fa-rub"></i></span>
+                        <span>Банк: <b>{{FirstBank-(FirstBank*10/100)}}</b> <i class="fa fa-rub"></i></span>
                     </a>
                 </div>
                 <div class="col-lg-4">
                     <a href="#" class="select-room-block mx-auto text-center">
                         <p>Название</p>
                         <b>от 100 <i class="fa fa-rub"></i></b>
-                        <span>Банк: <b>2484</b> <i class="fa fa-rub"></i></span>
+                        <span>Банк: <b>{{SecondBank-(SecondBank*10/100)}}</b> <i class="fa fa-rub"></i></span>
                     </a>
                 </div>
                 <div class="col-lg-4">
                     <a href="#" class="select-room-block mx-auto text-center">
                         <p>Название</p>
                         <b>от 1000 <i class="fa fa-rub"></i></b>
-                        <span>Банк: <b>2484</b> <i class="fa fa-rub"></i></span>
+                        <span>Банк: <b>{{ThirdBank-(ThirdBank*10/100)}}</b> <i class="fa fa-rub"></i></span>
                     </a>
                 </div>
             </div>
@@ -64,16 +64,61 @@
                 maxJackpotToday: 0,
                 countGamesToday: 0,
                 maxJackpot: 0,
+
+                FirstBank: 0,
+                SecondBank: 0,
+                ThirdBank: 0,
             }
         },
         mounted() {
             this.getData();
 
+            this.connectChannel();
+
+            this.getBanks();
         },
         beforeDestroy() {
 
         },
         methods: {
+            connectChannel: function () {
+                window.Echo.channel('JackpotBankChannel')
+                    .listen('JackpotBankEvent', (e) => {
+                        console.log(e.bankChangeMessage);
+                        switch (e.bankChangeMessage.roomNumber) {
+                            case '1':
+                                if (Number(e.bankChangeMessage.amount) !== 0) {
+                                    this.FirstBank += Number(e.bankChangeMessage.amount);
+                                } else {
+                                    this.FirstBank = 0;
+                                }
+                                break;
+                            case '2':
+                                if (Number(e.bankChangeMessage.amount) !== 0) {
+                                    this.SecondBank += Number(e.bankChangeMessage.amount);
+                                } else {
+                                    this.SecondBank = 0;
+                                }
+                                break;
+                            case '3':
+                                if (Number(e.bankChangeMessage.amount) !== 0) {
+                                    this.ThirdBank += Number(e.bankChangeMessage.amount);
+                                } else {
+                                    this.ThirdBank = 0;
+                                }
+                                break;
+                        }
+                    });
+            },
+            getBanks: function () {
+                let app = this;
+                axios.post('/getBankInfo', {})
+                    .then(function (resp) {
+                        app.FirstBank += Number(resp.data.playerBetFirst);
+                        app.SecondBank += Number(resp.data.playerBetSecond);
+                        app.ThirdBank += Number(resp.data.playerBetThird);
+                    });
+            },
             getData: function () {
                 let app = this;
                 axios.post('/getJackpotData', {})

@@ -43,6 +43,7 @@ Route::post('/getJackpotRotatePlayers', 'JackpotController@getJackpotRotatePlaye
 Route::post('/getJackpotData', 'JackpotController@getJackpotData');
 
 Route::post('/getLastJackpotAndWinner', 'JackpotController@getLastJackpotAndWinner');
+Route::post('/getBankInfo', 'JackpotController@getBankInfo');
 
 
 

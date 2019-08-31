@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Events\JackpotBankEvent;
 use App\Events\JackpotFirstEvent;
 use App\Events\JackpotSecondEvent;
 use App\Events\JackpotThirdEvent;
@@ -24,6 +25,9 @@ class JackpotRepository
     public $name;
     public $userWin;
 
+    /***
+     * @param $roomNumber
+     */
     public function start($roomNumber)
     {
         $this->setWinNumber($roomNumber);
@@ -32,18 +36,31 @@ class JackpotRepository
         switch ($roomNumber) {
             case '1':
                 JackpotFirstEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                $this->changeBanksEvent("1",0);
                 break;
             case '2':
                 JackpotSecondEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                $this->changeBanksEvent("2",0);
                 break;
             case '3':
                 JackpotThirdEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                $this->changeBanksEvent("3",0);
                 break;
             default:
                 return;
         }
     }
 
+    private function changeBanksEvent($roomNumber,$amount)
+    {
+        JackpotBankEvent::dispatch(['roomNumber'=>$roomNumber,'amount'=>$amount]);
+    }
+
+    /***
+     * @param $amount
+     * @param $roomNumber
+     * @param $user
+     */
     public function depositMoney($amount, $roomNumber, $user)
     {
         $user->withdrawFloat($amount);
@@ -55,8 +72,15 @@ class JackpotRepository
         $game = $this->getGame($roomNumber);
         $gameId = $game->id;
         $this->checkCountBetGames($gameId, $roomNumber);
+
+        $this->changeBanksEvent($roomNumber,$amount);
     }
 
+    /***
+     * @param $amount
+     * @param $roomNumber
+     * @param $userId
+     */
     private function createBet($amount, $roomNumber, $userId)
     {
         $game = $this->getGame($roomNumber);
