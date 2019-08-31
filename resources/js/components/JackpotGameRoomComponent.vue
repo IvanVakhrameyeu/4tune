@@ -1,7 +1,8 @@
 <template>
     <div class="room">
         <div class="jackpot-info">
-            <h4 class="text-center mx-auto">Джекпот сейчас: <b>{{currentJackpot - (currentJackpot *10/100)}} <i class="fa fa-rub"></i></b></h4>
+            <h4 class="text-center mx-auto">Джекпот сейчас: <b>{{currentJackpot - (currentJackpot *10/100)}} <i
+                class="fa fa-rub"></i></b></h4>
             <div class="win-info">
                 <div v-for="result in winResult">
                     <div class="winner">
@@ -215,11 +216,7 @@
             this.startConnectToChannel();
 
 
-            this.winResult.push({
-                winName: '54456',
-                winAmount: 11,
-                winTicket: 33,
-            });
+            this.getLastJackpotAndWinner();
         },
         beforeDestroy() {
 
@@ -254,7 +251,7 @@
 
                             this.currentJackpot = 0;
                             this.ratePlayers = [];
-                            this.currentAmount=0;
+                            this.currentAmount = 0;
                         }
                     });
             },
@@ -284,6 +281,28 @@
                     .then(function (resp) {
                         for (let i = 0; i < resp.data.length; i++) {
                             app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range + '-' + resp.data[i].tickets_max_range), 3)
+                        }
+                    });
+            },
+            getLastJackpotAndWinner: function () {
+                let app = this;
+                axios.post('/getLastJackpotAndWinner', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        if (resp.data.length != 0) {
+                            app.winResult.push({
+                                winName: resp.data.player.name,
+                                winAmount: resp.data.lastSum,
+                                winTicket: resp.data.game.game_number,
+                            });
+                        }
+                        else{
+                            app.winResult.push({
+                                winName: '',
+                                winAmount: 0,
+                                winTicket: 0,
+                            });
                         }
                     });
             },

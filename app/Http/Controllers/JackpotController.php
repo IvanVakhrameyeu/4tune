@@ -72,6 +72,9 @@ class JackpotController extends Controller
             ['room_number', '=', $roomNumber],
         ])->first();
 
+        if (!$game) {
+            return [];
+        }
         $players = JackpotGameBet::join('users', 'users.id', '=', 'jackpot_game_bets.user_id')
             ->select('tickets_min_range', 'tickets_max_range', 'amount', 'users.name', 'users.avatar')
             ->where([
@@ -91,5 +94,44 @@ class JackpotController extends Controller
         $maxJackpot = JackpotGameBet::max('amount');
 
         return ['maxJackpotToday' => $maxJackpotToday, 'countGamesToday' => $countGamesToday, 'maxJackpot' => $maxJackpot];
+    }
+
+    public function getLastJackpotAndWinner(Request $request)
+    {
+
+        $request->validate([
+            'roomNumber' => 'required|numeric|between:1,3',
+        ]);
+        $roomNumber = $request->input('roomNumber');
+
+        $game = JackpotGame::where([
+            ['room_number', '=', $roomNumber],
+            ['status', '=', JackpotGame::JACKPOT_GAME_STATUS_CLOSED],
+        ])->orderBy('id', 'desc')->first();
+
+        if (!$game) {
+            return [];
+        }
+        $playerBet = JackpotGameBet::where([
+            ['game_id', '=', $game->id],
+            ['status', '=', 'win'],
+        ])->first();
+
+        if (!$playerBet) {
+            return [];
+        }
+        $player = User::where([
+            ['id', '=', $playerBet->user_id],
+        ])->first();
+
+        if (!$player) {
+            return [];
+        }
+        $sum = JackpotGameBet::where([
+            ['game_id', '=', $game->id],
+        ])->sum('amount');
+        $lastSum = $sum - ($sum * 10 / 100);
+        return ['player' => $player, 'lastSum' => $lastSum, 'game' => $game];
+
     }
 }
