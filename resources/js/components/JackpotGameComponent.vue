@@ -4,19 +4,19 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="stats-block mx-auto text-center">
-                        <b>63613</b>
+                        <b>{{maxJackpotToday}}</b>
                         <span>Максимальный джекпот сегодня</span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="stats-block mx-auto text-center">
-                        <b>3576</b>
+                        <b>{{countGamesToday}}</b>
                         <span>Количество игр сегодня</span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="stats-block mx-auto text-center">
-                        <b>149444</b>
+                        <b>{{maxJackpot}}</b>
                         <span>Максимальный джекпот</span>
                     </div>
                 </div>
@@ -58,17 +58,36 @@
 <script>
     export default {
         name: "JackpotComponent",
-        /*
-                data: function () {
-                    return {            }
-                },*/
+
+        data: function () {
+            return {
+                maxJackpotToday: 0,
+                countGamesToday: 0,
+                maxJackpot: 0,
+            }
+        },
         mounted() {
-       //     alert(window.location.pathname);
+            this.getData();
+
         },
         beforeDestroy() {
 
         },
-        // methods: {}
+        methods: {
+            getData: function () {
+                let app = this;
+                axios.post('/getJackpotData', {})
+                    .then(function (resp) {
+                        if ((resp.data.maxJackpotToday) !== null) {
+                            app.maxJackpotToday = resp.data.maxJackpotToday;
+                        }
+                        if ((resp.data.countGamesToday) !== null) {
+                            app.countGamesToday = resp.data.countGamesToday;
+                        }
+                        app.maxJackpot = resp.data.maxJackpot;
+                    });
+            },
+        }
     }
 </script>
 

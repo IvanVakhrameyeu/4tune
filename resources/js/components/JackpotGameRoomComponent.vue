@@ -1,16 +1,18 @@
 <template>
     <div class="room">
         <div class="jackpot-info">
-            <h4 class="text-center mx-auto">Джекпот сейчас: <b>3570 <i class="fa fa-rub"></i></b></h4>
+            <h4 class="text-center mx-auto">Джекпот сейчас: <b>{{currentJackpot - (currentJackpot *10/100)}} <i class="fa fa-rub"></i></b></h4>
             <div class="win-info">
-                <div class="winner">
-                    <b>Победил:</b> {{winResult.name}}
-                </div>
-                <div class="ticket">
-                    <b>Билет:</b> #{{winResult.ticketWin}}
-                </div>
-                <div class="win-sum">
-                    Выигрыш: <b>{{winResult.winAmount}} <i class="fa fa-rub"></i></b>
+                <div v-for="result in winResult">
+                    <div class="winner">
+                        <b>Победил:</b> {{result.winName}}
+                    </div>
+                    <div class="ticket">
+                        <b>Билет:</b> #{{result.winTicket}}
+                    </div>
+                    <div class="win-sum">
+                        Выигрыш: <b>{{result.winAmount}}<i class="fa fa-rub"></i></b>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,7 +163,7 @@
         </div>
         <div class="jackpot-bet-form">
             <input type="text" class="form-control mx-auto" placeholder="Введите сумму" v-model="amount">
-            <div class="balance ml-lg-5">Ваш баланс: 0</div>
+            <div class="balance ml-lg-5">Ваш баланс: {{currentAmount}}</div>
             <a class="btn btn-lg float-lg-right mx-auto" v-on:click="takeButton()">Сделать ставку!</a>
         </div>
         <div class="jackpot-players">
@@ -198,12 +200,10 @@
             return {
                 roomNumber: 0,
                 amount: 1,
-                totalAmount: 1,
-                winResult: ({
-                    name: '',
-                    winAmount: 0,
-                    ticketWin: 0,
-                }),
+                currentJackpot: 0,
+                currentAmount: 0,
+                winResult: [],
+
                 ratePlayers: [],
             }
         },
@@ -212,10 +212,14 @@
 
             this.getPlayerRate();
 
-             this.startConnectToChannel();
+            this.startConnectToChannel();
 
-            this.winPlayer('gfdd', 324, 343434);
 
+            this.winResult.push({
+                winName: '54456',
+                winAmount: 11,
+                winTicket: 33,
+            });
         },
         beforeDestroy() {
 
@@ -243,17 +247,22 @@
             startChannel: function (nameChannel, nameEvent) {
                 window.Echo.channel(nameChannel)
                     .listen(nameEvent, (e) => {
-                        this.getAnimation();
+                        //  this.getAnimation();
 
-                        this.winPlayer(e['name'], e['winAmount'], e['ticketWin']);
+                        if (e['name'] !== null || e['winAmount'] !== null || e['ticketWin'] !== null) {
+                            this.winPlayer(e['name'], e['winAmount'], e['ticketWin']);
 
-                        this.ratePlayers = [];
+                            this.currentJackpot = 0;
+                            this.ratePlayers = [];
+                            this.currentAmount=0;
+                        }
                     });
             },
             startRateChannel: function (nameChannel, nameEvent) {
                 window.Echo.channel(nameChannel)
                     .listen(nameEvent, (e) => {
                         this.addNewPlayer(e['image'], e['name'], e['amount'], e['tickets']);
+                        this.currentJackpot += Number(e['amount']);
                     });
             },
             takeButton: function () {
@@ -264,7 +273,7 @@
                     roomNumber: this.roomNumber,
                 })
                     .then(function (resp) {
-                        app.totalAmount += app.amount;
+                        app.currentAmount += Number(app.amount);
                     });
             },
             getPlayerRate: function () {
@@ -274,15 +283,16 @@
                 })
                     .then(function (resp) {
                         for (let i = 0; i < resp.data.length; i++) {
-                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range+'-'+resp.data[i].tickets_max_range),3)
+                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range + '-' + resp.data[i].tickets_max_range), 3)
                         }
                     });
             },
-            winPlayer: function (name, winAmount, ticketWin) {
-                this.winResult = ({
-                    name: name,
+            winPlayer: function (name, winAmount, winTicket) {
+                this.winResult.pop();
+                this.winResult.push({
+                    winName: name,
                     winAmount: winAmount,
-                    ticketWin: ticketWin,
+                    winTicket: winTicket,
                 });
             },
             addNewPlayer: function (image, name, amount, ticketRanges, percent,) {

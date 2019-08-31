@@ -12,7 +12,7 @@ class JackpotStart extends Command
      *
      * @var string
      */
-    protected $signature = 'jackpotStart';
+    protected $signature = 'jackpotStart {numberJackpotRoom}';
 
     /**
      * The console command description.
@@ -38,6 +38,7 @@ class JackpotStart extends Command
      */
     public function handle()
     {
-        dispatch(new PlayJackpotGame())->onQueue('jackpotGameProcessing');
+        $numberJackpotRoom= $this->argument('numberJackpotRoom');
+        dispatch(new PlayJackpotGame($numberJackpotRoom))->onQueue('jackpotGameProcessing');
     }
 }

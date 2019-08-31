@@ -11,6 +11,8 @@ use App\JackpotGame;
 use App\JackpotGameBet;
 use App\Jobs\PlayJackpotGame;
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JackpotRepository
 {
@@ -24,26 +26,22 @@ class JackpotRepository
 
     public function start($roomNumber)
     {
-
         $this->setWinNumber($roomNumber);
         $this->winPlayer($roomNumber);
-        /*
-               switch ($roomNumber) {
-                   case 1:
-                       //JackpotFirstEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                       JackpotFirstEvent::dispatch('aaaa',231231, 2);
-                       break;
-                   case 2:
-                       JackpotSecondEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                       break;
-                   case 3:
-                       JackpotThirdEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                       break;
-                   default:
-                       return;
-               }
 
-               $this->createGame($roomNumber);*/
+        switch ($roomNumber) {
+            case '1':
+                JackpotFirstEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                break;
+            case '2':
+                JackpotSecondEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                break;
+            case '3':
+                JackpotThirdEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                break;
+            default:
+                return;
+        }
     }
 
     public function depositMoney($amount, $roomNumber, $user)
@@ -52,24 +50,11 @@ class JackpotRepository
         $userId = $user->id;
 
         $this->createBet($amount, $roomNumber, $userId);
-        info('before switch');
-        info('room number =  ' . $roomNumber);
-        /* switch ($roomNumber) {
-             case '1':
-                 info('case 1');
 
-              //   dispatch(new PlayJackpotGame(1))->onQueue('jackpotGameProcessing');
-                 //PlayJackpotGame::$minPlayersReadyFirstRoom--;
-                 break;
-             case '2':
-                 PlayJackpotGame::$minPlayersReadySecondRoom--;
-                 break;
-             case '3':
-                 PlayJackpotGame::$minPlayersReadyThirdRoom--;
-                 break;
-             default:
-                 return;
-         }*/
+
+        $game = $this->getGame($roomNumber);
+        $gameId = $game->id;
+        $this->checkCountBetGames($gameId, $roomNumber);
     }
 
     private function createBet($amount, $roomNumber, $userId)
@@ -86,8 +71,6 @@ class JackpotRepository
             $min = 0;
             $max = $amount + $min - 1;
         }
-        info('$min' . $min);
-        info('$max' . $max);
         JackpotGameBet::create([
             'tickets_min_range' => $min,
             'tickets_max_range' => $max,
@@ -156,6 +139,40 @@ class JackpotRepository
     }
 
     /***
+     * if count bets by more then 2 then start game
+     * @param $gameId
+     * @param $roomNumber
+     */
+    private function checkCountBetGames($gameId, $roomNumber)
+    {
+        $gameBet = JackpotGameBet::select(DB::raw('max(id)'))
+            ->where('game_id', '=', $gameId)
+            ->groupBy('user_id')
+            ->get();
+        if (count($gameBet) > 1) {
+            switch ($roomNumber) {
+                case '1':
+                    dispatch(new PlayJackpotGame(1))
+                        ->onQueue('jackpotGameProcessing')
+                        ->delay(Carbon::now()->addSeconds(5));
+                    break;
+                case '2':
+                    dispatch(new PlayJackpotGame(2))
+                        ->onQueue('jackpotGameProcessing')
+                        ->delay(Carbon::now()->addSeconds(5));
+                    break;
+                case '3':
+                    dispatch(new PlayJackpotGame(3))
+                        ->onQueue('jackpotGameProcessing')
+                        ->delay(Carbon::now()->addSeconds(5));
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
+
+    /***
      * find win player and set value for $winAmount,$name
      * @param $roomNumber
      */
@@ -167,7 +184,7 @@ class JackpotRepository
 
         $this->ticketWin = $game->game_number;
 
-        if (!isset($this->ticketWin)){
+        if (!isset($this->ticketWin)) {
             return;
         }
 
@@ -182,30 +199,25 @@ class JackpotRepository
             ['status', '=', 'win'],
         ])->first();
 
-        $user=User::where([
-            ['id', '=', $userWin->user_id],
-        ])->first();
+        $user = $this->getUser($userWin->user_id);
 
         $this->changeStatusGame($roomNumber);
 
-        info('mb error');
-        $sumToDeposit=$sumBet - ($sumBet * 10 / 100);
-        info($sumToDeposit);
+        $sumToDeposit = $sumBet - ($sumBet * 10 / 100);
+
+        $this->name = $user->name;
+        $this->winAmount = $sumToDeposit;
         $user->depositFloat($sumToDeposit);
     }
 
     /***
      * return players why win
      * @param $roomNumber
-     * @return mixed
      */
     private function updatePlayers($roomNumber)
     {
         $game = $this->getGame($roomNumber);
         $gameId = $game->id;
-
-       // $this->ticketWin = $game->game_number;
-        info($this->ticketWin);
 
         JackpotGameBet::where(
             'game_id', '=', $gameId)
@@ -221,7 +233,6 @@ class JackpotRepository
             ['game_id', '=', $gameId],
             ['status', '!=', 'win'],
         ])->update(['status' => 'lose']);
-
     }
 
     /***
@@ -248,7 +259,7 @@ class JackpotRepository
     {
         $user = User::where([
             ['id', '=', $userId],
-        ]);
+        ])->first();
         return $user;
     }
 

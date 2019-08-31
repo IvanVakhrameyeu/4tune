@@ -10,6 +10,7 @@ use App\JackpotGameBet;
 use App\Jobs\PlayJackpotGame;
 use App\Repositories\JackpotRepository;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -44,8 +45,6 @@ class JackpotController extends Controller
         ($JackpotRepository)->depositMoney($amount, $roomNumber, $user);
         $ticketRangeS = $JackpotRepository->ticketMin . '-' . $JackpotRepository->ticketMax;
 
-      //  info($roomNumber);
-
         switch ($roomNumber) {
             case '1':
                 JackpotRateFirstEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
@@ -57,9 +56,6 @@ class JackpotController extends Controller
                 JackpotRateThirdEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
                 break;
         }
-        info(PlayJackpotGame::$minPlayersReadyFirstRoom);
-        info(PlayJackpotGame::$minPlayersReadySecondRoom);
-        info(PlayJackpotGame::$minPlayersReadyThirdRoom);
 
         return response()->json();
     }
@@ -77,11 +73,23 @@ class JackpotController extends Controller
         ])->first();
 
         $players = JackpotGameBet::join('users', 'users.id', '=', 'jackpot_game_bets.user_id')
-        ->select('tickets_min_range','tickets_max_range','amount','users.name','users.avatar')
+            ->select('tickets_min_range', 'tickets_max_range', 'amount', 'users.name', 'users.avatar')
             ->where([
-            ['game_id', '=', $game->id]
-        ])->get();
+                ['game_id', '=', $game->id]
+            ])->get();
 
         return $players;
+    }
+
+    public function getJackpotData()
+    {
+        $maxJackpotToday = JackpotGameBet::where('created_at', '>=', Carbon::now()->startOfDay()->toDateTimeString())
+            ->max('amount');
+        $countGamesToday = JackpotGame::where('created_at', '>=', Carbon::now()->startOfDay()->toDateTimeString())
+            ->count();
+
+        $maxJackpot = JackpotGameBet::max('amount');
+
+        return ['maxJackpotToday' => $maxJackpotToday, 'countGamesToday' => $countGamesToday, 'maxJackpot' => $maxJackpot];
     }
 }

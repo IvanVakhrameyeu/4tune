@@ -13,17 +13,18 @@ class PlayJackpotGame implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public static $minPlayersReadyFirstRoom = 1;
-    public static $minPlayersReadySecondRoom = 1;
-    public static $minPlayersReadyThirdRoom = 1;
+    public $timeout = 5;
+    public $tries = 3;
+    public $roomNumber;
 
 
     /**
      * Create a new job instance.
-     *
+     * @param $roomNumber
      */
-    public function __construct()
+    public function __construct($roomNumber)
     {
+        $this->roomNumber=$roomNumber;
     }
 
     /**
@@ -33,38 +34,6 @@ class PlayJackpotGame implements ShouldQueue
      */
     public function handle()
     {
-        /*
-        while (self::$minPlayersReadyFirstRoom != 0 || self::$minPlayersReadySecondRoom != 0 || self::$minPlayersReadyThirdRoom != 0) {
-            sleep(5);
-        }
-
-        dispatch(new PlayJackpotGame())
-            ->onQueue('jackpotGameProcessing')
-            ->delay(Carbon::now()->addSeconds(1));
-        */
-        /*
-                info('--------------');
-                info(self::$minPlayersReadyFirstRoom);
-                info(self::$minPlayersReadySecondRoom);
-                info(self::$minPlayersReadyThirdRoom);
-                info('--------------');
-                if(self::$minPlayersReadyFirstRoom == 0){
-                    (new JackpotRepository())->start(1);
-
-                    self::$minPlayersReadyFirstRoom = 2;
-                }
-                elseif ( self::$minPlayersReadySecondRoom == 0){
-                    (new JackpotRepository())->start(2);
-
-                    self::$minPlayersReadySecondRoom = 2;
-                }
-                elseif ( self::$minPlayersReadyThirdRoom == 0){
-                    (new JackpotRepository())->start(3);
-
-                    self::$minPlayersReadyThirdRoom = 2;
-                }
-
-
         switch ($this->roomNumber) {
             case 1: (new JackpotRepository())->start(1);
                 break;
@@ -74,7 +43,6 @@ class PlayJackpotGame implements ShouldQueue
                 break;
         }
 
-        */
-        (new JackpotRepository())->start(1);
+
     }
 }
