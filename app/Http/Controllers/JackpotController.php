@@ -31,16 +31,20 @@ class JackpotController extends Controller
         $balance = $user->balanceFloat;
 
         $request->validate([
-            'amount' => 'required|numeric|between:1,1000',
             'roomNumber' => 'required|numeric|between:1,3',
         ]);
-
-        $amount = $request->input('amount');
         $roomNumber = $request->input('roomNumber');
 
-        if ($amount > $balance || $amount > 1000 || $amount < pow(10, $roomNumber)) {
+
+        $request->validate([
+            'amount' => 'required|numeric|min:'.pow(10, $roomNumber),
+        ]);
+        $amount = $request->input('amount');
+
+        if ($amount > $balance || $amount < pow(10, $roomNumber)) {
             return response()->json();
         }
+
         $JackpotRepository = new JackpotRepository();
         ($JackpotRepository)->depositMoney($amount, $roomNumber, $user);
         $ticketRangeS = $JackpotRepository->ticketMin . '-' . $JackpotRepository->ticketMax;
@@ -56,7 +60,6 @@ class JackpotController extends Controller
                 JackpotRateThirdEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
                 break;
         }
-
         return response()->json();
     }
 
@@ -133,6 +136,9 @@ class JackpotController extends Controller
         return ['player' => $player, 'lastSum' => $lastSum, 'game' => $game];
     }
 
+    /***
+     * @return array
+     */
     public function getBankInfo()
     {
         $gameFirst = JackpotGame::where([
@@ -144,7 +150,7 @@ class JackpotController extends Controller
             $playerBetFirst = JackpotGameBet::where([
                 ['game_id', '=', $gameFirst->id],
             ])->sum('amount');
-        }else {
+        } else {
             $playerBetFirst = 0;
         }
         $gameSecond = JackpotGame::where([
@@ -156,7 +162,7 @@ class JackpotController extends Controller
             $playerBetSecond = JackpotGameBet::where([
                 ['game_id', '=', $gameSecond->id],
             ])->sum('amount');
-        }else {
+        } else {
             $playerBetSecond = 0;
         }
         $gameThird = JackpotGame::where([
@@ -172,5 +178,28 @@ class JackpotController extends Controller
             $playerBetThird = 0;
         }
         return ['playerBetFirst' => $playerBetFirst, 'playerBetSecond' => $playerBetSecond, 'playerBetThird' => $playerBetThird];
+    }
+
+    public function getCurrentJackpot(Request $request)
+    {
+        $request->validate([
+            'roomNumber' => 'required|numeric|between:1,3',
+        ]);
+        $roomNumber = $request->input('roomNumber');
+
+        $game = JackpotGame::where([
+            ['room_number', '=', $roomNumber],
+            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
+        ])->orderBy('id', 'desc')->first();
+
+        if ($game) {
+            $sum = JackpotGameBet::where([
+                ['game_id', '=', $game->id],
+            ])->sum('amount');
+        }
+        else{
+            $sum=0;
+        }
+        return $sum;
     }
 }

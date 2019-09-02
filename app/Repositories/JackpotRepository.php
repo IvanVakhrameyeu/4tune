@@ -51,6 +51,10 @@ class JackpotRepository
         }
     }
 
+    /***
+     * @param $roomNumber
+     * @param $amount
+     */
     private function changeBanksEvent($roomNumber,$amount)
     {
         JackpotBankEvent::dispatch(['roomNumber'=>$roomNumber,'amount'=>$amount]);

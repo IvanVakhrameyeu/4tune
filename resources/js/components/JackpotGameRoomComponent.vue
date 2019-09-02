@@ -215,6 +215,8 @@
             this.startConnectToChannel();
 
             this.getLastJackpotAndWinner();
+
+            this.getCurrentJackpot();
         },
         beforeDestroy() {
 
@@ -269,6 +271,16 @@
                 })
                     .then(function (resp) {
                         app.currentAmount += Number(app.amount);
+                    });
+            },
+            getCurrentJackpot: function () {
+                let app = this;
+
+                axios.post('/getCurrentJackpot', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        app.currentJackpot+=resp.data;
                     });
             },
             getPlayerRate: function () {
