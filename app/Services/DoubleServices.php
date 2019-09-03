@@ -20,27 +20,46 @@ class DoubleServices
     {
         try {
             $this->updatePlayers();
-
             $this->makeMoneyWinPlayer();
-
             $this->changeStatusGame();
+
+            $this->createGame();
 
             DoubleEvent::dispatch($this->winNumber);
         } catch (\Exception $ex) {
-            info($ex->getMessage());
         } finally {
             $this->returnPlayersMoney();
+
+            $this->createGame();
         }
     }
 
+    /***
+     * if throw error, then return players their money
+     */
     private function returnPlayersMoney()
     {
         $game = $this->getGame();
         $gameId = $game->id;
 
-        $users=DoubleGameBet::where([
+        $users = DoubleGameBet::where([
             ['game_id', '=', $gameId],
-        ])->first();
+        ])->get();
+        if (!$users) {
+            return;
+        }
+        foreach ($users as $user) {
+            $userForDeposit = User::where([
+                ['id', '=', $user->user_id],
+            ])->first();
+            $userForDeposit->depositFloat($user->amount);
+        }
+        DoubleGameBet::where([
+            ['game_id', '=', $gameId],
+        ])->update(['status' => 'closed']);
+        DoubleGame::where([
+            ['id', '=', $gameId],
+        ])->update(['status' => DoubleGame::DOUBLE_GAME_STATUS_CLOSED]);
 
     }
 
@@ -105,7 +124,6 @@ class DoubleServices
             ['game_id', '=', $gameId],
             ['anticipated_event', '!=', $winColor],
         ])->update(['status' => 'lose']);
-
     }
 
     /***
