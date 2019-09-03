@@ -25,9 +25,7 @@ class DoubleServices
 
             DoubleEvent::dispatch($this->winNumber);
         } catch (\Exception $ex) {
-        } finally {
             $this->returnPlayersMoney();
-
             $this->createGame();
         }
     }
@@ -37,7 +35,12 @@ class DoubleServices
      */
     private function returnPlayersMoney()
     {
-        $game = $this->getGame();
+        $game = DoubleGame::where([
+            ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
+        ])->first();
+        if (!$game) {
+            return;
+        }
         $gameId = $game->id;
 
         $users = DoubleGameBet::where([
