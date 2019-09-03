@@ -10,7 +10,7 @@
         </div>
         <div class="double-wheel">
             <div class="wheel-block mx-auto">
-                <b class="wheel-number red mx-auto">{{rotateNumber}}</b>
+                <b class="wheel-number red mx-auto">{{rotateNumber}}    </b>{{timer}}
                 <span v-html=styleRotateZ> </span>
             </div>
         </div>
@@ -102,9 +102,6 @@
 </template>
 
 <script>
-    //import * as autobahn from "autobahn";
-
-
     export default {
         name: "DoubleGameComponent",
         data: function () {
@@ -118,6 +115,8 @@
                 blackRates: [],
                 greenRates: [],
                 histories: [],
+
+                timer: 0,
             }
         },
         mounted() {
@@ -125,9 +124,11 @@
             this.getAnimation();
 
             this.startChannel();
-            this.startRateChannel(); //channel rate
+            this.startRateChannel();
 
             this.getPlayerRate();
+
+            this.doubleInformation();
 
             this.rotateNumber = 0;
         },
@@ -136,18 +137,27 @@
                 .stopListening('DoubleEvent');
 
             window.Echo.channel(`DoubleRateChannel`)
-               .stopListening('DoubleRateEvent');
+                .stopListening('DoubleRateEvent');
         },
         methods: {
+            doubleInformation: function () {
+                window.Echo.channel(`DoubleInformationChannel`)
+                    .listen('DoubleInformationEvent', (e) => {
+                        console.log(e);
+                        //if (e['timer'] != null) {
+                            this.timer = e.message['timer'];
+                      //  }
+                    });
+            },
             startChannel: function () {
                 window.Echo.channel(`DoubleChannel`)
                     .listen('DoubleEvent', (e) => {
                         this.rotateNumber = e['rotation'];
                         this.getAnimation();
                         this.addNewHistory(this.rotateNumber);
-                        this.greenRates=[];
-                        this.blackRates=[];
-                        this.redRates=[];
+                        this.greenRates = [];
+                        this.blackRates = [];
+                        this.redRates = [];
                     });
             },
             startRateChannel: function () {
@@ -259,27 +269,27 @@
             addNewPlayer: function (image, name, amount, color) {
                 switch (color) {
                     case 'green':
-                        for (let i = 0; i <this.greenRates.length; i++){
-                            if(this.greenRates[i]['name']==name){
-                                this.greenRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.greenRates.length; i++) {
+                            if (this.greenRates[i]['name'] == name) {
+                                this.greenRates[i]['sum'] += amount;
                                 return;
                             }
                         }
                         this.greenRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'black':
-                        for (let i = 0; i <this.blackRates.length; i++){
-                            if(this.blackRates[i]['name']==name){
-                                this.blackRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.blackRates.length; i++) {
+                            if (this.blackRates[i]['name'] == name) {
+                                this.blackRates[i]['sum'] += amount;
                                 return;
                             }
                         }
                         this.blackRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'red':
-                        for (let i = 0; i <this.redRates.length; i++){
-                            if(this.redRates[i]['name']==name){
-                                this.redRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.redRates.length; i++) {
+                            if (this.redRates[i]['name'] == name) {
+                                this.redRates[i]['sum'] += amount;
                                 return;
                             }
                         }

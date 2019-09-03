@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DoubleGame;
 use App\DoubleGameBet;
 use App\Events\DoubleRateEvent;
-use App\Repositories\DoubleRepository;
+use App\Services\DoubleServices;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +36,7 @@ class DoubleController extends Controller
             return response()->json();
         }
 
-        (new DoubleRepository())->depositMoney($amount, $color, $user);
+        (new DoubleServices())->depositMoney($amount, $color, $user);
 
         DoubleRateEvent::dispatch($user->avatar, $user->name, $amount, $color);
 
