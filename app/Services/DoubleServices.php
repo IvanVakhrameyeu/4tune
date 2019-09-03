@@ -23,8 +23,6 @@ class DoubleServices
             $this->makeMoneyWinPlayer();
             $this->changeStatusGame();
 
-            $this->createGame();
-
             DoubleEvent::dispatch($this->winNumber);
         } catch (\Exception $ex) {
         } finally {
