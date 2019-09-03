@@ -18,13 +18,30 @@ class DoubleServices
      */
     public function start()
     {
-        $this->updatePlayers();
+        try {
+            $this->updatePlayers();
 
-        $this->makeMoneyWinPlayer();
+            $this->makeMoneyWinPlayer();
 
-        $this->changeStatusGame();
+            $this->changeStatusGame();
 
-        DoubleEvent::dispatch($this->winNumber);
+            DoubleEvent::dispatch($this->winNumber);
+        } catch (\Exception $ex) {
+            info($ex->getMessage());
+        } finally {
+            $this->returnPlayersMoney();
+        }
+    }
+
+    private function returnPlayersMoney()
+    {
+        $game = $this->getGame();
+        $gameId = $game->id;
+
+        $users=DoubleGameBet::where([
+            ['game_id', '=', $gameId],
+        ])->first();
+
     }
 
     /***
@@ -153,7 +170,6 @@ class DoubleServices
         $game = $this->getGame();
         $gameId = $game->id;
         $deposit = DoubleGameBet::where([
-            ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_PENDING],
             ['anticipated_event', '=', $color],
             ['user_id', '=', $userId],
             ['game_id', '=', $gameId],
