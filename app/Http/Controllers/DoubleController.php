@@ -48,9 +48,10 @@ class DoubleController extends Controller
      */
     public function getHistories()
     {
-        $histories = DoubleGame::select('game_number')->
-        orderBy('id', 'DESC')->get()->take(11);
-        $histories->shift();
+        $histories = DoubleGame::select('game_number')
+            ->where([
+                ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_CLOSED],
+            ])->orderBy('id', 'DESC')->get()->take(10);
         return $histories;
     }
 
@@ -61,7 +62,7 @@ class DoubleController extends Controller
     {
         $gameId = ($this->getLastGame())->id;
         $players = DoubleGameBet::join('users', 'users.id', '=', 'double_game_bets.user_id')
-        ->select('anticipated_event', 'amount','users.name','users.avatar')
+            ->select('anticipated_event', 'amount', 'users.name', 'users.avatar')
             ->orderBy('user_id', 'asc')
             ->where([
                 ['game_id', '=', $gameId]])->get();
