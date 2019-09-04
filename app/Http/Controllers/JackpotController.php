@@ -24,7 +24,7 @@ class JackpotController extends Controller
 
 
     public function setBetJackpot(Request $request)
-    {
+    {// добавить проверку авторизованности
         $user = Auth::user();
         $user->wallet->refreshBalance();
 

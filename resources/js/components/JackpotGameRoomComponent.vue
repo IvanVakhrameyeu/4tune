@@ -20,145 +20,21 @@
         <div class="jackpot-process">
             <div class="jackpot-progress">
                 <div class="bar">
-                    <div class="progress" style="margin-left: 0%;
-    transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;">
+                    <div class="progress"
+                         style="margin-left: 0%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;">
+
                         <div class="overdiv"></div>
 
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 0%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 34%" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 64%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
+                        <template v-for="currentHTML in arrayHTML">
+                            <div class="bar-cont" v-bind:style="currentHTML"></div>
+                        </template>
 
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 100%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 134%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 164%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 200%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 234%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 264%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 300%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 334%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 364%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 400%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 434%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 464%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 500%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 534%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 564%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 600%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 634%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 664%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 700%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 734%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 764%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 800%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 834%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 864%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 900%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 934%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 964%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1000%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1034%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1064%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1100%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1134%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1164%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1200%;" aria-valuenow="34" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1234%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1264%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
                     </div>
                 </div>
                 <div class="arrow mx-auto"></div>
                 <div class="start-new-game mx-auto text-center">
                     <span>Новая игра через:</span>
-                    <b>7 сек</b>
+                    <b>{{currentTime}} сек</b>
                 </div>
             </div>
         </div>
@@ -194,6 +70,8 @@
 </template>
 
 <script>
+
+
     export default {
         name: "JackpotGameRoom",
 
@@ -205,6 +83,11 @@
                 currentAmount: 0,
                 winResult: [],
                 ratePlayers: [],
+
+                currentTime: 5,
+                timer: null,
+
+                arrayHTML: [],
             }
         },
         mounted() {
@@ -217,9 +100,16 @@
             this.getLastJackpotAndWinner();
 
             this.getCurrentJackpot();
+
+            this.startTimer();
+
+            this.createArrayHTML();
+            this.createArrayHTML();
+
+            console.log(this.arrayHTML);
         },
         beforeDestroy() {
-
+            this.stopTimer();
         },
         methods: {
             startConnectToChannel: function () {
@@ -252,6 +142,7 @@
                             this.currentJackpot = 0;
                             this.ratePlayers = [];
                             this.currentAmount = 0;
+                            this.currentTime = 10;
                         }
                     });
             },
@@ -280,7 +171,7 @@
                     roomNumber: this.roomNumber,
                 })
                     .then(function (resp) {
-                        app.currentJackpot+=resp.data;
+                        app.currentJackpot += resp.data;
                     });
             },
             getPlayerRate: function () {
@@ -306,8 +197,7 @@
                                 winAmount: resp.data.lastSum,
                                 winTicket: resp.data.game.game_number,
                             });
-                        }
-                        else{
+                        } else {
                             app.winResult.push({
                                 winName: '',
                                 winAmount: 0,
@@ -333,10 +223,23 @@
                     percent: percent,
                 });
             },
+
+            createArrayHTML: function () {
+                this.arrayHTML.push('background-color: rgb(247, 0, 195); width: 41.0214%; left: 0%;');
+            },
             getAnimation: function () {
                 let prog = document.getElementsByClassName('progress')[0];
                 console.log(prog);
                 prog.setAttribute('style', 'margin-left: -1052.34%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;');
+            },
+            startTimer: function () {
+                this.timer = setInterval(() => {
+                    if (this.currentTime > 0)
+                        this.currentTime = (this.currentTime - 0.01).toFixed(2);
+                }, 10)
+            },
+            stopTimer: function () {
+                clearTimeout(this.timer);
             }
             /*
             *42["jackpot_bets",
@@ -397,7 +300,14 @@
             *   "room":"classic"
             * }]
             */
-        }
+        },
+        watch: {
+            currentTime(time) {
+                if (time === 0) {
+                    this.stopTimer()
+                }
+            }
+        },
     }
 </script>
 

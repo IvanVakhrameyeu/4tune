@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Repositories\DoubleRepository;
+use App\Events\DoubleInformationEvent;
+use App\Services\DoubleServices;
 use Carbon\Carbon;
+use http\Message;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -16,6 +18,7 @@ class PlayDoubleGame implements ShouldQueue
 
     public $timeout = 5;
     public $tries = 1;
+    public $currentTimer = 4;
 
     /**
      * Create a new job instance.
@@ -34,10 +37,19 @@ class PlayDoubleGame implements ShouldQueue
      */
     public function handle()
     {
-        dispatch(new PlayDoubleGame())
-            ->onQueue('doubleGameProcessing')
-            ->delay(Carbon::now()->addSeconds(5));
+        while ($this->currentTimer > 0) {
+            $this->currentTimer--;
 
-        (new DoubleRepository())->start();
+            DoubleInformationEvent::dispatch(['timer' => $this->currentTimer]);
+            sleep(1);
+        }
+
+        (new DoubleServices())->start();
+
+            dispatch(new PlayDoubleGame())
+                ->onQueue('doubleGameProcessing')
+                ->delay(Carbon::now()->addSeconds(5));
+
+
     }
 }

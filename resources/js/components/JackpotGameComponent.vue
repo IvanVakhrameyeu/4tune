@@ -84,7 +84,6 @@
             connectChannel: function () {
                 window.Echo.channel('JackpotBankChannel')
                     .listen('JackpotBankEvent', (e) => {
-                        console.log(e.bankChangeMessage);
                         switch (e.bankChangeMessage.roomNumber) {
                             case '1':
                                 if (Number(e.bankChangeMessage.amount) !== 0) {
