@@ -3,9 +3,9 @@
         <div class="double-history">
             <span>История игр:</span>
             <div class="history">
-                <div v-for="history in histories">
+                <template v-for="history in histories">
                     <p v-bind:class="[getColor(history.game_number)]">{{history.game_number}}</p>
-                </div>
+                </template>
             </div>
         </div>
         <div class="double-wheel">
