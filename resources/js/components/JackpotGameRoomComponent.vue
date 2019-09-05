@@ -26,7 +26,8 @@
                         <div class="overdiv"></div>
 
                         <template v-for="currentHTML in arrayHTML">
-                            <div class="bar-cont" v-bind:style="currentHTML"></div>
+                            <div class="bar-cont"
+                                 v-bind:style="currentHTML.background_color + currentHTML.width+ currentHTML.left"></div>
                         </template>
 
                     </div>
@@ -103,8 +104,9 @@
 
             this.startTimer();
 
-            this.createArrayHTML();
-            this.createArrayHTML();
+            this.createArrayHTML('347, 0, 195', '40', '0');
+            this.createArrayHTML('207, 0, 195', '20', '0');
+            this.createArrayHTML('107, 0, 195', '40', '0');
 
             console.log(this.arrayHTML);
         },
@@ -224,8 +226,14 @@
                 });
             },
 
-            createArrayHTML: function () {
-                this.arrayHTML.push('background-color: rgb(247, 0, 195); width: 41.0214%; left: 0%;');
+            createArrayHTML: function (colorNumber, percent, left) {
+                this.arrayHTML.push({
+                    background_color: 'background-color: rgb(' + colorNumber + '); ',
+                    width: 'width: ' + percent + '%; ',
+                    left: 'left: ' + left + '%;',
+                });
+                //        this.arrayHTML.push('background-color: rgb(' + colorNumber + '); ' +
+                //           'width: ' + percent + '%; left: 0%;');
             },
             getAnimation: function () {
                 let prog = document.getElementsByClassName('progress')[0];
