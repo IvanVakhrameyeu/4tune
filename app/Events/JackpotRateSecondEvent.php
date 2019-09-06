@@ -18,6 +18,7 @@ class JackpotRateSecondEvent implements ShouldBroadcast
     public $name;
     public $amount;
     public $tickets;
+    public $arrayPercent;
 
     /***
      * JackpotRateSecondEvent constructor.
@@ -25,13 +26,15 @@ class JackpotRateSecondEvent implements ShouldBroadcast
      * @param $name
      * @param $amount
      * @param $tickets
+     * @param $arrayPercent
      */
-    public function __construct($image,$name,$amount,$tickets)
+    public function __construct($image,$name,$amount,$tickets,$arrayPercent)
     {
         $this->image=$image;
         $this->name=$name;
         $this->amount=$amount;
         $this->tickets=$tickets;
+        $this->arrayPercent=$arrayPercent;
     }
 
     /***

@@ -24,11 +24,13 @@
                          style="margin-left: 0%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;">
 
                         <div class="overdiv"></div>
-
-                        <template v-for="currentHTML in arrayHTML">
-                            <div class="bar-cont"
+                        <template v-for="currentHTML in sortArray(arrayHTML)">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                 role="progressbar"
+                                 aria-valuemin="0" aria-valuemax="100"
                                  v-bind:style="currentHTML.background_color + currentHTML.width+ currentHTML.left"></div>
                         </template>
+
 
                     </div>
                 </div>
@@ -89,6 +91,7 @@
                 timer: null,
 
                 arrayHTML: [],
+                arrayPercent: [],
             }
         },
         mounted() {
@@ -103,12 +106,6 @@
             this.getCurrentJackpot();
 
             this.startTimer();
-
-            this.createArrayHTML('347, 0, 195', '40', '0');
-            this.createArrayHTML('207, 0, 195', '20', '0');
-            this.createArrayHTML('107, 0, 195', '40', '0');
-
-            console.log(this.arrayHTML);
         },
         beforeDestroy() {
             this.stopTimer();
@@ -145,15 +142,73 @@
                             this.ratePlayers = [];
                             this.currentAmount = 0;
                             this.currentTime = 10;
+                            this.arrayHTML = [];
                         }
                     });
             },
             startRateChannel: function (nameChannel, nameEvent) {
                 window.Echo.channel(nameChannel)
                     .listen(nameEvent, (e) => {
-                        this.addNewPlayer(e['image'], e['name'], e['amount'], e['tickets']);
+                        this.addNewPlayer(e['image'], e['name'], e['amount'], e['tickets'], (e['arrayPercent'][e['arrayPercent'].length - 1]).toFixed(1));
                         this.currentJackpot += Number(e['amount']);
+
+                        this.arrayPercent = e['arrayPercent'];
+
+                        this.changePercent(this.arrayPercent);
+
+                        let lengthArray = Number(this.arrayHTML.length);
+
+
+                        if (lengthArray != 0) { // fixing
+                            for (let i = 4; i > 0; i--) {
+                                this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                                    (this.arrayPercent[this.arrayPercent.length - 1]).toFixed(3),
+                                    (this.arrayHTML[lengthArray - i].percent + (this.arrayPercent[this.arrayPercent.length - 1])).toFixed(3));
+                            }
+                        } else {
+                            for (let i = 0; i < 4; i++) {
+                                this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                                    (this.arrayPercent[this.arrayPercent.length - 1]).toFixed(3),
+                                    (i * 100));
+                            }
+                        }
+                        this.changeHTMLPercent();
                     });
+            },
+            changeHTMLPercent: function () {
+
+                let lengthArray = Number(this.arrayHTML.length);
+                let lengthArrayPercent = Number(this.arrayPercent.length);
+
+
+                let width = this.arrayPercent[0].toFixed(3);
+                for (let i = 0; i < 4; i++) {
+                    let left = (i * 100);
+                    this.arrayHTML[i].width = 'width: ' + width + '%; ';
+                    this.arrayHTML[i].left = 'left: ' + left + '%;';
+                    this.arrayHTML[i].percent = this.arrayPercent[0];
+                }
+
+                if (lengthArray < 5) {
+                    return;
+                }
+                console.log(this.arrayHTML);
+                console.log(this.arrayPercent);
+                for (let currentBlock = 1; currentBlock < lengthArrayPercent; currentBlock++) {
+                    for (let j = 0; j < 4; j++) {
+                        let width = this.arrayPercent[currentBlock].toFixed(3);
+                        let left = Number(this.arrayHTML[lengthArrayPercent - 1 + j].percent) + Number(width);
+
+                        console.log(width);
+                        console.log(left);
+                        console.log([lengthArray / 4 - lengthArrayPercent + j]);
+                        console.log(this.arrayHTML[lengthArray / 4 - lengthArrayPercent + j]);
+
+                        this.arrayHTML[lengthArray - 4 + j].width = 'width: ' + width + '%; ';
+                        this.arrayHTML[lengthArray - 4 + j].left = 'left: ' + left + '%;';
+                        this.arrayHTML[lengthArray - 4 + j].percent = Number(left);
+                    }
+                }
             },
             takeButton: function () {
                 let app = this;
@@ -182,9 +237,16 @@
                     roomNumber: this.roomNumber,
                 })
                     .then(function (resp) {
-                        for (let i = 0; i < resp.data.length; i++) {
-                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, (resp.data[i].tickets_min_range + '-' + resp.data[i].tickets_max_range), 3)
+                        for (let i = 0; i < resp.data['players'].length; i++) {
+                            app.addNewPlayer(resp.data['players'][i].avatar,
+                                resp.data['players'][i].name,
+                                resp.data['players'][i].amount,
+                                (resp.data['players'][i].tickets_min_range + '-' + resp.data['players'][i].tickets_max_range),
+                                (resp.data['percent'][i]).toFixed(1));
+
                         }
+                        app.addToArrayHTML(resp.data['percent']);
+
                     });
             },
             getLastJackpotAndWinner: function () {
@@ -226,14 +288,45 @@
                 });
             },
 
-            createArrayHTML: function (colorNumber, percent, left) {
+            addToArrayHTML: function (arrayPercent) {
+                for (let j = 0; j < 4; j++) {
+                    this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                        (arrayPercent[0]).toFixed(1),
+                        (j * 100)
+                    );
+                }
+                for (let i = 1; i < arrayPercent.length; i++) {
+                    for (let j = 0; j < 4; j++) {
+                        let background_color = 'background-color: rgb(' + this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber() + '); ';
+                        let width = 'width: ' + (arrayPercent[i]).toFixed(1) + '%; ';
+                        let leftNumber = Number((this.arrayHTML[i * 4 - 4 + j].percent).toFixed(1)) + Number((this.arrayHTML[i * 4 - 4 + j].widthNumber));
+                        let withNumber = (arrayPercent[i]).toFixed(1);
+                        let left = 'left: ' + leftNumber + '%;';
+
+                        this.arrayHTML.push({
+                            background_color: background_color,
+                            width: width,
+                            left: left,
+                            percent: leftNumber,
+                            widthNumber: withNumber,
+                        });
+                    }
+                }
+            },
+            createArrayHTML: function (colorNumber, width, left) {
                 this.arrayHTML.push({
                     background_color: 'background-color: rgb(' + colorNumber + '); ',
-                    width: 'width: ' + percent + '%; ',
+                    width: 'width: ' + width + '%; ',
                     left: 'left: ' + left + '%;',
+                    percent: Number(left),
+                    widthNumber: Number(width),
                 });
-                //        this.arrayHTML.push('background-color: rgb(' + colorNumber + '); ' +
-                //           'width: ' + percent + '%; left: 0%;');
+            },
+            sortArray: function (arr) {
+                return arr.slice().sort(function (a, b) {
+                    return a.percent - b.percent;
+                });
+
             },
             getAnimation: function () {
                 let prog = document.getElementsByClassName('progress')[0];
@@ -248,7 +341,16 @@
             },
             stopTimer: function () {
                 clearTimeout(this.timer);
-            }
+            },
+            changePercent: function (arrayPercent) {
+                for (let i = 0; i < arrayPercent.length; i++) {
+                    this.ratePlayers[i].percent = arrayPercent[i].toFixed(1);
+                }
+            },
+            randomNumber: function () {
+                return Math.floor(Math.random() * (255 - 1 + 1)) + 1;
+            },
+
             /*
             *42["jackpot_bets",
             * {
@@ -308,14 +410,16 @@
             *   "room":"classic"
             * }]
             */
-        },
+        }
+        ,
         watch: {
             currentTime(time) {
                 if (time === 0) {
                     this.stopTimer()
                 }
             }
-        },
+        }
+        ,
     }
 </script>
 

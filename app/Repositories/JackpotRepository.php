@@ -19,11 +19,13 @@ class JackpotRepository
 {
     public $ticketMin;
     public $ticketMax;
-
     public $winAmount;
+
     public $ticketWin;
     public $name;
     public $userWin;
+
+    public $percentPlayers;
 
     /***
      * @param $roomNumber
@@ -36,15 +38,15 @@ class JackpotRepository
         switch ($roomNumber) {
             case '1':
                 JackpotFirstEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                $this->changeBanksEvent("1",0);
+                $this->changeBanksEvent("1", 0);
                 break;
             case '2':
                 JackpotSecondEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                $this->changeBanksEvent("2",0);
+                $this->changeBanksEvent("2", 0);
                 break;
             case '3':
                 JackpotThirdEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
-                $this->changeBanksEvent("3",0);
+                $this->changeBanksEvent("3", 0);
                 break;
             default:
                 return;
@@ -55,9 +57,9 @@ class JackpotRepository
      * @param $roomNumber
      * @param $amount
      */
-    private function changeBanksEvent($roomNumber,$amount)
+    private function changeBanksEvent($roomNumber, $amount)
     {
-        JackpotBankEvent::dispatch(['roomNumber'=>$roomNumber,'amount'=>$amount]);
+        JackpotBankEvent::dispatch(['roomNumber' => $roomNumber, 'amount' => $amount]);
     }
 
     /***
@@ -77,7 +79,10 @@ class JackpotRepository
         $gameId = $game->id;
         $this->checkCountBetGames($gameId, $roomNumber);
 
-        $this->changeBanksEvent($roomNumber,$amount);
+        $this->changeBanksEvent($roomNumber, $amount);
+
+
+        $this->percentPlayers=$this->reckonPercent($roomNumber);
     }
 
     /***
@@ -301,5 +306,30 @@ class JackpotRepository
             'status' => JackpotGame::JACKPOT_GAME__STATUS_PENDING,
             'room_number' => $roomNumber,
         ]);
+    }
+
+    /***
+     * @param $roomNumber
+     * @return array
+     */
+    private function reckonPercent($roomNumber)
+    {
+        $game = $this->getGame($roomNumber);
+        $gameId = $game->id;
+
+        $usersAmount = JackpotGameBet::select('amount')
+            ->where('game_id', '=', $gameId)->get();
+
+        $ticket = JackpotGameBet::select('tickets_max_range')
+            ->where('game_id', '=', $gameId)
+            ->orderBy('id', 'desc')->first();
+
+        $lastTicket = (int)$ticket['tickets_max_range'] + 1;
+        $percentPlayers = [];
+        foreach ($usersAmount as $user) {
+            $percent = 100 / ($lastTicket / $user['amount']);
+            array_push($percentPlayers, $percent);
+        }
+        return $percentPlayers;
     }
 }

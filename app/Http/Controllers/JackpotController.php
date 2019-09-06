@@ -48,16 +48,17 @@ class JackpotController extends Controller
         $JackpotRepository = new JackpotRepository();
         ($JackpotRepository)->depositMoney($amount, $roomNumber, $user);
         $ticketRangeS = $JackpotRepository->ticketMin . '-' . $JackpotRepository->ticketMax;
+        $percentPlayers=$JackpotRepository->percentPlayers;
 
         switch ($roomNumber) {
             case '1':
-                JackpotRateFirstEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
+                JackpotRateFirstEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS,$percentPlayers);
                 break;
             case '2':
-                JackpotRateSecondEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
+                JackpotRateSecondEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS,$percentPlayers);
                 break;
             case '3':
-                JackpotRateThirdEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS);
+                JackpotRateThirdEvent::dispatch($user->avatar, $user->name, $amount, $ticketRangeS,$percentPlayers);
                 break;
         }
         return response()->json();
@@ -70,10 +71,7 @@ class JackpotController extends Controller
         ]);
         $roomNumber = $request->input('roomNumber');
 
-        $game = JackpotGame::where([
-            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
-            ['room_number', '=', $roomNumber],
-        ])->first();
+        $game = $this->getGame($roomNumber);
 
         if (!$game) {
             return [];
@@ -84,7 +82,39 @@ class JackpotController extends Controller
                 ['game_id', '=', $game->id]
             ])->get();
 
-        return $players;
+        $percent=$this->reckonPercent($roomNumber);
+        return ['players'=>$players,'percent'=>$percent];
+    }
+    private function reckonPercent($roomNumber)
+    {
+        $game = $this->getGame($roomNumber);
+        $gameId = $game->id;
+
+        $usersAmount = JackpotGameBet::select('amount')
+            ->where('game_id', '=', $gameId)->get();
+
+        $ticket = JackpotGameBet::select('tickets_max_range')
+            ->where('game_id', '=', $gameId)
+            ->orderBy('id', 'desc')->first();
+
+        $lastTicket = (int)$ticket['tickets_max_range'] + 1;
+        $percentPlayers = [];
+        foreach ($usersAmount as $user) {
+            $percent = 100 / ($lastTicket / $user['amount']);
+            array_push($percentPlayers, $percent);
+        }
+        return $percentPlayers;
+    }
+    private function getGame($roomNumber){
+        $game=JackpotGame::where([
+            ['status', '=', JackpotGame::JACKPOT_GAME__STATUS_PENDING],
+            ['room_number', '=', $roomNumber],
+        ])->first();
+
+        if (!$game) {
+            return [];
+        }
+        return $game;
     }
 
     public function getJackpotData()
