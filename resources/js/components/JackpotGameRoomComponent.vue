@@ -176,37 +176,29 @@
                     });
             },
             changeHTMLPercent: function () {
-
                 let lengthArray = Number(this.arrayHTML.length);
                 let lengthArrayPercent = Number(this.arrayPercent.length);
 
-
-                let width = this.arrayPercent[0].toFixed(3);
                 for (let i = 0; i < 4; i++) {
-                    let left = (i * 100);
-                    this.arrayHTML[i].width = 'width: ' + width + '%; ';
-                    this.arrayHTML[i].left = 'left: ' + left + '%;';
-                    this.arrayHTML[i].percent = this.arrayPercent[0];
+                    this.arrayHTML[i].width = 'width: ' + this.arrayPercent[0].toFixed(1) + '%; ';
+                    this.arrayHTML[i].widthNumber = Number(this.arrayPercent[0].toFixed(1));
                 }
-
                 if (lengthArray < 5) {
                     return;
                 }
-                console.log(this.arrayHTML);
-                console.log(this.arrayPercent);
-                for (let currentBlock = 1; currentBlock < lengthArrayPercent; currentBlock++) {
+                for (let i = 1; i < lengthArrayPercent; i++) {
                     for (let j = 0; j < 4; j++) {
-                        let width = this.arrayPercent[currentBlock].toFixed(3);
-                        let left = Number(this.arrayHTML[lengthArrayPercent - 1 + j].percent) + Number(width);
 
-                        console.log(width);
-                        console.log(left);
-                        console.log([lengthArray / 4 - lengthArrayPercent + j]);
-                        console.log(this.arrayHTML[lengthArray / 4 - lengthArrayPercent + j]);
+                        let width = 'width: ' + (this.arrayPercent[i]).toFixed(1) + '%; ';
+                        let leftNumber = Number((this.arrayHTML[i * 4 - 4 + j].percent).toFixed(1)) + Number((this.arrayHTML[i * 4 - 4 + j].widthNumber));
+                        let withNumber = (this.arrayPercent[i]).toFixed(1);
+                        let left = 'left: ' + leftNumber + '%;';
 
-                        this.arrayHTML[lengthArray - 4 + j].width = 'width: ' + width + '%; ';
-                        this.arrayHTML[lengthArray - 4 + j].left = 'left: ' + left + '%;';
-                        this.arrayHTML[lengthArray - 4 + j].percent = Number(left);
+
+                        this.arrayHTML[i * 4 + j].width = width;
+                        this.arrayHTML[i * 4 + j].left = left;
+                        this.arrayHTML[i * 4 + j].percent = leftNumber;
+                        this.arrayHTML[i * 4 + j].widthNumber = withNumber;
                     }
                 }
             },
