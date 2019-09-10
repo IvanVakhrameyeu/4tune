@@ -21,7 +21,7 @@
             <div class="jackpot-progress">
                 <div class="bar">
                     <div class="progress"
-                         style="margin-left: 0%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;">
+                         v-bind:style="styleAnimation">
 
                         <div class="overdiv"></div>
                         <template v-for="currentHTML in sortArray(arrayHTML)">
@@ -91,11 +91,13 @@
 
                 arrayHTML: [],
                 arrayPercent: [],
+
+                styleAnimation: '',
             }
         },
         mounted() {
+            this.styleAnimation = 'transform: translateX(0%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
             this.roomNumber = this.$route.path.substring(this.$route.path.length - 1);
-
             this.getPlayerRate();
 
             this.startConnectToChannel();
@@ -130,26 +132,35 @@
             startChannel: function (nameChannel, nameEvent) {
                 window.Echo.channel(nameChannel)
                     .listen(nameEvent, (e) => {
-                        //  this.getAnimation();
 
-                        let winner=e['arrayValueMessage'];
+                        let winner = e['arrayValueMessage'];
 
-                        if( typeof (winner['timer'])!== "undefined"){
-                            this.currentTime=e['arrayValueMessage']['timer'];
-
+                        if (typeof (winner['timer']) !== "undefined") {
+                            this.currentTime = e['arrayValueMessage']['timer'];
                             return;
                         }
 
                         if (winner['name'] !== null || winner['winAmount'] !== null || winner['ticketWin'] !== null) {
-                            this.winPlayer(e['name'], e['winAmount'], e['ticketWin']);
+                            let percentShift = Number(winner['ticketWin']);
+                            let shiftNumber = this.getShiftNumber(percentShift);
+                            this.getAnimation(shiftNumber);
 
-                            this.currentJackpot = 0;
-                            this.ratePlayers = [];
-                            this.currentAmount = 0;
-                            this.currentTime = 10;
-                            this.arrayHTML = [];
+                            this.sleep(15000).then(() => {
+                                this.winPlayer(winner['name'], winner['winAmount'], winner['ticketWin']);
+
+                                this.currentJackpot = 0;
+                                this.ratePlayers = [];
+                                this.currentAmount = 0;
+                                this.currentTime = 10;
+                                this.arrayHTML = [];
+                                this.styleAnimation = 'transform: translateX(0%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
+
+                            });
                         }
                     });
+            },
+            sleep: function (time) {
+                return new Promise((resolve) => setTimeout(resolve, time));
             },
             startRateChannel: function (nameChannel, nameEvent) {
                 window.Echo.channel(nameChannel)
@@ -207,7 +218,7 @@
                     }
                 }
             },
-            takeButton: function () {
+            takeButton: function () { // add error message when player have't enough money
                 let app = this;
 
                 axios.post('/setBetJackpot', {
@@ -242,7 +253,7 @@
                                 (resp.data['percent'][i]).toFixed(1));
 
                         }
-                        if(resp.data['percent'].length !== 0) {
+                        if (resp.data['percent'].length !== 0) {
                             app.addToArrayHTML(resp.data['percent']);
                         }
                     });
@@ -268,6 +279,15 @@
                         }
                     });
             },
+            getShiftNumber: function (winNumber) {
+                for (let i = 0; i < this.ratePlayers.length; i++) {
+                    let result = this.ratePlayers[i].ticketRanges.split('-');
+                    if (Number(result[0]) <= Number(winNumber) && Number(result[1]) >= Number(winNumber)) {
+
+                        return (this.arrayHTML[i * 4 + 3].percent - 50);
+                    }
+                }
+            },
             winPlayer: function (name, winAmount, winTicket) {
                 this.winResult.pop();
                 this.winResult.push({
@@ -286,15 +306,17 @@
                 });
             },
             addToArrayHTML: function (arrayPercent) {
+                let background_color = this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber();
                 for (let j = 0; j < 4; j++) {
-                    this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                    this.createArrayHTML(background_color,
                         (arrayPercent[0]).toFixed(1),
                         (j * 100)
                     );
                 }
                 for (let i = 1; i < arrayPercent.length; i++) {
+                    background_color = 'background-color: rgb(' + this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber() + '); ';
+
                     for (let j = 0; j < 4; j++) {
-                        let background_color = 'background-color: rgb(' + this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber() + '); ';
                         let width = 'width: ' + (arrayPercent[i]).toFixed(1) + '%; ';
                         let leftNumber = Number((this.arrayHTML[i * 4 - 4 + j].percent).toFixed(1)) + Number((this.arrayHTML[i * 4 - 4 + j].widthNumber));
                         let withNumber = (arrayPercent[i]).toFixed(1);
@@ -325,13 +347,9 @@
                 });
 
             },
-            getAnimation: function () {
-                let prog = document.getElementsByClassName('progress')[0];
-                console.log(prog);
-                prog.setAttribute('style', 'margin-left: -1052.34%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;');
+            getAnimation: function (percentShift) {
+                this.styleAnimation = 'transform: translateX(-' + percentShift + '%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
             },
-
-
             changePercent: function (arrayPercent) {
                 for (let i = 0; i < arrayPercent.length; i++) {
                     this.ratePlayers[i].percent = arrayPercent[i].toFixed(1);
@@ -400,16 +418,8 @@
             *   "room":"classic"
             * }]
             */
-        }
-        ,
-        watch: {
-            currentTime(time) {
-                if (time === 0) {
-                    this.stopTimer()
-                }
-            }
-        }
-        ,
+        },
+
     }
 </script>
 

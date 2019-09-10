@@ -14,21 +14,15 @@ class JackpotSecondEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $name;
-    public $winAmount;
-    public $ticketWin;
+    public $arrayValueMessage;
 
     /***
      * JackpotSecondEvent constructor.
-     * @param $name
-     * @param $winAmount
-     * @param $ticketWin
+     * @param $arrayValueMessage
      */
-    public function __construct($name,$winAmount,$ticketWin)
+    public function __construct($arrayValueMessage)
     {
-        $this->name= $name;
-        $this->winAmount= $winAmount;
-        $this->ticketWin= $ticketWin;
+        $this->arrayValueMessage= $arrayValueMessage;
     }
 
     /***

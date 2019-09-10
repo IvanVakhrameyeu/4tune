@@ -15,9 +15,6 @@ class JackpotFirstEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $arrayValueMessage;
-    public $name;
-    public $winAmount;
-    public $ticketWin;
 
     /***
      * JackpotFirstEvent constructor.
@@ -26,9 +23,6 @@ class JackpotFirstEvent implements ShouldBroadcast
     public function __construct($arrayValueMessage)
     {
         $this->arrayValueMessage= $arrayValueMessage;
-      //  $this->name= $name;
-      //  $this->winAmount= $winAmount;
-      //  $this->ticketWin= $ticketWin;
     }
 
     /**

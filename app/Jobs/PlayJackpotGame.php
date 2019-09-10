@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Events\JackpotFirstEvent;
+use App\Events\JackpotSecondEvent;
+use App\Events\JackpotThirdEvent;
 use App\Repositories\JackpotRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -37,7 +39,6 @@ class PlayJackpotGame implements ShouldQueue
     {
         switch ($this->roomNumber) {
             case 1:
-
                 while ($this->currentTimer > 0) {
                     $this->currentTimer--;
 
@@ -45,12 +46,26 @@ class PlayJackpotGame implements ShouldQueue
                     sleep(1);
                 }
 
-
                 (new JackpotRepository())->start(1);
                 break;
-            case 2:(new JackpotRepository())->start(2);
+            case 2:
+                while ($this->currentTimer > 0) {
+                $this->currentTimer--;
+
+                JackpotSecondEvent::dispatch(['timer' => $this->currentTimer]);
+                sleep(1);
+            }
+
+                (new JackpotRepository())->start(2);
                 break;
-            case 3:(new JackpotRepository())->start(3);
+            case 3:
+                while ($this->currentTimer > 0) {
+                    $this->currentTimer--;
+
+                    JackpotThirdEvent::dispatch(['timer' => $this->currentTimer]);
+                    sleep(1);
+                }
+                (new JackpotRepository())->start(3);
                 break;
         }
 

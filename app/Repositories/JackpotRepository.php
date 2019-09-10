@@ -38,15 +38,14 @@ class JackpotRepository
         switch ($roomNumber) {
             case '1':
                 JackpotFirstEvent::dispatch(['name' => $this->name ,'winAmount' =>   $this->winAmount, 'ticketWin' => $this->ticketWin]);
-              //  JackpotFirstEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
                 $this->changeBanksEvent("1", 0);
                 break;
             case '2':
-                JackpotSecondEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                JackpotSecondEvent::dispatch(['name' => $this->name ,'winAmount' =>   $this->winAmount, 'ticketWin' => $this->ticketWin]);
                 $this->changeBanksEvent("2", 0);
                 break;
             case '3':
-                JackpotThirdEvent::dispatch($this->name, $this->winAmount, $this->ticketWin);
+                JackpotThirdEvent::dispatch(['name' => $this->name ,'winAmount' =>   $this->winAmount, 'ticketWin' => $this->ticketWin]);
                 $this->changeBanksEvent("3", 0);
                 break;
             default:
