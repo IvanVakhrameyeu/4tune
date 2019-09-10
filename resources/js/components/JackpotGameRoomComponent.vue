@@ -88,7 +88,6 @@
                 ratePlayers: [],
 
                 currentTime: 5,
-                timer: null,
 
                 arrayHTML: [],
                 arrayPercent: [],
@@ -105,10 +104,8 @@
 
             this.getCurrentJackpot();
 
-            this.startTimer();
         },
         beforeDestroy() {
-            this.stopTimer();
         },
         methods: {
             startConnectToChannel: function () {
@@ -135,7 +132,15 @@
                     .listen(nameEvent, (e) => {
                         //  this.getAnimation();
 
-                        if (e['name'] !== null || e['winAmount'] !== null || e['ticketWin'] !== null) {
+                        let winner=e['arrayValueMessage'];
+
+                        if( typeof (winner['timer'])!== "undefined"){
+                            this.currentTime=e['arrayValueMessage']['timer'];
+
+                            return;
+                        }
+
+                        if (winner['name'] !== null || winner['winAmount'] !== null || winner['ticketWin'] !== null) {
                             this.winPlayer(e['name'], e['winAmount'], e['ticketWin']);
 
                             this.currentJackpot = 0;
@@ -237,8 +242,9 @@
                                 (resp.data['percent'][i]).toFixed(1));
 
                         }
-                        app.addToArrayHTML(resp.data['percent']);
-
+                        if(resp.data['percent'].length !== 0) {
+                            app.addToArrayHTML(resp.data['percent']);
+                        }
                     });
             },
             getLastJackpotAndWinner: function () {
@@ -279,7 +285,6 @@
                     percent: percent,
                 });
             },
-
             addToArrayHTML: function (arrayPercent) {
                 for (let j = 0; j < 4; j++) {
                     this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
@@ -325,15 +330,8 @@
                 console.log(prog);
                 prog.setAttribute('style', 'margin-left: -1052.34%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;');
             },
-            startTimer: function () {
-                this.timer = setInterval(() => {
-                    if (this.currentTime > 0)
-                        this.currentTime = (this.currentTime - 0.01).toFixed(2);
-                }, 10)
-            },
-            stopTimer: function () {
-                clearTimeout(this.timer);
-            },
+
+
             changePercent: function (arrayPercent) {
                 for (let i = 0; i < arrayPercent.length; i++) {
                     this.ratePlayers[i].percent = arrayPercent[i].toFixed(1);
