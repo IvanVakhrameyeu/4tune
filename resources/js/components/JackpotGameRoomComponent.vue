@@ -80,6 +80,7 @@
 
         data: function () {
             return {
+                buttonDisable: false,
                 roomNumber: 0,
                 amount: 1,
                 currentJackpot: 0,
@@ -139,7 +140,7 @@
                             this.currentTime = e['arrayValueMessage']['timer'];
                             return;
                         }
-
+                        this.buttonDisable = true;
                         if (winner['name'] !== null || winner['winAmount'] !== null || winner['ticketWin'] !== null) {
                             let percentShift = Number(winner['ticketWin']);
                             let shiftNumber = this.getShiftNumber(percentShift);
@@ -154,7 +155,7 @@
                                 this.currentTime = 10;
                                 this.arrayHTML = [];
                                 this.styleAnimation = 'transform: translateX(0%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
-
+                                this.buttonDisable = false;
                             });
                         }
                     });
@@ -219,6 +220,9 @@
                 }
             },
             takeButton: function () { // add error message when player have't enough money
+                if (this.buttonDisable) {
+                    return;
+                }
                 let app = this;
 
                 axios.post('/setBetJackpot', {
@@ -283,8 +287,9 @@
                 for (let i = 0; i < this.ratePlayers.length; i++) {
                     let result = this.ratePlayers[i].ticketRanges.split('-');
                     if (Number(result[0]) <= Number(winNumber) && Number(result[1]) >= Number(winNumber)) {
+                        let shift = ((Number(this.arrayHTML[i * 4 + 3].widthNumber) / Number(this.ratePlayers[i].amount)) * (Number(winNumber) - Number(result[0])));
 
-                        return (this.arrayHTML[i * 4 + 3].percent - 50);
+                        return (this.arrayHTML[i * 4 + 3].percent - 50 + shift);
                     }
                 }
             },
