@@ -74,7 +74,10 @@
 
 <script>
 
+    import Toasted from 'vue-toasted';
+    import * as Vue from "vue";
 
+    Vue.use(Toasted);
     export default {
         name: "JackpotGameRoom",
 
@@ -231,6 +234,11 @@
                 })
                     .then(function (resp) {
                         app.currentAmount += Number(app.amount);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        //console.log(error);
+                        app.getResult('возможно вы поставили меньше минимума','');
                     });
             },
             getCurrentJackpot: function () {
@@ -364,6 +372,13 @@
                 return Math.floor(Math.random() * (255 - 1 + 1)) + 1;
             },
 
+            getResult: function (result, amount) {
+                Vue.toasted.show(result + ' ' + amount, {
+                    theme: "toasted-primary",
+                    position: "bottom-center",
+                    duration: 2000
+                });
+            }
             /*
             *42["jackpot_bets",
             * {
