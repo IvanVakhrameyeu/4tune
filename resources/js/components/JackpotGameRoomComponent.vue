@@ -238,7 +238,7 @@
                     .catch(function (error) {
                         // handle error
                         //console.log(error);
-                        app.getResult('возможно вы поставили меньше минимума','');
+                        app.getResult('возможно вы поставили меньше минимальной ставки','');
                     });
             },
             getCurrentJackpot: function () {
