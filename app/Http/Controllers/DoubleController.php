@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DoubleGame;
 use App\DoubleGameBet;
 use App\Events\DoubleRateEvent;
-use App\Repositories\DoubleRepository;
+use App\Services\DoubleServices;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +36,7 @@ class DoubleController extends Controller
             return response()->json();
         }
 
-        (new DoubleRepository())->depositMoney($amount, $color, $user);
+        (new DoubleServices())->depositMoney($amount, $color, $user);
 
         DoubleRateEvent::dispatch($user->avatar, $user->name, $amount, $color);
 
@@ -48,9 +48,10 @@ class DoubleController extends Controller
      */
     public function getHistories()
     {
-        $histories = DoubleGame::select('game_number')->
-        orderBy('id', 'DESC')->get()->take(11);
-        $histories->shift();
+        $histories = DoubleGame::select('game_number')
+            ->where([
+                ['status', '=', DoubleGame::DOUBLE_GAME_STATUS_CLOSED],
+            ])->orderBy('id', 'DESC')->get()->take(10);
         return $histories;
     }
 
@@ -60,26 +61,13 @@ class DoubleController extends Controller
     public function getRotatePlayers()
     {
         $gameId = ($this->getLastGame())->id;
-        $players = DoubleGameBet::select('anticipated_event', 'amount', 'user_id')
+        $players = DoubleGameBet::join('users', 'users.id', '=', 'double_game_bets.user_id')
+            ->select('anticipated_event', 'amount', 'users.name', 'users.avatar')
             ->orderBy('user_id', 'asc')
             ->where([
                 ['game_id', '=', $gameId]])->get();
 
-        $playersId = DoubleGameBet::select('user_id')
-            ->where([
-                ['game_id', '=', $gameId]])->distinct()->get();
-
-        $users = $this->getUsers($playersId);
-
-        return [$players, $users];
-    }
-
-    public function getUsers($playersId)
-    {
-        $users = User::whereIn('id', $playersId)
-            ->orderBy('id', 'asc')
-            ->get();
-        return $users;
+        return $players;
     }
 
     public function getLastGame()

@@ -1,230 +1,383 @@
 <template>
     <div class="room">
         <div class="jackpot-info">
-            <h4 class="text-center mx-auto">Джекпот сейчас: <b>3570 <i class="fa fa-rub"></i></b></h4>
+            <h4 class="text-center mx-auto">Джекпот сейчас: <b>{{currentJackpot - (currentJackpot *10/100)}} <i
+                class="fa fa-rub"></i></b></h4>
             <div class="win-info">
-                <div class="winner">
-                    <b>Победил:</b> Кирилл Валевский
-                </div>
-                <div class="ticket">
-                    <b>Билет:</b> #180
-                </div>
-                <div class="win-sum">
-                    Выигрыш: <b>7135 <i class="fa fa-rub"></i></b>
+                <div v-for="result in winResult">
+                    <div class="winner">
+                        <b>Победил:</b> {{result.winName}}
+                    </div>
+                    <div class="ticket">
+                        <b>Билет:</b> #{{result.winTicket}}
+                    </div>
+                    <div class="win-sum">
+                        Выигрыш: <b>{{result.winAmount}}<i class="fa fa-rub"></i></b>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="jackpot-process">
             <div class="jackpot-progress">
                 <div class="bar">
-                    <div class="progress" style="margin-left: 0%;
-    transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;">
+                    <div class="progress"
+                         v-bind:style="styleAnimation">
+
                         <div class="overdiv"></div>
+                        <template v-for="currentHTML in sortArray(arrayHTML)">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                 role="progressbar"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 v-bind:style="currentHTML.background_color + currentHTML.width+ currentHTML.left"></div>
+                        </template>
 
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 0%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 34%" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 64%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
 
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 100%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 134%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 164%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 200%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 234%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 264%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 300%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 334%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 364%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 400%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 434%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 464%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 500%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 534%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 564%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 600%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 634%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 664%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 700%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 734%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 764%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 800%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 834%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 864%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 900%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 934%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 964%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1000%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1034%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1064%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1100%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1134%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1164%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar"
-                             style="width: 34%; left: 1200%;" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 30%; left: 1234%;" aria-valuenow="30" aria-valuemin="0"
-                             aria-valuemax="100"></div>
-                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                             role="progressbar" style="width: 36%; left: 1264%;" aria-valuenow="36" aria-valuemin="0"
-                             aria-valuemax="100"></div>
                     </div>
                 </div>
                 <div class="arrow mx-auto"></div>
                 <div class="start-new-game mx-auto text-center">
                     <span>Новая игра через:</span>
-                    <b>7 сек</b>
+                    <b>{{currentTime}} сек</b>
                 </div>
             </div>
         </div>
         <div class="jackpot-bet-form">
-            <input type="text" class="form-control mx-auto" placeholder="Введите сумму">
-            <div class="balance ml-lg-5">Ваш баланс: 0</div>
-            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="scroll">Сделать ставку!</a>
+            <input type="text" class="form-control mx-auto" placeholder="Введите сумму" v-model="amount">
+            <div class="balance ml-lg-5">Ваш баланс: {{currentAmount}}</div>
+            <a class="btn btn-lg float-lg-right mx-auto" v-on:click="takeButton()">Сделать ставку!</a>
         </div>
         <div class="jackpot-players">
-            <div class="player">
+            <div class="player" v-for="ratePlayer in ratePlayers">
                 <div class="player-avatar">
-                    <img src="images/test-avatar.png">
+                    <img v-bind:src="[ratePlayer.image]">
                 </div>
                 <div class="player-info">
                     <div class="name">
-                        Владимир Кузнецов
+                        {{ratePlayer.name}}
                     </div>
                     <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
+                        Поставил: <b>{{ratePlayer.amount}} <i class="fa fa-rub"></i></b>
                     </div>
                     <div class="ticket">
                         <span>Билет:</span>
-                        #5511-6511
+                        #{{ratePlayer.ticketRanges}}
                     </div>
                     <div class="percent">
-                        10%
+                        {{ratePlayer.percent}}%
                     </div>
                 </div>
-            </div>
-            <div class="player">
-                <div class="player-avatar">
-                    <img src="images/test-avatar.png">
-                </div>
-                <div class="player-info">
-                    <div class="name">
-                        Владимир Кузнецов
-                    </div>
-                    <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
-                    </div>
-                    <div class="ticket">
-                        <span>Билет:</span>
-                        #5511-6511
-                    </div>
-                    <div class="percent">
-                        10%
-                    </div>
-                </div>
-            </div>
-            <div class="player">
-                <div class="player-avatar">
-                    <img src="images/test-avatar.png">
-                </div>
-                <div class="player-info">
-                    <div class="name">
-                        Владимир Кузнецов
-                    </div>
-                    <div class="bet">
-                        Поставил: <b>500 <i class="fa fa-rub"></i></b>
-                    </div>
-                    <div class="ticket">
-                        <span>Билет:</span>
-                        #5511-6511
-                    </div>
-                    <div class="percent">
-                        10%
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
+    import Toasted from 'vue-toasted';
+    import * as Vue from "vue";
+
+    Vue.use(Toasted);
     export default {
         name: "JackpotGameRoom",
 
+        data: function () {
+            return {
+                buttonDisable: false,
+                roomNumber: 0,
+                amount: 1,
+                currentJackpot: 0,
+                currentAmount: 0,
+                winResult: [],
+                ratePlayers: [],
+
+                currentTime: 5,
+
+                arrayHTML: [],
+                arrayPercent: [],
+
+                styleAnimation: '',
+            }
+        },
+        mounted() {
+            this.styleAnimation = 'transform: translateX(0%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
+            this.roomNumber = this.$route.path.substring(this.$route.path.length - 1);
+            this.getPlayerRate();
+
+            this.startConnectToChannel();
+
+            this.getLastJackpotAndWinner();
+
+            this.getCurrentJackpot();
+
+        },
+        beforeDestroy() {
+        },
         methods: {
-            scroll() {
-                let prog = document.getElementsByClassName('progress')[0];
-                console.log(prog);
-                prog.setAttribute('style', 'margin-left: -1052.34%; transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;');
+            startConnectToChannel: function () {
+                switch (this.roomNumber) {
+                    case '1':
+                        this.startChannel('JackpotFirstChannel', 'JackpotFirstEvent');
+                        this.startRateChannel('JackpotRateFirstChannel', 'JackpotRateFirstEvent');
+                        break;
+                    case '2':
+                        this.startChannel('JackpotSecondChannel', 'JackpotSecondEvent');
+                        this.startRateChannel('JackpotRateSecondChannel', 'JackpotRateSecondEvent');
+                        break;
+                    case '3':
+                        this.startChannel('JackpotThirdChannel', 'JackpotThirdEvent');
+                        this.startRateChannel('JackpotRateThirdChannel', 'JackpotRateThirdEvent');
+                        break;
+                    default:
+                        return;
+                }
+
+            },
+            startChannel: function (nameChannel, nameEvent) {
+                window.Echo.channel(nameChannel)
+                    .listen(nameEvent, (e) => {
+
+                        let winner = e['arrayValueMessage'];
+
+                        if (typeof (winner['timer']) !== "undefined") {
+                            this.currentTime = e['arrayValueMessage']['timer'];
+                            return;
+                        }
+                        this.buttonDisable = true;
+                        if (winner['name'] !== null || winner['winAmount'] !== null || winner['ticketWin'] !== null) {
+                            let percentShift = Number(winner['ticketWin']);
+                            let shiftNumber = this.getShiftNumber(percentShift);
+                            this.getAnimation(shiftNumber);
+
+                            this.sleep(15000).then(() => {
+                                this.winPlayer(winner['name'], winner['winAmount'], winner['ticketWin']);
+
+                                this.currentJackpot = 0;
+                                this.ratePlayers = [];
+                                this.currentAmount = 0;
+                                this.currentTime = 10;
+                                this.arrayHTML = [];
+                                this.styleAnimation = 'transform: translateX(0%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
+                                this.buttonDisable = false;
+                            });
+                        }
+                    });
+            },
+            sleep: function (time) {
+                return new Promise((resolve) => setTimeout(resolve, time));
+            },
+            startRateChannel: function (nameChannel, nameEvent) {
+                window.Echo.channel(nameChannel)
+                    .listen(nameEvent, (e) => {
+                        this.addNewPlayer(e['image'], e['name'], e['amount'], e['tickets'], (e['arrayPercent'][e['arrayPercent'].length - 1]).toFixed(1));
+                        this.currentJackpot += Number(e['amount']);
+
+                        this.arrayPercent = e['arrayPercent'];
+
+                        this.changePercent(this.arrayPercent);
+
+                        let lengthArray = Number(this.arrayHTML.length);
+
+
+                        if (lengthArray != 0) { // fixing
+                            for (let i = 4; i > 0; i--) {
+                                this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                                    (this.arrayPercent[this.arrayPercent.length - 1]).toFixed(3),
+                                    (this.arrayHTML[lengthArray - i].percent + (this.arrayPercent[this.arrayPercent.length - 1])).toFixed(3));
+                            }
+                        } else {
+                            for (let i = 0; i < 4; i++) {
+                                this.createArrayHTML(this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber(),
+                                    (this.arrayPercent[this.arrayPercent.length - 1]).toFixed(3),
+                                    (i * 100));
+                            }
+                        }
+                        this.changeHTMLPercent();
+                    });
+            },
+            changeHTMLPercent: function () {
+                let lengthArray = Number(this.arrayHTML.length);
+                let lengthArrayPercent = Number(this.arrayPercent.length);
+
+                for (let i = 0; i < 4; i++) {
+                    this.arrayHTML[i].width = 'width: ' + this.arrayPercent[0].toFixed(1) + '%; ';
+                    this.arrayHTML[i].widthNumber = Number(this.arrayPercent[0].toFixed(1));
+                }
+                if (lengthArray < 5) {
+                    return;
+                }
+                for (let i = 1; i < lengthArrayPercent; i++) {
+                    for (let j = 0; j < 4; j++) {
+
+                        let width = 'width: ' + (this.arrayPercent[i]).toFixed(1) + '%; ';
+                        let leftNumber = Number((this.arrayHTML[i * 4 - 4 + j].percent).toFixed(1)) + Number((this.arrayHTML[i * 4 - 4 + j].widthNumber));
+                        let withNumber = (this.arrayPercent[i]).toFixed(1);
+                        let left = 'left: ' + leftNumber + '%;';
+
+
+                        this.arrayHTML[i * 4 + j].width = width;
+                        this.arrayHTML[i * 4 + j].left = left;
+                        this.arrayHTML[i * 4 + j].percent = leftNumber;
+                        this.arrayHTML[i * 4 + j].widthNumber = withNumber;
+                    }
+                }
+            },
+            takeButton: function () { // add error message when player have't enough money
+                if (this.buttonDisable) {
+                    return;
+                }
+                let app = this;
+
+                axios.post('/setBetJackpot', {
+                    amount: this.amount,
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        app.currentAmount += Number(app.amount);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        //console.log(error);
+                        app.getResult('возможно вы поставили меньше минимальной ставки','');
+                    });
+            },
+            getCurrentJackpot: function () {
+                let app = this;
+
+                axios.post('/getCurrentJackpot', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        app.currentJackpot += resp.data;
+                    });
+            },
+            getPlayerRate: function () {
+                let app = this;
+                axios.post('/getJackpotRotatePlayers', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        for (let i = 0; i < resp.data['players'].length; i++) {
+                            app.addNewPlayer(resp.data['players'][i].avatar,
+                                resp.data['players'][i].name,
+                                resp.data['players'][i].amount,
+                                (resp.data['players'][i].tickets_min_range + '-' + resp.data['players'][i].tickets_max_range),
+                                (resp.data['percent'][i]).toFixed(1));
+
+                        }
+                        if (resp.data['percent'].length !== 0) {
+                            app.addToArrayHTML(resp.data['percent']);
+                        }
+                    });
+            },
+            getLastJackpotAndWinner: function () {
+                let app = this;
+                axios.post('/getLastJackpotAndWinner', {
+                    roomNumber: this.roomNumber,
+                })
+                    .then(function (resp) {
+                        if (resp.data.length != 0) {
+                            app.winResult.push({
+                                winName: resp.data.player.name,
+                                winAmount: resp.data.lastSum,
+                                winTicket: resp.data.game.game_number,
+                            });
+                        } else {
+                            app.winResult.push({
+                                winName: '',
+                                winAmount: 0,
+                                winTicket: 0,
+                            });
+                        }
+                    });
+            },
+            getShiftNumber: function (winNumber) {
+                for (let i = 0; i < this.ratePlayers.length; i++) {
+                    let result = this.ratePlayers[i].ticketRanges.split('-');
+                    if (Number(result[0]) <= Number(winNumber) && Number(result[1]) >= Number(winNumber)) {
+                        let shift = ((Number(this.arrayHTML[i * 4 + 3].widthNumber) / Number(this.ratePlayers[i].amount)) * (Number(winNumber) - Number(result[0])));
+
+                        return (this.arrayHTML[i * 4 + 3].percent - 50 + shift);
+                    }
+                }
+            },
+            winPlayer: function (name, winAmount, winTicket) {
+                this.winResult.pop();
+                this.winResult.push({
+                    winName: name,
+                    winAmount: winAmount,
+                    winTicket: winTicket,
+                });
+            },
+            addNewPlayer: function (image, name, amount, ticketRanges, percent,) {
+                this.ratePlayers.push({
+                    image: image,
+                    name: name,
+                    amount: amount,
+                    ticketRanges: ticketRanges,
+                    percent: percent,
+                });
+            },
+            addToArrayHTML: function (arrayPercent) {
+                let background_color = this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber();
+                for (let j = 0; j < 4; j++) {
+                    this.createArrayHTML(background_color,
+                        (arrayPercent[0]).toFixed(1),
+                        (j * 100)
+                    );
+                }
+                for (let i = 1; i < arrayPercent.length; i++) {
+                    background_color = 'background-color: rgb(' + this.randomNumber() + ', ' + this.randomNumber() + ', ' + this.randomNumber() + '); ';
+
+                    for (let j = 0; j < 4; j++) {
+                        let width = 'width: ' + (arrayPercent[i]).toFixed(1) + '%; ';
+                        let leftNumber = Number((this.arrayHTML[i * 4 - 4 + j].percent).toFixed(1)) + Number((this.arrayHTML[i * 4 - 4 + j].widthNumber));
+                        let withNumber = (arrayPercent[i]).toFixed(1);
+                        let left = 'left: ' + leftNumber + '%;';
+
+                        this.arrayHTML.push({
+                            background_color: background_color,
+                            width: width,
+                            left: left,
+                            percent: leftNumber,
+                            widthNumber: withNumber,
+                        });
+                    }
+                }
+            },
+            createArrayHTML: function (colorNumber, width, left) {
+                this.arrayHTML.push({
+                    background_color: 'background-color: rgb(' + colorNumber + '); ',
+                    width: 'width: ' + width + '%; ',
+                    left: 'left: ' + left + '%;',
+                    percent: Number(left),
+                    widthNumber: Number(width),
+                });
+            },
+            sortArray: function (arr) {
+                return arr.slice().sort(function (a, b) {
+                    return a.percent - b.percent;
+                });
+
+            },
+            getAnimation: function (percentShift) {
+                this.styleAnimation = 'transform: translateX(-' + percentShift + '%); transition: all 5s cubic-bezier(0.51, 0.18, 0.22, 1) 0s;';
+            },
+            changePercent: function (arrayPercent) {
+                for (let i = 0; i < arrayPercent.length; i++) {
+                    this.ratePlayers[i].percent = arrayPercent[i].toFixed(1);
+                }
+            },
+            randomNumber: function () {
+                return Math.floor(Math.random() * (255 - 1 + 1)) + 1;
+            },
+
+            getResult: function (result, amount) {
+                Vue.toasted.show(result + ' ' + amount, {
+                    theme: "toasted-primary",
+                    position: "bottom-center",
+                    duration: 2000
+                });
             }
             /*
             *42["jackpot_bets",
@@ -285,7 +438,8 @@
             *   "room":"classic"
             * }]
             */
-        }
+        },
+
     }
 </script>
 

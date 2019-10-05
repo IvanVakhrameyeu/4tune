@@ -13,6 +13,8 @@
 
 /* ================Pages============= */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/','MainController@index')->name('home');
 //
 //
@@ -30,11 +32,23 @@ Route::get('/getUser', 'MainController@getUser');
 
 
 Route::get('/getHash', 'NvutiController@getHash');
-Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBet', 'NvutiController@setBet');
 
+Route::get('/getHistories', 'DoubleController@getHistories');
 Route::post('/setBetDouble', 'DoubleController@setBetDouble');
 Route::post('/getRotatePlayers', 'DoubleController@getRotatePlayers');
+
+Route::post('/setBetJackpot', 'JackpotController@setBetJackpot');
+Route::post('/getJackpotRotatePlayers', 'JackpotController@getJackpotRotatePlayers');
+Route::post('/getJackpotData', 'JackpotController@getJackpotData');
+
+Route::post('/getLastJackpotAndWinner', 'JackpotController@getLastJackpotAndWinner');
+Route::post('/getBankInfo', 'JackpotController@getBankInfo');
+Route::post('/getCurrentJackpot', 'JackpotController@getCurrentJackpot');
+
+
+
+
 //
 //Route::middleware('auth')->group(function (){
 //    Route::get('/double','DoubleController@index');

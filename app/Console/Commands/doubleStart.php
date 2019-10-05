@@ -13,7 +13,7 @@ class doubleStart extends Command
      *
      * @var string
      */
-    protected $signature = 'double:gameStart';
+    protected $signature = 'doubleStart';
 
     /**
      * The console command description.

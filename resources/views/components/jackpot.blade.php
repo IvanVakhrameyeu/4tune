@@ -29,7 +29,7 @@
                 <div class="col-lg-4">
                     <a href="#" class="select-room-block mx-auto text-center">
                         <p>Название</p>
-                        <b>от 100 <i class="fa fa-rub"></i></b>
+                        <b>от 10 <i class="fa fa-rub"></i></b>
                         <span>Банк: <b>2484</b> <i class="fa fa-rub"></i></span>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="col-lg-4">
                     <a href="#" class="select-room-block mx-auto text-center">
                         <p>Название</p>
-                        <b>от 100 <i class="fa fa-rub"></i></b>
+                        <b>от 1000 <i class="fa fa-rub"></i></b>
                         <span>Банк: <b>2484</b> <i class="fa fa-rub"></i></span>
                     </a>
                 </div>

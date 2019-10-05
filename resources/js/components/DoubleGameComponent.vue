@@ -3,14 +3,14 @@
         <div class="double-history">
             <span>История игр:</span>
             <div class="history">
-                <div v-for="history in histories">
+                <template v-for="history in histories">
                     <p v-bind:class="[getColor(history.game_number)]">{{history.game_number}}</p>
-                </div>
+                </template>
             </div>
         </div>
         <div class="double-wheel">
             <div class="wheel-block mx-auto">
-                <b class="wheel-number red mx-auto">{{rotateNumber}}</b>
+                <b class="wheel-number red mx-auto">{{rotateNumber}}    </b>{{timer}}
                 <span v-html=styleRotateZ> </span>
             </div>
         </div>
@@ -43,7 +43,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="redRate in redRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[redRate.name]">
+                                    <img v-bind:src="[redRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{redRate.name}}</div>
@@ -65,7 +65,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="greenRate in greenRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[greenRate.name]">
+                                    <img v-bind:src="[greenRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{greenRate.name}}</div>
@@ -86,7 +86,7 @@
                         <div class="bet-players">
                             <div class="player" v-for="blackRate in blackRates">
                                 <div class="player-avatar">
-                                    <img v-bind:src="[blackRate.name]">
+                                    <img v-bind:src="[blackRate.image]">
                                 </div>
                                 <div class="player-info">
                                     <div class="name">{{blackRate.name}}</div>
@@ -102,9 +102,6 @@
 </template>
 
 <script>
-    //import * as autobahn from "autobahn";
-
-
     export default {
         name: "DoubleGameComponent",
         data: function () {
@@ -118,16 +115,20 @@
                 blackRates: [],
                 greenRates: [],
                 histories: [],
+
+                timer: 0,
             }
         },
         mounted() {
             this.getHistories();
             this.getAnimation();
 
-            this.startWebSocket();
-            this.startRateChannel(); //channel rate
+            this.startChannel();
+            this.startRateChannel();
 
             this.getPlayerRate();
+
+            this.doubleInformation();
 
             this.rotateNumber = 0;
         },
@@ -136,21 +137,27 @@
                 .stopListening('DoubleEvent');
 
             window.Echo.channel(`DoubleRateChannel`)
-               .stopListening('DoubleRateEvent');
+                .stopListening('DoubleRateEvent');
         },
         methods: {
-            startWebSocket: function () {
+            doubleInformation: function () {
+                window.Echo.channel(`DoubleInformationChannel`)
+                    .listen('DoubleInformationEvent', (e) => {
+                        console.log(e);
+                        //if (e['timer'] != null) {
+                            this.timer = e.message['timer'];
+                      //  }
+                    });
+            },
+            startChannel: function () {
                 window.Echo.channel(`DoubleChannel`)
                     .listen('DoubleEvent', (e) => {
                         this.rotateNumber = e['rotation'];
                         this.getAnimation();
                         this.addNewHistory(this.rotateNumber);
-
-                        this.greenRates=[];
-                        this.blackRates=[];
-                        this.redRates=[];
-
-                        console.log('123');
+                        this.greenRates = [];
+                        this.blackRates = [];
+                        this.redRates = [];
                     });
             },
             startRateChannel: function () {
@@ -175,12 +182,9 @@
                 let app = this;
                 axios.post('/getRotatePlayers', {})
                     .then(function (resp) {
-                        for (let i = 0; i < resp.data[0].length; i++) {
-                            let j = 0;
-                            if (resp.data[0][i].user_id != resp.data[1][j].id) {
-                                j++;
-                            }
-                            app.addNewPlayer(resp.data[1][j].avatar, resp.data[1][j].name, resp.data[0][i].amount, resp.data[0][i].anticipated_event)
+                        console.log(resp.data);
+                        for (let i = 0; i < resp.data.length; i++) {
+                            app.addNewPlayer(resp.data[i].avatar, resp.data[i].name, resp.data[i].amount, resp.data[i].anticipated_event)
                         }
                     });
             },
@@ -265,27 +269,27 @@
             addNewPlayer: function (image, name, amount, color) {
                 switch (color) {
                     case 'green':
-                        for (let i = 0; i <this.greenRates.length; i++){
-                            if(this.greenRates[i]['name']==name){
-                                this.greenRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.greenRates.length; i++) {
+                            if (this.greenRates[i]['name'] == name) {
+                                this.greenRates[i]['sum'] += amount;
                                 return;
                             }
                         }
                         this.greenRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'black':
-                        for (let i = 0; i <this.blackRates.length; i++){
-                            if(this.blackRates[i]['name']==name){
-                                this.blackRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.blackRates.length; i++) {
+                            if (this.blackRates[i]['name'] == name) {
+                                this.blackRates[i]['sum'] += amount;
                                 return;
                             }
                         }
                         this.blackRates.push({image: image, name: name, sum: amount});
                         break;
                     case 'red':
-                        for (let i = 0; i <this.redRates.length; i++){
-                            if(this.redRates[i]['name']==name){
-                                this.redRates[i]['sum']+=amount;
+                        for (let i = 0; i < this.redRates.length; i++) {
+                            if (this.redRates[i]['name'] == name) {
+                                this.redRates[i]['sum'] += amount;
                                 return;
                             }
                         }
